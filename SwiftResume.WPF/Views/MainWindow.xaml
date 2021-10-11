@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SwiftResume.WPF.Views"
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
-        lex:LocalizeDictionary.DesignCulture="en"
+        lex:LocalizeDictionary.DesignCulture="{Binding Language}"
         lex:LocalizeDictionary.OutputMissingKeys="True"
         lex:ResxLocalizationProvider.DefaultAssembly="SwiftResume.WPF"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
@@ -44,6 +44,10 @@
                     <ToolTip Style="{StaticResource ToolTipStyle}" Content="Cerrar Aplicación"/>
                 </Button.ToolTip>
             </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
         </Grid>
         
     </Grid>

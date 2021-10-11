@@ -2,6 +2,6 @@
 {
     public enum ViewType : short
     {
-        Home
+        Resume
     }
 }
