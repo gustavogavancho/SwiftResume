@@ -34,12 +34,12 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <svgc:SvgViewbox Source="/Images/swiftline.svg" Margin="10 10 10 10"/>
-            <Button Style="{StaticResource ButtonPrimaryStyle}" Content="&#xE738;" Grid.Column="3" Foreground="{StaticResource PrimaryBrush}" HorizontalAlignment="Right" Command="{Binding MinimizeCommand}">
+            <Button Style="{StaticResource ButtonPrimaryStyle}" Content="&#xE738;" Grid.Column="3" Foreground="{StaticResource PrimaryBrush}" HorizontalAlignment="Right" Command="{Binding MinimizeWindowCommand}">
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource ToolTipStyle}" Content="Minimizar Aplicación"/>
                 </Button.ToolTip>
             </Button>
-            <Button Style="{StaticResource ButtonPrimaryStyle}" Content="&#xE8BB;" Foreground="{StaticResource PrimaryBrush}" Grid.Column="4" HorizontalAlignment="Right" Command="{Binding CloseCommand}">
+            <Button Style="{StaticResource ButtonPrimaryStyle}" Content="&#xE8BB;" Foreground="{StaticResource PrimaryBrush}" Grid.Column="4" HorizontalAlignment="Right" Command="{Binding CloseWindowCommand}">
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource ToolTipStyle}" Content="Cerrar Aplicación"/>
                 </Button.ToolTip>
