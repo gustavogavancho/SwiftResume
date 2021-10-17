@@ -3,11 +3,78 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              xmlns:local="clr-namespace:SwiftResume.WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="Resume View" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+    
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Curriculums:" Style="{StaticResource TitlePrimaryTextBlockStyle}"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <ListView Grid.Row="1" 
+                  ItemsSource="{Binding Resumes}" 
+                  SelectedItem="{Binding Resume}"
+                  BorderBrush="Transparent" 
+                  HorizontalContentAlignment="Stretch"
+                  >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Width="1085" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource BorderCard}"  Height="170" Width="350">
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <svgc:SvgViewbox Source="/Images/personmale.svg" Height="80"/>
+                            <Grid Grid.Column="1" VerticalAlignment="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Style="{StaticResource WhiteTextTextBlockStyle}">
+                                        <Run Text="Nombes:" FontWeight="Bold"/>
+                                        <Run Text="{Binding Nombres}"/>
+                                </TextBlock>
+                                <TextBlock Grid.Row="1" Style="{StaticResource WhiteTextTextBlockStyle}">
+                                        <Run Text="Apellidos:" FontWeight="Bold"/>
+                                        <Run Text="{Binding Apellidos}"/>
+                                </TextBlock>
+                                <TextBlock Grid.Row="2" Style="{StaticResource WhiteTextTextBlockStyle}">
+                                        <Run Text="Genero:" FontWeight="Bold"/>
+                                        <Run Text="{Binding Genero}"/>
+                                </TextBlock>
+                                <TextBlock Grid.Row="3" Style="{StaticResource WhiteTextTextBlockStyle}">
+                                        <Run Text="Lenguaje:" FontWeight="Bold"/>
+                                        <Run Text="{Binding Lenguajes}"/>
+                                </TextBlock>
+                                <StackPanel Grid.Row="4" HorizontalAlignment="Right" Orientation="Horizontal" Margin ="10 0 10 0">
+                                    <Button Style="{StaticResource ButtonPrimaryStyle}" FontSize="16" Content="&#xE74D;" Height="35" Width="35">
+                                        <Button.ToolTip>
+                                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Curriculum"/>
+                                        </Button.ToolTip>
+                                    </Button>
+                                    <Button Style="{StaticResource ButtonPrimaryStyle}" FontSize="16" Content="&#xEB7E;" Height="35" Width="35">
+                                        <Button.ToolTip>
+                                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Editar Curriculum"/>
+                                        </Button.ToolTip>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>

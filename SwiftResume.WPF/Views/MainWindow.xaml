@@ -11,7 +11,7 @@
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
         mc:Ignorable="d"
-        Title="Swift Resume" Height="650" Width="1000"
+        Title="Swift Resume" Height="650" Width="1140"
         WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" BorderThickness="1"
         BorderBrush="{StaticResource PrimaryBrush}"
         >

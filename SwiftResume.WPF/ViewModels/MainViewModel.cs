@@ -1,9 +1,14 @@
-﻿using SwiftResume.COMMON.Enums;
+﻿using Prism.Commands;
 using SwiftResume.WPF.Commands;
 using SwiftResume.WPF.Core;
 using SwiftResume.WPF.State.Navigators;
 using SwiftResume.WPF.ViewModels.Factories;
+using SwiftResume.WPF.Views;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
+using Application = System.Windows.Application;
+using EnumLanguage = SwiftResume.COMMON.Enums;
 
 namespace SwiftResume.WPF.ViewModels
 {
@@ -27,8 +32,8 @@ namespace SwiftResume.WPF.ViewModels
 
         #region Commands
 
-        public ICommand MinimizeWindowCommand { get; private set; }
-        public ICommand CloseWindowCommand { get; set; }
+        public DelegateCommand MinimizeWindowCommand { get; private set; }
+        public DelegateCommand CloseWindowCommand { get; private set; }
 
         #endregion
 
@@ -43,10 +48,20 @@ namespace SwiftResume.WPF.ViewModels
             _navigator.StateChanged += Navigator_StateChanged;
 
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, _viewModelFactory);
-            UpdateCurrentViewModelCommand.Execute(ViewType.Resume);
+            UpdateCurrentViewModelCommand.Execute(EnumLanguage.ViewType.Resume);
 
-            MinimizeWindowCommand = new MinimizeWindowCommand();
-            CloseWindowCommand = new CloseWindowCommand();
+            MinimizeWindowCommand = new DelegateCommand(OnMinimizeCommand);
+            CloseWindowCommand = new DelegateCommand(OnCloseCommand);
+        }
+
+        private void OnCloseCommand()
+        {
+            Application.Current.Windows.OfType<MainWindow>().FirstOrDefault().Close();
+        }
+
+        private void OnMinimizeCommand()
+        {
+            Application.Current.Windows.OfType<MainWindow>().FirstOrDefault().WindowState = WindowState.Minimized;
         }
 
         #endregion
