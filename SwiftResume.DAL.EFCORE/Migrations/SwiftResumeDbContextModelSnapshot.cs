@@ -49,6 +49,38 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                             Genero = "Masculino",
                             Lenguaje = "Español",
                             Nombres = "Gustavo"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Apellidos = "Gavancho León",
+                            Genero = "Masculino",
+                            Lenguaje = "Español",
+                            Nombres = "Jordi"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Apellidos = "Iñipe Cachay",
+                            Genero = "Femenino",
+                            Lenguaje = "English",
+                            Nombres = "Milagros"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Apellidos = "Gavancho León",
+                            Genero = "Femenino",
+                            Lenguaje = "English",
+                            Nombres = "Olga Cristina del Rocio"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Apellidos = "León García",
+                            Genero = "Femenino",
+                            Lenguaje = "English",
+                            Nombres = "Olga del Rocio"
                         });
                 });
 #pragma warning restore 612, 618

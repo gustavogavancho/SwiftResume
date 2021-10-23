@@ -172,7 +172,7 @@
         <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="WindowStyle" Value="None"/>
-        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TertiaryBrush}"/>
         <Setter Property="BorderThickness" Value="5"/>
         <Setter Property="ResizeMode" Value="NoResize"/>
     </Style>

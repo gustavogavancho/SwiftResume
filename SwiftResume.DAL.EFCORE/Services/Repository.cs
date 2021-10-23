@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace SwiftResume.DAL.EFCORE.Services
 {
@@ -14,19 +16,19 @@ namespace SwiftResume.DAL.EFCORE.Services
             _contextFactory = contextFactory;
         }
 
-        public TEntity Get(int id)
+        public async Task<TEntity> Get(int id)
         {
             using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
             {
-                return context.Set<TEntity>().Find(id);
+                return await context.Set<TEntity>().FindAsync(id);
             }
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public async Task<IEnumerable<TEntity>> GetAll()
         {
             using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
             {
-                return context.Set<TEntity>().ToList();
+                return await context.Set<TEntity>().ToListAsync();
             }
         }
 
@@ -38,19 +40,19 @@ namespace SwiftResume.DAL.EFCORE.Services
             }
         }
 
-        public void Add(TEntity entity)
+        public async Task Add(TEntity entity)
         {
             using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
             {
-                context.Set<TEntity>().Add(entity);
+                await context.Set<TEntity>().AddAsync(entity);
             }
         }
 
-        public void ADdRange(IEnumerable<TEntity> entities)
+        public async Task AddRange(IEnumerable<TEntity> entities)
         {
             using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
             {
-                context.Set<TEntity>().AddRange(entities);
+                await context.Set<TEntity>().AddRangeAsync(entities);
             }
         }
 

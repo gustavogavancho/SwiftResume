@@ -1,6 +1,7 @@
 ﻿using SwiftResume.COMMON.Models;
 using SwiftResume.DAL.EFCORE.Services;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SwiftResume.BIZ.Repositories
 {

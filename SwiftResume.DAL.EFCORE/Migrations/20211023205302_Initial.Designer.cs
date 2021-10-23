@@ -9,8 +9,8 @@ using SwiftResume.DAL.EFCORE;
 namespace SwiftResume.DAL.EFCORE.Migrations
 {
     [DbContext(typeof(SwiftResumeDbContext))]
-    [Migration("20211023202850_ModifyLanguejeColumn")]
-    partial class ModifyLanguejeColumn
+    [Migration("20211023205302_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,6 +51,38 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                             Genero = "Masculino",
                             Lenguaje = "Español",
                             Nombres = "Gustavo"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Apellidos = "Gavancho León",
+                            Genero = "Masculino",
+                            Lenguaje = "Español",
+                            Nombres = "Jordi"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Apellidos = "Iñipe Cachay",
+                            Genero = "Femenino",
+                            Lenguaje = "English",
+                            Nombres = "Milagros"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Apellidos = "Gavancho León",
+                            Genero = "Femenino",
+                            Lenguaje = "English",
+                            Nombres = "Olga Cristina del Rocio"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Apellidos = "León García",
+                            Genero = "Femenino",
+                            Lenguaje = "English",
+                            Nombres = "Olga del Rocio"
                         });
                 });
 #pragma warning restore 612, 618
