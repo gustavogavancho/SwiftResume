@@ -199,4 +199,13 @@
         </Style.Triggers>
     </Style>-->
 
+    <Style x:Key="LvItemStyle" TargetType="ListViewItem">
+        <Style.Triggers>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="IsSelected" Value="True" />
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
 </ResourceDictionary>

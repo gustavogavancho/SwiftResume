@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:SwiftResume.WPF"
              xmlns:views="clr-namespace:SwiftResume.WPF.Views"
              xmlns:viewModels="clr-namespace:SwiftResume.WPF.ViewModels"
+             xmlns:alert="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Alert"
+             xmlns:yesno="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.YesNo"
              Startup="Application_Startup">
     <Application.Resources>
         <ResourceDictionary>
@@ -13,6 +15,14 @@
 
             <DataTemplate DataType="{x:Type viewModels:ResumeViewModel}">
                 <views:ResumeView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type alert:AlertDialogViewModel}">
+                <alert:AlertDialogView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type yesno:YesNoDialogViewModel}">
+                <yesno:YesNoDialogView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

@@ -15,11 +15,21 @@
         </Grid.RowDefinitions>
         <TextBlock Text="Curriculums:" Style="{StaticResource TitlePrimaryTextBlockStyle}"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <ListView Grid.Row="1" 
+                  SelectionMode="Single"
                   ItemsSource="{Binding Resumes}" 
-                  SelectedItem="{Binding Resume}"
+                  SelectedItem="{Binding Resume, UpdateSourceTrigger=PropertyChanged}"
                   BorderBrush="Transparent" 
-                  HorizontalContentAlignment="Stretch"
-                  >
+                  PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown"
+                  HorizontalContentAlignment="Stretch">
+            <ListView.Resources>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter Property="IsSelected" Value="True"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Resources>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" Width="1085" />
@@ -56,10 +66,12 @@
                                 </TextBlock>
                                 <TextBlock Grid.Row="3" Style="{StaticResource WhiteTextTextBlockStyle}">
                                         <Run Text="Lenguaje:" FontWeight="Bold"/>
-                                        <Run Text="{Binding Lenguajes}"/>
+                                        <Run Text="{Binding Lenguaje}"/>
                                 </TextBlock>
                                 <StackPanel Grid.Row="4" HorizontalAlignment="Right" Orientation="Horizontal" Margin ="10 0 10 0">
-                                    <Button Style="{StaticResource ButtonPrimaryStyle}" FontSize="16" Content="&#xE74D;" Height="35" Width="35">
+                                    <Button Style="{StaticResource ButtonPrimaryStyle}" FontSize="16" Content="&#xE74D;" Height="35" Width="35"
+                                            Focusable="True"
+                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.DeleteCommand}">
                                         <Button.ToolTip>
                                             <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Curriculum"/>
                                         </Button.ToolTip>

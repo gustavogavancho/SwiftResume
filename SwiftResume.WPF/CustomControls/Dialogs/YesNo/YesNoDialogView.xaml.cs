@@ -13,22 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SwiftResume.WPF.Views
+namespace SwiftResume.WPF.CustomControls.Dialogs.YesNo
 {
     /// <summary>
-    /// Interaction logic for ResumeView.xaml
+    /// Interaction logic for YesNoDialogView.xaml
     /// </summary>
-    public partial class ResumeView : UserControl
+    public partial class YesNoDialogView : UserControl
     {
-        public ResumeView()
+        public YesNoDialogView()
         {
             InitializeComponent();
-        }
-
-        private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var checkSender = sender;
-            var checkE = sender;
         }
     }
 }

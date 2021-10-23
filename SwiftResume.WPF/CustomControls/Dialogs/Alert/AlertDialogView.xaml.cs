@@ -13,22 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SwiftResume.WPF.Views
+namespace SwiftResume.WPF.CustomControls.Dialogs.Alert
 {
     /// <summary>
-    /// Interaction logic for ResumeView.xaml
+    /// Interaction logic for AlertDialogView.xaml
     /// </summary>
-    public partial class ResumeView : UserControl
+    public partial class AlertDialogView : UserControl
     {
-        public ResumeView()
+        public AlertDialogView()
         {
             InitializeComponent();
-        }
-
-        private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var checkSender = sender;
-            var checkE = sender;
         }
     }
 }

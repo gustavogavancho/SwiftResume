@@ -2,6 +2,9 @@
 using SwiftResume.COMMON.Models;
 using SwiftResume.WPF.Commands;
 using SwiftResume.WPF.Core;
+using SwiftResume.WPF.CustomControls.Dialogs.Alert;
+using SwiftResume.WPF.CustomControls.Dialogs.Service;
+using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -12,6 +15,12 @@ namespace SwiftResume.WPF.ViewModels
 {
     public class ResumeViewModel : ViewModelBase
     {
+        #region Fields
+
+        private readonly IDialogService _dialogService;
+
+        #endregion
+
         #region Properties
 
         private ObservableCollection<Resume> _resumes;
@@ -36,6 +45,17 @@ namespace SwiftResume.WPF.ViewModels
             }
         }
 
+        private int _index;
+        public int Index
+        {
+            get => _index;
+            set 
+            {
+                _index = value;
+                OnPropertyChanged(nameof(Index));
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -46,8 +66,10 @@ namespace SwiftResume.WPF.ViewModels
 
         #region Constructor
 
-        public ResumeViewModel()
+        public ResumeViewModel(IDialogService dialogService)
         {
+            _dialogService = dialogService;
+
             //TODO: Delete mock resume data
             Resumes = new ObservableCollection<Resume>
             {
@@ -109,12 +131,22 @@ namespace SwiftResume.WPF.ViewModels
                 }
             };
 
-            DeleteCommand = new DelegateCommand<int>(OnDelete);
+            DeleteCommand = new DelegateCommand(OnDelete);
         }
 
-        private void OnDelete(int id)
+        private void OnDelete()
         {
-            MessageBox.Show($"Show value {id}");
+            //var dialog = new AlertDialogViewModel("Attention", "This is an alert!");
+            var dialog = new YesNoDialogViewModel("Question", "Can you see this?");
+
+            var result = _dialogService.OpenDialog(dialog);
+
+            Console.WriteLine(result);
+
+            if (Resume != null)
+            {
+                Resumes.Remove(Resume);
+            }
         }
 
         #endregion
