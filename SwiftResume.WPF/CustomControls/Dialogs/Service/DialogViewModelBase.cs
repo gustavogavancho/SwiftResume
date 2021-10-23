@@ -2,15 +2,12 @@
 {
     public abstract class DialogViewModelBase<T>
     {
-        public string Title { get; set; }
         public string Message { get; set; }
         public T DialogResult { get; set; }
 
-        protected DialogViewModelBase() : this(string.Empty, string.Empty) { }
-        protected DialogViewModelBase(string title) : this(title, string.Empty) { }
-        protected DialogViewModelBase(string title, string message)
+        protected DialogViewModelBase() : this(string.Empty) { }
+        protected DialogViewModelBase(string message)
         {
-            Title = title;
             Message = message;
         }
 

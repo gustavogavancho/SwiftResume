@@ -1,7 +1,6 @@
 ﻿using Prism.Commands;
 using SwiftResume.COMMON.Enums;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
-using System;
 using System.Windows.Input;
 
 namespace SwiftResume.WPF.CustomControls.Dialogs.Alert
@@ -10,7 +9,7 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Alert
     {
         public ICommand OkCommand { get; private set; }
 
-        public AlertDialogViewModel(string title, string message) : base(title, message)
+        public AlertDialogViewModel(string message) : base(message)
         {
             OkCommand = new DelegateCommand<IDialogWindow>(OnOk);
         }

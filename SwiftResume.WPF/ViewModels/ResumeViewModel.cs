@@ -1,4 +1,5 @@
 ﻿using Prism.Commands;
+using SwiftResume.COMMON.Enums;
 using SwiftResume.COMMON.Models;
 using SwiftResume.WPF.Commands;
 using SwiftResume.WPF.Core;
@@ -60,7 +61,7 @@ namespace SwiftResume.WPF.ViewModels
 
         #region Commands
 
-        public ICommand DeleteCommand { get; private set; }
+        public DelegateCommand DeleteCommand { get; private set; }
 
         #endregion
 
@@ -136,16 +137,16 @@ namespace SwiftResume.WPF.ViewModels
 
         private void OnDelete()
         {
-            //var dialog = new AlertDialogViewModel("Attention", "This is an alert!");
-            var dialog = new YesNoDialogViewModel("Question", "Can you see this?");
-
-            var result = _dialogService.OpenDialog(dialog);
-
-            Console.WriteLine(result);
-
             if (Resume != null)
             {
-                Resumes.Remove(Resume);
+                var dialog = new YesNoDialogViewModel("Alerta", $"¿Deseal eliminar el curriculum de {Resume.Nombres} {Resume.Apellidos}?");
+    
+                var result = _dialogService.OpenDialog(dialog);
+
+                if (result == DialogResults.Si)
+                {
+                    Resumes.Remove(Resume);
+                }
             }
         }
 

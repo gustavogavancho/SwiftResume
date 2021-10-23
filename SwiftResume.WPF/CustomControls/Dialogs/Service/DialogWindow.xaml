@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Service"
         SizeToContent="WidthAndHeight"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-        Title="{Binding Title}" Height="300" Width="300">
+        WindowStartupLocation="CenterScreen" 
+        Height="300"
+        Width="300"
+        Style="{StaticResource WindowDialogStyle}">
 
-    <ContentControl x:Name="ContentPresenter" Content="{Binding}">
-        
-    </ContentControl>
-    
+    <ContentControl x:Name="ContentPresenter" Content="{Binding}" />
+
 </Window>

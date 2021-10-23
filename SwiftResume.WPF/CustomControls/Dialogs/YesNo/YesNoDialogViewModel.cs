@@ -10,7 +10,7 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.YesNo
         public ICommand YesCommand { get; private set; }
         public ICommand NoCommand { get; private set; }
 
-        public YesNoDialogViewModel(string message, string title) : base(message, title)
+        public YesNoDialogViewModel(string message) : base(message)
         {
             YesCommand = new DelegateCommand<IDialogWindow>(OnYes);
             NoCommand = new DelegateCommand<IDialogWindow>(No);
