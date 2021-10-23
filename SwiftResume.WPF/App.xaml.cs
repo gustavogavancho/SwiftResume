@@ -27,7 +27,7 @@ namespace SwiftResume.WPF
                 .AddConfiguration()
                 //.AddFinanceApi()
                 .AddDbContext()
-                //.AddServices()
+                .AddServices()
                 .AddStores()
                 .AddViewModels()
                 .AddViews();

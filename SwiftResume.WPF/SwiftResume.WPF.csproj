@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SwiftResume.BIZ\SwiftResume.BIZ.csproj" />
     <ProjectReference Include="..\SwiftResume.COMMON\SwiftResume.COMMON.csproj" />
     <ProjectReference Include="..\SwiftResume.DAL.EFCORE\SwiftResume.DAL.EFCORE.csproj" />
   </ItemGroup>

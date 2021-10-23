@@ -1,4 +1,5 @@
 ﻿using Prism.Commands;
+using SwiftResume.BIZ.Repositories;
 using SwiftResume.COMMON.Enums;
 using SwiftResume.COMMON.Models;
 using SwiftResume.WPF.Commands;
@@ -19,6 +20,7 @@ namespace SwiftResume.WPF.ViewModels
         #region Fields
 
         private readonly IDialogService _dialogService;
+        private readonly IResumeRepository _resumeRepository;
 
         #endregion
 
@@ -67,9 +69,13 @@ namespace SwiftResume.WPF.ViewModels
 
         #region Constructor
 
-        public ResumeViewModel(IDialogService dialogService)
+        public ResumeViewModel(IDialogService dialogService,
+            IResumeRepository resumeRepository)
         {
             _dialogService = dialogService;
+            _resumeRepository = resumeRepository;
+
+            var getRepository = _resumeRepository.GetAll();
 
             //TODO: Delete mock resume data
             Resumes = new ObservableCollection<Resume>
@@ -139,7 +145,7 @@ namespace SwiftResume.WPF.ViewModels
         {
             if (Resume != null)
             {
-                var dialog = new YesNoDialogViewModel("Alerta", $"¿Deseal eliminar el curriculum de {Resume.Nombres} {Resume.Apellidos}?");
+                var dialog = new YesNoDialogViewModel($"¿Deseal eliminar el curriculum de {Resume.Nombres} {Resume.Apellidos}?");
     
                 var result = _dialogService.OpenDialog(dialog);
 

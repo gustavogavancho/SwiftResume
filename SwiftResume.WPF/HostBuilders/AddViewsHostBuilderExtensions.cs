@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SwiftResume.WPF.CustomControls.Dialogs.Alert;
 using SwiftResume.WPF.ViewModels;
 using SwiftResume.WPF.Views;
 
@@ -12,6 +13,7 @@ namespace SwiftResume.WPF.HostBuilders
             host.ConfigureServices(services =>
             {
                 services.AddSingleton<MainWindow>(s => new MainWindow(s.GetRequiredService<MainViewModel>()));
+                services.AddSingleton<AlertDialogView>();
             });
 
             return host;
