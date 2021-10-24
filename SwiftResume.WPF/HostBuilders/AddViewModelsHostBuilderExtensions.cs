@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SwiftResume.WPF.Core;
-using SwiftResume.WPF.CustomControls.Dialogs.Alert;
-using SwiftResume.WPF.CustomControls.Dialogs.Service;
+using SwiftResume.WPF.CustomControls.Dialogs.Resume;
 using SwiftResume.WPF.ViewModels;
 using SwiftResume.WPF.ViewModels.Factories;
 
@@ -16,6 +15,8 @@ namespace SwiftResume.WPF.HostBuilders
             {
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton<ResumeViewModel>();
+
+                services.AddTransient<ResumeDialogViewModel>();
 
                 services.AddSingleton<CreateViewModel<ResumeViewModel>>(services => () => services.GetRequiredService<ResumeViewModel>());
 

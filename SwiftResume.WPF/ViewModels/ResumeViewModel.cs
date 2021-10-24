@@ -5,6 +5,7 @@ using SwiftResume.COMMON.Models;
 using SwiftResume.WPF.Commands;
 using SwiftResume.WPF.Core;
 using SwiftResume.WPF.CustomControls.Dialogs.Alert;
+using SwiftResume.WPF.CustomControls.Dialogs.Resume;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
 using SwiftResume.WPF.Extensions;
@@ -23,6 +24,7 @@ namespace SwiftResume.WPF.ViewModels
 
         private readonly IDialogService _dialogService;
         private readonly IResumeRepository _resumeRepository;
+        private readonly ResumeDialogViewModel _resumeDialogViewModel;
 
         #endregion
 
@@ -65,6 +67,7 @@ namespace SwiftResume.WPF.ViewModels
 
         #region Commands
 
+        public DelegateCommand AddCommand { get; private set; }
         public DelegateCommand DeleteCommand { get; private set; }
 
         #endregion
@@ -72,12 +75,26 @@ namespace SwiftResume.WPF.ViewModels
         #region Constructor
 
         public ResumeViewModel(IDialogService dialogService,
-            IResumeRepository resumeRepository)
+            IResumeRepository resumeRepository,
+            ResumeDialogViewModel resumeDialogViewModel)
         {
             _dialogService = dialogService;
             _resumeRepository = resumeRepository;
-
+            _resumeDialogViewModel = resumeDialogViewModel;
+            AddCommand = new DelegateCommand(OnAdd);
             DeleteCommand = new DelegateCommand(OnDelete);
+        }
+
+        private void OnAdd()
+        {
+            var resume = _resumeDialogViewModel;
+
+            var result = _dialogService.OpenDialog(resume);
+
+            if (result is not null)
+            {
+                Resumes.Add(result);
+            }
         }
 
         private async void OnDelete()

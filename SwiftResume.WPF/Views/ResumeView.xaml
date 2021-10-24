@@ -109,7 +109,7 @@
                 Margin="0 15 2 0" 
                 Foreground="{StaticResource SecondaryBrush}" 
                 HorizontalAlignment="Right" 
-                Command="{Binding MinimizeWindowCommand}">
+                Command="{Binding AddCommand}">
             <Button.ToolTip>
                 <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Curriculum"/>
             </Button.ToolTip>

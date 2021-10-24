@@ -1,6 +1,8 @@
-﻿namespace SwiftResume.WPF.CustomControls.Dialogs.Service
+﻿using SwiftResume.WPF.Core;
+
+namespace SwiftResume.WPF.CustomControls.Dialogs.Service
 {
-    public abstract class DialogViewModelBase<T>
+    public abstract class DialogViewModelBase<T> : ViewModelBase
     {
         public string Message { get; set; }
         public T DialogResult { get; set; }

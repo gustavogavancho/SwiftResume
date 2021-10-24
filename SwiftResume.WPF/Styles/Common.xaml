@@ -89,6 +89,11 @@
         <Setter Property="Margin" Value="5"/>
     </Style>
 
+    <Style x:Key="SecondaryNormalButtonSytle" TargetType="Button" BasedOn="{StaticResource PrimaryNormalButtonSytle}">
+        <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
+        <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+    </Style>
+
     <Style x:Key="ButtonItem" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
@@ -169,11 +174,11 @@
     
     <!-- Window -->
     <Style x:Key="WindowDialogStyle" TargetType="Window">
-        <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="{StaticResource SecondaryBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
         <Setter Property="WindowStyle" Value="None"/>
-        <Setter Property="BorderBrush" Value="{StaticResource TertiaryBrush}"/>
-        <Setter Property="BorderThickness" Value="5"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="4"/>
         <Setter Property="ResizeMode" Value="NoResize"/>
     </Style>
 
