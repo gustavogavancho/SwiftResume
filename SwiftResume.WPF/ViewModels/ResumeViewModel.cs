@@ -77,11 +77,10 @@ namespace SwiftResume.WPF.ViewModels
             _dialogService = dialogService;
             _resumeRepository = resumeRepository;
 
-
             DeleteCommand = new DelegateCommand(OnDelete);
         }
 
-        private void OnDelete()
+        private async void OnDelete()
         {
             if (Resume != null)
             {
@@ -91,7 +90,12 @@ namespace SwiftResume.WPF.ViewModels
 
                 if (result == DialogResults.Si)
                 {
+                    await _resumeRepository.Remove(Resume);
                     Resumes.Remove(Resume);
+
+                    var alert = new AlertDialogViewModel("Se eliminó correctamente el curriculum");
+
+                    _dialogService.OpenDialog(alert);
                 }
             }
         }

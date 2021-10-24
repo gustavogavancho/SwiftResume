@@ -1,5 +1,4 @@
-﻿using SwiftResume.COMMON.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -15,7 +14,7 @@ namespace SwiftResume.DAL.EFCORE.Services
         Task Add(TEntity entity);
         Task AddRange(IEnumerable<TEntity> entities);
 
-        void Remove(TEntity entity);
-        void RemoveRange(IEnumerable<TEntity> entities);
+        Task Remove(TEntity entity);
+        Task RemoveRange(IEnumerable<TEntity> entities);
     }
 }

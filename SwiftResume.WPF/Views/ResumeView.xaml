@@ -20,11 +20,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Curriculums:" Style="{StaticResource TitlePrimaryTextBlockStyle}"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        
+        <TextBlock Text="Curriculums:" Style="{StaticResource TitlePrimaryTextBlockStyle}"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"/>
         <ListView Grid.Row="1" 
                   SelectionMode="Single"
                   ItemsSource="{Binding Resumes}" 
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  HorizontalAlignment="Left"
                   SelectedItem="{Binding Resume, UpdateSourceTrigger=PropertyChanged}"
                   BorderBrush="Transparent" 
                   PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown"
@@ -96,5 +100,19 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button Style="{StaticResource ButtonSecondaryStyle}"
+                Content="&#xE710;" 
+                Grid.Row="2" 
+                Width="50"
+                FontSize="18"
+                Height="50"
+                Margin="0 15 2 0" 
+                Foreground="{StaticResource SecondaryBrush}" 
+                HorizontalAlignment="Right" 
+                Command="{Binding MinimizeWindowCommand}">
+            <Button.ToolTip>
+                <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Curriculum"/>
+            </Button.ToolTip>
+        </Button>
     </Grid>
 </UserControl>

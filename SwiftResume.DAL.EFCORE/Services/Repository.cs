@@ -45,6 +45,8 @@ namespace SwiftResume.DAL.EFCORE.Services
             using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
             {
                 await context.Set<TEntity>().AddAsync(entity);
+
+                await context.SaveChangesAsync();
             }
         }
 
@@ -53,22 +55,28 @@ namespace SwiftResume.DAL.EFCORE.Services
             using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
             {
                 await context.Set<TEntity>().AddRangeAsync(entities);
+
+                await context.SaveChangesAsync();
             }
         }
 
-        public void Remove(TEntity entity)
+        public async Task Remove(TEntity entity)
         {
             using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
             {
                 context.Set<TEntity>().Remove(entity);
+
+                await context.SaveChangesAsync();
             }
         }
 
-        public void RemoveRange(IEnumerable<TEntity> entities)
+        public async Task RemoveRange(IEnumerable<TEntity> entities)
         {
             using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
             {
                 context.Set<TEntity>().RemoveRange(entities);
+
+                await context.SaveChangesAsync();
             }
         }
     }

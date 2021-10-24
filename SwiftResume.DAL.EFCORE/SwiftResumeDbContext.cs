@@ -61,6 +61,24 @@ namespace SwiftResume.DAL.EFCORE
                 Genero = "Femenino",
                 Lenguaje = "English"
             });
+
+            modelBuilder.Entity<Resume>().HasData(new Resume
+            {
+                Id = 6,
+                Nombres = "Toty Ernestina",
+                Apellidos = "Cordiva Rios",
+                Genero = "Femenino",
+                Lenguaje = "English"
+            });
+
+            modelBuilder.Entity<Resume>().HasData(new Resume
+            {
+                Id = 7,
+                Nombres = "Mia Isabella",
+                Apellidos = "Gavancho Cordova",
+                Genero = "Femenino",
+                Lenguaje = "English"
+            });
         }
     }
 }
