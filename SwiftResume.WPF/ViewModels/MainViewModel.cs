@@ -23,6 +23,7 @@ namespace SwiftResume.WPF.ViewModels
 
         #region Properties
 
+        public bool IsLoggedIn { get; set; }
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
         public INavigator Navigator { get; set; }
         public ICommand UpdateCurrentViewModelCommand { get; }
@@ -48,7 +49,8 @@ namespace SwiftResume.WPF.ViewModels
             _navigator.StateChanged += Navigator_StateChanged;
 
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, _viewModelFactory);
-            UpdateCurrentViewModelCommand.Execute(EnumLanguage.ViewType.Resume);
+            //Startup View
+            UpdateCurrentViewModelCommand.Execute(EnumLanguage.ViewType.Login);
 
             MinimizeWindowCommand = new DelegateCommand(OnMinimizeCommand);
             CloseWindowCommand = new DelegateCommand(OnCloseCommand);

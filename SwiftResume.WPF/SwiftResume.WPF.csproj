@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\loginbackground.jpg" />
     <None Remove="Images\personfemale.png" />
     <None Remove="Images\personmale.svg" />
     <None Remove="Images\swiftline.svg" />
@@ -19,6 +20,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.37" />
+    <PackageReference Include="PasswordBoxMVVM" Version="1.0.5" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="SharpVectors" Version="1.7.6" />
     <PackageReference Include="WPFLocalizeExtension" Version="3.9.0" />
@@ -31,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\loginbackground.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\personfemale.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

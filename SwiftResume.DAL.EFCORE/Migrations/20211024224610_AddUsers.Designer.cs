@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwiftResume.DAL.EFCORE;
 
 namespace SwiftResume.DAL.EFCORE.Migrations
 {
     [DbContext(typeof(SwiftResumeDbContext))]
-    partial class SwiftResumeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211024224610_AddUsers")]
+    partial class AddUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

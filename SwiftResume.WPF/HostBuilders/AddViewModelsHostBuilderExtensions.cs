@@ -15,10 +15,12 @@ namespace SwiftResume.WPF.HostBuilders
             {
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton<ResumeViewModel>();
+                services.AddSingleton<LoginViewModel>();
 
                 services.AddTransient<ResumeDialogViewModel>();
 
                 services.AddSingleton<CreateViewModel<ResumeViewModel>>(services => () => services.GetRequiredService<ResumeViewModel>());
+                services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => services.GetRequiredService<LoginViewModel>());
 
                 services.AddSingleton<ISwiftResumeViewModelFactory, SwiftResumeViewModelFactory>();
             });
