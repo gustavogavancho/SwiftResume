@@ -18,6 +18,10 @@
                 <views:LoginView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModels:RegisterViewModel}">
+                <views:RegisterView />
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModels:ResumeViewModel}">
                 <views:ResumeView />
             </DataTemplate>

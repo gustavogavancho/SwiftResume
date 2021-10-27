@@ -27,18 +27,38 @@
         <Grid Background="{StaticResource PrimaryBrush}" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <svgc:SvgViewbox Source="/Images/swiftline.svg" Margin="10 10 10 10"/>
-            <Button Style="{StaticResource ButtonPrimaryStyle}" Content="&#xE738;" Grid.Column="3" Foreground="{StaticResource PrimaryBrush}" HorizontalAlignment="Right" Command="{Binding MinimizeWindowCommand}">
+            <Border BorderBrush="{StaticResource SecondaryBrush}" Grid.Column="2" Margin="10 0 10 0" BorderThickness="3" Height="70">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsLoggedIn}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Style="{StaticResource WhiteTextTextBlockStyle}" Text="{Binding Username}"/>
+                    <Button Style="{StaticResource ButtonPrimaryStyle}" Content="&#xE7E8;" FontSize="18" Foreground="{StaticResource PrimaryBrush}" HorizontalAlignment="Right" Command="{Binding LogoutCommand}">
+                        <Button.ToolTip>
+                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Cerrar Sesión"/>
+                        </Button.ToolTip>
+                    </Button>
+                </StackPanel>
+            </Border>
+            <Button Style="{StaticResource ButtonPrimaryStyle}" Content="&#xE738;" Grid.Column="3" FontSize="18" Foreground="{StaticResource PrimaryBrush}" HorizontalAlignment="Right" Command="{Binding MinimizeWindowCommand}">
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource ToolTipStyle}" Content="Minimizar Aplicación"/>
                 </Button.ToolTip>
             </Button>
-            <Button Style="{StaticResource ButtonPrimaryStyle}" Content="&#xE8BB;" Foreground="{StaticResource PrimaryBrush}" Grid.Column="4" HorizontalAlignment="Right" Command="{Binding CloseWindowCommand}">
+            <Button Style="{StaticResource ButtonPrimaryStyle}" Content="&#xE8BB;" Grid.Column="4" FontSize="18" Foreground="{StaticResource PrimaryBrush}" HorizontalAlignment="Right" Command="{Binding CloseWindowCommand}">
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource ToolTipStyle}" Content="Cerrar Aplicación"/>
                 </Button.ToolTip>

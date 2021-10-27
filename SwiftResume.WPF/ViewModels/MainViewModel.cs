@@ -1,14 +1,16 @@
 ﻿using Prism.Commands;
 using SwiftResume.WPF.Commands;
 using SwiftResume.WPF.Core;
+using SwiftResume.WPF.State.Authenticators;
 using SwiftResume.WPF.State.Navigators;
 using SwiftResume.WPF.ViewModels.Factories;
 using SwiftResume.WPF.Views;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using Application = System.Windows.Application;
 using EnumLanguage = SwiftResume.COMMON.Enums;
+using Application = System.Windows.Application;
+using System;
 
 namespace SwiftResume.WPF.ViewModels
 {
@@ -18,12 +20,16 @@ namespace SwiftResume.WPF.ViewModels
 
         private readonly INavigator _navigator;
         private readonly ISwiftResumeViewModelFactory _viewModelFactory;
+        private readonly IAuthenticator _authenticator;
+        private readonly ViewModelDelegateRenavigator<LoginViewModel> _viewModelDelegateRenavigator;
 
         #endregion
 
         #region Properties
 
-        public bool IsLoggedIn { get; set; }
+        public bool IsLoggedIn => _authenticator.IsLoggedIn;
+        public string Username => $"Bienvenido {_authenticator.CurrentUser?.Username}!";
+
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
         public INavigator Navigator { get; set; }
         public ICommand UpdateCurrentViewModelCommand { get; }
@@ -35,25 +41,49 @@ namespace SwiftResume.WPF.ViewModels
 
         public DelegateCommand MinimizeWindowCommand { get; private set; }
         public DelegateCommand CloseWindowCommand { get; private set; }
+        public DelegateCommand LogoutCommand { get; set; }
 
         #endregion
 
         #region Construtor
 
         public MainViewModel(INavigator navigator,
-            ISwiftResumeViewModelFactory viewModelFactory)
+            ISwiftResumeViewModelFactory viewModelFactory,
+            IAuthenticator authenticator,
+            ViewModelDelegateRenavigator<LoginViewModel> viewModelDelegateRenavigator)
         {
             _navigator = navigator;
             _viewModelFactory = viewModelFactory;
+            _authenticator = authenticator;
+            _viewModelDelegateRenavigator = viewModelDelegateRenavigator;
 
             _navigator.StateChanged += Navigator_StateChanged;
-
+            _authenticator.StateChanged += Authenticator_StateChanged;
+            
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, _viewModelFactory);
             //Startup View
             UpdateCurrentViewModelCommand.Execute(EnumLanguage.ViewType.Login);
 
             MinimizeWindowCommand = new DelegateCommand(OnMinimizeCommand);
             CloseWindowCommand = new DelegateCommand(OnCloseCommand);
+            LogoutCommand = new DelegateCommand(OnLogout);
+        }
+
+        private void OnLogout()
+        {
+            _authenticator.Logout();
+            (_viewModelDelegateRenavigator as IRenavigator).Renavigate();
+        }
+
+        private void Authenticator_StateChanged()
+        {
+            OnPropertyChanged(nameof(IsLoggedIn));
+            OnPropertyChanged(nameof(Username));
+        }
+
+        private void Navigator_StateChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
         }
 
         private void OnCloseCommand()
@@ -72,13 +102,9 @@ namespace SwiftResume.WPF.ViewModels
         public override void Dispose()
         {
             _navigator.StateChanged -= Navigator_StateChanged;
+            _authenticator.StateChanged -= Authenticator_StateChanged;
 
             base.Dispose();
-        }
-
-        private void Navigator_StateChanged()
-        {
-            OnPropertyChanged(nameof(CurrentViewModel));
         }
 
         #endregion

@@ -18,7 +18,6 @@ namespace SwiftResume.BIZ.Repositories
             {
                 return context.Resumes.OrderByDescending(c => c.Nombres).Take(count).ToList();
             }
-
         }
 
         public IEnumerable<Resume> GetResumes(int pageIndex, int pageSize)

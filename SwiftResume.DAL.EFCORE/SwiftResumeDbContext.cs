@@ -18,6 +18,17 @@ namespace SwiftResume.DAL.EFCORE
         {
             base.OnModelCreating(modelBuilder);
 
+            //Seed user data
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = 1,
+                Email = "ggavancholeon@gmail.com",
+                Username = "GGAVANCHO",
+                DateJoined = DateTime.Now,
+                PasswordHash = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA=="
+            });
+
+            //Seed resume data
             modelBuilder.Entity<Resume>().HasData(new Resume
             {
                 Id = 1,

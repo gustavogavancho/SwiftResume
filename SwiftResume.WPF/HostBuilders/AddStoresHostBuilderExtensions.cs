@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SwiftResume.WPF.State.Authenticators;
 using SwiftResume.WPF.State.Navigators;
 
 namespace SwiftResume.WPF.HostBuilders
@@ -10,6 +11,7 @@ namespace SwiftResume.WPF.HostBuilders
         {
             host.ConfigureServices(services =>
             {
+                services.AddSingleton<IAuthenticator, Authenticator>();
                 services.AddSingleton<INavigator, Navigator>();
             });
 
