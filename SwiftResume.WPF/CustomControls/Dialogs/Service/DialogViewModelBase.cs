@@ -4,14 +4,18 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Service
 {
     public abstract class DialogViewModelBase<T> : ViewModelBase
     {
-        public string Message { get; set; }
-        public T DialogResult { get; set; }
-
-        protected DialogViewModelBase() : this(string.Empty) { }
-        protected DialogViewModelBase(string message)
+        private string _message;
+        public string Message
         {
-            Message = message;
+            get => _message;
+            set
+            {
+                _message = value;
+                OnPropertyChanged(nameof(Message));
+            }
         }
+
+        public T DialogResult { get; set; }
 
         protected void CloseDialogWithResult(IDialogWindow dialog, T result)
         {

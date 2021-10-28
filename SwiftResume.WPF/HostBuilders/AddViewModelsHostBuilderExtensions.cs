@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SwiftResume.WPF.Core;
+using SwiftResume.WPF.CustomControls.Dialogs.Alert;
 using SwiftResume.WPF.CustomControls.Dialogs.Resume;
+using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
 using SwiftResume.WPF.State.Authenticators;
 using SwiftResume.WPF.State.Navigators;
 using SwiftResume.WPF.ViewModels;
@@ -19,7 +21,9 @@ namespace SwiftResume.WPF.HostBuilders
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton<ResumeViewModel>();
 
-                services.AddTransient<ResumeDialogViewModel>();
+                services.AddSingleton<ResumeDialogViewModel>();
+                services.AddSingleton<AlertDialogViewModel>();
+                services.AddSingleton<YesNoDialogViewModel>();
 
                 services.AddSingleton<CreateViewModel<ResumeViewModel>>(services => () => services.GetRequiredService<ResumeViewModel>());
                 services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));

@@ -9,8 +9,10 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using EnumLanguage = SwiftResume.COMMON.Enums;
+using SwiftResume.WPF.CustomControls.Dialogs.Service;
+using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
+using SwiftResume.COMMON.Enums;
 using Application = System.Windows.Application;
-using System;
 
 namespace SwiftResume.WPF.ViewModels
 {
@@ -22,6 +24,8 @@ namespace SwiftResume.WPF.ViewModels
         private readonly ISwiftResumeViewModelFactory _viewModelFactory;
         private readonly IAuthenticator _authenticator;
         private readonly ViewModelDelegateRenavigator<LoginViewModel> _viewModelDelegateRenavigator;
+        private readonly IDialogService _dialogService;
+        private readonly YesNoDialogViewModel _yesNoDialogViewModel;
 
         #endregion
 
@@ -50,12 +54,16 @@ namespace SwiftResume.WPF.ViewModels
         public MainViewModel(INavigator navigator,
             ISwiftResumeViewModelFactory viewModelFactory,
             IAuthenticator authenticator,
-            ViewModelDelegateRenavigator<LoginViewModel> viewModelDelegateRenavigator)
+            ViewModelDelegateRenavigator<LoginViewModel> viewModelDelegateRenavigator,
+            IDialogService dialogService,
+            YesNoDialogViewModel yesNoDialogViewModel)
         {
             _navigator = navigator;
             _viewModelFactory = viewModelFactory;
             _authenticator = authenticator;
             _viewModelDelegateRenavigator = viewModelDelegateRenavigator;
+            _dialogService = dialogService;
+            _yesNoDialogViewModel = yesNoDialogViewModel;
 
             _navigator.StateChanged += Navigator_StateChanged;
             _authenticator.StateChanged += Authenticator_StateChanged;
@@ -71,8 +79,14 @@ namespace SwiftResume.WPF.ViewModels
 
         private void OnLogout()
         {
-            _authenticator.Logout();
-            (_viewModelDelegateRenavigator as IRenavigator).Renavigate();
+            _yesNoDialogViewModel.Message = "¿Está seguro que desea cerrar sesión?";
+            var result = _dialogService.OpenDialog(_yesNoDialogViewModel);
+
+            if (result == DialogResults.Si)
+            {
+                _authenticator.Logout();
+                (_viewModelDelegateRenavigator as IRenavigator).Renavigate();
+            }
         }
 
         private void Authenticator_StateChanged()

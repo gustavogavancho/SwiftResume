@@ -99,12 +99,10 @@
                         IsDefault="True"/>
 
                 <Button Grid.Row="5" 
+                        Style="{StaticResource ArchorLinkButtonStyle}"
                         HorizontalAlignment="Center" 
                         Margin="0 10 0 0" 
-                        Background="Transparent" 
-                        Foreground="Blue" 
-                        FontSize="14" 
-                        Content="Already have and accout?" 
+                        Content="Iniciar Sesión" 
                         Command="{Binding ViewLoginCommand}"/>
 
                 <TextBlock Grid.Row="6" Margin="0,10,0,0"

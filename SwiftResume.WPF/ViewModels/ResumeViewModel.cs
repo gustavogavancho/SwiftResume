@@ -25,6 +25,8 @@ namespace SwiftResume.WPF.ViewModels
         private readonly IDialogService _dialogService;
         private readonly IResumeRepository _resumeRepository;
         private readonly ResumeDialogViewModel _resumeDialogViewModel;
+        private readonly YesNoDialogViewModel _yesNoDialogViewModel;
+        private readonly AlertDialogViewModel _alertDialogViewModel;
 
         #endregion
 
@@ -74,22 +76,24 @@ namespace SwiftResume.WPF.ViewModels
 
         #region Constructor
 
-        public ResumeViewModel(IDialogService dialogService,
-            IResumeRepository resumeRepository,
-            ResumeDialogViewModel resumeDialogViewModel)
+        public ResumeViewModel(IResumeRepository resumeRepository,
+            IDialogService dialogService,
+            ResumeDialogViewModel resumeDialogViewModel,
+            YesNoDialogViewModel yesNoDialogViewModel,
+            AlertDialogViewModel alertDialogViewModel)
         {
-            _dialogService = dialogService;
             _resumeRepository = resumeRepository;
+            _dialogService = dialogService;
             _resumeDialogViewModel = resumeDialogViewModel;
+            _yesNoDialogViewModel = yesNoDialogViewModel;
+            _alertDialogViewModel = alertDialogViewModel;
             AddCommand = new DelegateCommand(OnAdd);
             DeleteCommand = new DelegateCommand(OnDelete);
         }
 
         private void OnAdd()
         {
-            var resume = _resumeDialogViewModel;
-
-            var result = _dialogService.OpenDialog(resume);
+            var result = _dialogService.OpenDialog(_resumeDialogViewModel);
 
             if (result is not null)
             {
@@ -101,18 +105,18 @@ namespace SwiftResume.WPF.ViewModels
         {
             if (Resume != null)
             {
-                var dialog = new YesNoDialogViewModel($"¿Deseal eliminar el curriculum de {Resume.Nombres} {Resume.Apellidos}?");
+                _yesNoDialogViewModel.Message = $"¿Deseal eliminar el curriculum de {Resume.Nombres} {Resume.Apellidos}?";
     
-                var result = _dialogService.OpenDialog(dialog);
+                var result = _dialogService.OpenDialog(_yesNoDialogViewModel);
 
                 if (result == DialogResults.Si)
                 {
                     await _resumeRepository.Remove(Resume);
                     Resumes.Remove(Resume);
 
-                    var alert = new AlertDialogViewModel("Se eliminó correctamente el curriculum");
+                    _alertDialogViewModel.Message = "Se eliminó correctamente el curriculum";
 
-                    _dialogService.OpenDialog(alert);
+                    _dialogService.OpenDialog(_alertDialogViewModel);
                 }
             }
         }

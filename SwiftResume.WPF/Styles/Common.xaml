@@ -94,6 +94,42 @@
         <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
     </Style>
 
+    <Style x:Key="SecondaryNormalButtonSyleAnchor" TargetType="Button" BasedOn="{StaticResource SecondaryNormalButtonSytle}">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Opacity" Value="0" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="ArchorLinkButtonStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Rectangle x:Name="background" Fill="{TemplateBinding Background}"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="background" Property="Opacity" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="background" Property="Opacity" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="Blue"/>
+    </Style>
+
     <Style x:Key="ButtonItem" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
@@ -139,8 +175,6 @@
     <!-- Border -->
     <Style x:Key="BorderCard" TargetType="Border">
         <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource SecondaryBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="CornerRadius" Value="20"/>
     </Style>
 

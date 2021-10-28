@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              FontSize="18"
+             Foreground="{StaticResource PrimaryBrush}"
              FocusManager.FocusedElement="{Binding ElementName=txtUser}">
     
     <UserControl.Resources>
@@ -18,21 +19,20 @@
         <ImageBrush ImageSource="/Images/loginbackground.jpg" Stretch="UniformToFill" Opacity="0.5"/>
     </UserControl.Background>
 
-    <Border Margin="50" Padding="50" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{StaticResource PrimaryBrush}" CornerRadius="10" BorderThickness="3" Background="White">
-        <Border.Effect>
-            <DropShadowEffect BlurRadius="10" Color="Gray"/>
-        </Border.Effect>
+    <Border Margin="50" Padding="50 50 50 30" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{StaticResource PrimaryBrush}" CornerRadius="10" BorderThickness="3" Background="White">
         <Grid Grid.IsSharedSizeScope="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" FontSize="32" HorizontalAlignment="Center" Text="Iniciar Sesión"/>
+            <TextBlock Grid.Row="0" FontSize="32" HorizontalAlignment="Center" Text="Bienvenido"/>
 
-            <Grid Grid.Row="1" Margin="0 20">
+            <TextBlock Grid.Row="1" Margin="0 10" FontSize="18" HorizontalAlignment="Center" FontWeight="Thin" Text="Creador de curriculum vitae desarrollado por Swiftline."/>
+
+            <Grid Grid.Row="2" Margin="0 20">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -61,17 +61,14 @@
                                                     Password="{Binding Password}"/>
                 </Grid>
 
-                <Button Grid.Row="2" Content="Login" HorizontalAlignment="Center" Margin="0 10" Command="{Binding LoginCommand}" IsDefault="True"/>
+                <Button Grid.Row="2" Content="Iniciar Sesión" HorizontalAlignment="Center" Padding="10 5 10 5" Margin="0 10" Command="{Binding LoginCommand}" Style="{StaticResource SecondaryNormalButtonSytle}" IsDefault="True"/>
 
-                <Button Grid.Row="3" HorizontalAlignment="Center" Margin="0 10 0 0" Background="Transparent" Foreground="Blue" FontSize="14" Content="Registrarse" Command="{Binding ViewRegisterCommand}"/>
-
-                <TextBlock Grid.Row="4" Margin="0,10,0,0"
-                           HorizontalAlignment="Center"
-                           DataContext="{Binding ErrorMessageViewModel}"
-                           Foreground="DarkRed"
-                           Text="{Binding Message}"
-                           Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
-
+                <Button Grid.Row="3" 
+                        Style="{StaticResource ArchorLinkButtonStyle}"
+                        HorizontalAlignment="Center" 
+                        Margin="0 10 0 0" 
+                        Content="Registrarse" 
+                        Command="{Binding ViewRegisterCommand}"/>
             </Grid>
         </Grid>
     </Border>

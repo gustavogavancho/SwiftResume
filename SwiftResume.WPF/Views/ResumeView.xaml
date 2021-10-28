@@ -16,6 +16,10 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
+    <UserControl.Background>
+        <ImageBrush ImageSource="/Images/loginbackground.jpg" Stretch="UniformToFill" Opacity="0.5"/>
+    </UserControl.Background>
+
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -24,7 +28,8 @@
         </Grid.RowDefinitions>
         
         <TextBlock Text="Curriculums:" Style="{StaticResource TitlePrimaryTextBlockStyle}"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"/>
-        <ListView Grid.Row="1" 
+        <ListView Grid.Row="1"
+                  Background="Transparent"
                   SelectionMode="Single"
                   ItemsSource="{Binding Resumes}" 
                   ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -49,7 +54,7 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Style="{StaticResource BorderCard}"  Height="170" Width="350">
+                    <Border Style="{StaticResource BorderCard}" Height="170" Width="350">
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
