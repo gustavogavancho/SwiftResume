@@ -29,68 +29,68 @@ namespace SwiftResume.DAL.EFCORE
             });
 
             //Seed resume data
-            modelBuilder.Entity<Resume>().HasData(new Resume
-            {
-                Id = 1,
-                Nombres = "Gustavo",
-                Apellidos = "Gavancho León",
-                Genero = "Masculino",
-                Lenguaje = "Español"
-            });
+            //modelBuilder.Entity<Resume>().HasData(new Resume
+            //{
+            //    Id = 1,
+            //    Nombres = "Gustavo",
+            //    Apellidos = "Gavancho León",
+            //    Genero = "Masculino",
+            //    Lenguaje = "Español"
+            //});
 
-            modelBuilder.Entity<Resume>().HasData(new Resume
-            {
-                Id = 2,
-                Nombres = "Jordi",
-                Apellidos = "Gavancho León",
-                Genero = "Masculino",
-                Lenguaje = "Español"
-            });
+            //modelBuilder.Entity<Resume>().HasData(new Resume
+            //{
+            //    Id = 2,
+            //    Nombres = "Jordi",
+            //    Apellidos = "Gavancho León",
+            //    Genero = "Masculino",
+            //    Lenguaje = "Español"
+            //});
 
-            modelBuilder.Entity<Resume>().HasData(new Resume
-            {
-                Id = 3,
-                Nombres = "Milagros",
-                Apellidos = "Iñipe Cachay",
-                Genero = "Femenino",
-                Lenguaje = "English"
-            });
+            //modelBuilder.Entity<Resume>().HasData(new Resume
+            //{
+            //    Id = 3,
+            //    Nombres = "Milagros",
+            //    Apellidos = "Iñipe Cachay",
+            //    Genero = "Femenino",
+            //    Lenguaje = "English"
+            //});
 
-            modelBuilder.Entity<Resume>().HasData(new Resume
-            {
-                Id = 4,
-                Nombres = "Olga Cristina del Rocio",
-                Apellidos = "Gavancho León",
-                Genero = "Femenino",
-                Lenguaje = "English"
-            });
+            //modelBuilder.Entity<Resume>().HasData(new Resume
+            //{
+            //    Id = 4,
+            //    Nombres = "Olga Cristina del Rocio",
+            //    Apellidos = "Gavancho León",
+            //    Genero = "Femenino",
+            //    Lenguaje = "English"
+            //});
 
-            modelBuilder.Entity<Resume>().HasData(new Resume
-            {
-                Id = 5,
-                Nombres = "Olga del Rocio",
-                Apellidos = "León García",
-                Genero = "Femenino",
-                Lenguaje = "English"
-            });
+            //modelBuilder.Entity<Resume>().HasData(new Resume
+            //{
+            //    Id = 5,
+            //    Nombres = "Olga del Rocio",
+            //    Apellidos = "León García",
+            //    Genero = "Femenino",
+            //    Lenguaje = "English"
+            //});
 
-            modelBuilder.Entity<Resume>().HasData(new Resume
-            {
-                Id = 6,
-                Nombres = "Toty Ernestina",
-                Apellidos = "Cordiva Rios",
-                Genero = "Femenino",
-                Lenguaje = "English"
-            });
+            //modelBuilder.Entity<Resume>().HasData(new Resume
+            //{
+            //    Id = 6,
+            //    Nombres = "Toty Ernestina",
+            //    Apellidos = "Cordiva Rios",
+            //    Genero = "Femenino",
+            //    Lenguaje = "English"
+            //});
 
-            modelBuilder.Entity<Resume>().HasData(new Resume
-            {
-                Id = 7,
-                Nombres = "Mia Isabella",
-                Apellidos = "Gavancho Cordova",
-                Genero = "Femenino",
-                Lenguaje = "English"
-            });
+            //modelBuilder.Entity<Resume>().HasData(new Resume
+            //{
+            //    Id = 7,
+            //    Nombres = "Mia Isabella",
+            //    Apellidos = "Gavancho Cordova",
+            //    Genero = "Femenino",
+            //    Lenguaje = "English"
+            //});
         }
     }
 }

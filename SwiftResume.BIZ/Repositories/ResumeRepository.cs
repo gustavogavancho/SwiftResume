@@ -1,8 +1,11 @@
-﻿using SwiftResume.COMMON.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SwiftResume.COMMON.Models;
 using SwiftResume.DAL.EFCORE;
 using SwiftResume.DAL.EFCORE.Services;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 
 namespace SwiftResume.BIZ.Repositories
 {
@@ -29,6 +32,15 @@ namespace SwiftResume.BIZ.Repositories
                     .Skip((pageIndex - 1) * pageSize)
                     .Take(pageSize);
             }
+        }
+
+        public async Task<IEnumerable<Resume>> GetResumesByUsername(string username)
+        {
+            using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
+            {
+                return await context.Resumes.Where(x => x.Username == username).ToListAsync();
+            }
+
         }
     }
 }

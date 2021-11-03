@@ -37,67 +37,12 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                     b.Property<string>("Nombres")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Username")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Resumes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Apellidos = "Gavancho León",
-                            Genero = "Masculino",
-                            Lenguaje = "Español",
-                            Nombres = "Gustavo"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Apellidos = "Gavancho León",
-                            Genero = "Masculino",
-                            Lenguaje = "Español",
-                            Nombres = "Jordi"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Apellidos = "Iñipe Cachay",
-                            Genero = "Femenino",
-                            Lenguaje = "English",
-                            Nombres = "Milagros"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Apellidos = "Gavancho León",
-                            Genero = "Femenino",
-                            Lenguaje = "English",
-                            Nombres = "Olga Cristina del Rocio"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Apellidos = "León García",
-                            Genero = "Femenino",
-                            Lenguaje = "English",
-                            Nombres = "Olga del Rocio"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Apellidos = "Cordiva Rios",
-                            Genero = "Femenino",
-                            Lenguaje = "English",
-                            Nombres = "Toty Ernestina"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Apellidos = "Gavancho Cordova",
-                            Genero = "Femenino",
-                            Lenguaje = "English",
-                            Nombres = "Mia Isabella"
-                        });
                 });
 
             modelBuilder.Entity("SwiftResume.COMMON.Models.User", b =>
@@ -126,7 +71,7 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         new
                         {
                             Id = 1,
-                            DateJoined = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateJoined = new DateTime(2021, 11, 3, 15, 33, 22, 215, DateTimeKind.Local).AddTicks(7854),
                             Email = "ggavancholeon@gmail.com",
                             PasswordHash = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==",
                             Username = "GGAVANCHO"

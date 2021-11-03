@@ -9,6 +9,7 @@ using SwiftResume.WPF.CustomControls.Dialogs.Resume;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
 using SwiftResume.WPF.Extensions;
+using SwiftResume.WPF.State.Users;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace SwiftResume.WPF.ViewModels
         private readonly ResumeDialogViewModel _resumeDialogViewModel;
         private readonly YesNoDialogViewModel _yesNoDialogViewModel;
         private readonly AlertDialogViewModel _alertDialogViewModel;
+        private readonly IUserStored _userStored;
 
         #endregion
 
@@ -80,13 +82,15 @@ namespace SwiftResume.WPF.ViewModels
             IDialogService dialogService,
             ResumeDialogViewModel resumeDialogViewModel,
             YesNoDialogViewModel yesNoDialogViewModel,
-            AlertDialogViewModel alertDialogViewModel)
+            AlertDialogViewModel alertDialogViewModel,
+            IUserStored userStored)
         {
             _resumeRepository = resumeRepository;
             _dialogService = dialogService;
             _resumeDialogViewModel = resumeDialogViewModel;
             _yesNoDialogViewModel = yesNoDialogViewModel;
             _alertDialogViewModel = alertDialogViewModel;
+            _userStored = userStored;
             AddCommand = new DelegateCommand(OnAdd);
             DeleteCommand = new DelegateCommand(OnDelete);
         }
@@ -124,7 +128,7 @@ namespace SwiftResume.WPF.ViewModels
 
         public async void OnLoad()
         {
-            var resume = await _resumeRepository.GetAll();
+            var resume = await _resumeRepository.GetResumesByUsername(_userStored.CurrentUser.Username);
             Resumes = resume.ToObservableCollection();
         }
 

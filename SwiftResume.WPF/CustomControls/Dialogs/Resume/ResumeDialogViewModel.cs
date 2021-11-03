@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using SwiftResume.BIZ.Repositories;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
+using SwiftResume.WPF.State.Users;
 using Model = SwiftResume.COMMON.Models;
 
 namespace SwiftResume.WPF.CustomControls.Dialogs.Resume
@@ -10,6 +11,7 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Resume
         #region Fields
 
         private readonly IResumeRepository _resumeRepository;
+        private readonly IUserStored _userStored;
 
         #endregion
 
@@ -38,10 +40,11 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Resume
 
         #region Constructor
 
-        public ResumeDialogViewModel(IResumeRepository resumeRepository) : base()
+        public ResumeDialogViewModel(IResumeRepository resumeRepository,
+            IUserStored userStored) : base()
         {
             _resumeRepository = resumeRepository;
-
+            _userStored = userStored;
             SaveCommand = new DelegateCommand<IDialogWindow>(OnSave);
             CancelCommand = new DelegateCommand<IDialogWindow>(OnCancel);
         }
@@ -52,6 +55,7 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Resume
 
         private void OnSave(IDialogWindow window)
         {
+            Resume.Username = _userStored.CurrentUser.Username;
             _resumeRepository.Add(Resume);
             CloseDialogWithResult(window, Resume);
         }
