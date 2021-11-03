@@ -1,5 +1,8 @@
 ﻿using Prism.Commands;
+using SwiftResume.BIZ.Exceptions;
 using SwiftResume.WPF.Core;
+using SwiftResume.WPF.CustomControls.Dialogs.Alert;
+using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.State.Authenticators;
 using SwiftResume.WPF.State.Navigators;
 using System;
@@ -13,6 +16,8 @@ namespace SwiftResume.WPF.ViewModels
         private readonly IAuthenticator _authenticator;
         private readonly IRenavigator _loginRenavigator;
         private readonly IRenavigator _registerRenavigator;
+        private readonly IDialogService _dialogService;
+        private readonly AlertDialogViewModel _alertDialogViewModel;
 
         #endregion
 
@@ -57,11 +62,17 @@ namespace SwiftResume.WPF.ViewModels
         #endregion
 
         #region Constructors
-        public LoginViewModel(IAuthenticator authenticator, IRenavigator loginRenavigator, IRenavigator registerRenavigator)
+        public LoginViewModel(IAuthenticator authenticator, 
+            IRenavigator loginRenavigator,
+            IRenavigator registerRenavigator,
+            IDialogService dialogService,
+            AlertDialogViewModel alertDialogViewModel)
         {
             _authenticator = authenticator;
             _loginRenavigator = loginRenavigator;
             _registerRenavigator = registerRenavigator;
+            _dialogService = dialogService;
+            _alertDialogViewModel = alertDialogViewModel;
 
             LoginCommand = new DelegateCommand(OnLogin, CanLoginin);
             ViewRegisterCommand = new DelegateCommand(OnViewRegister);
@@ -90,10 +101,20 @@ namespace SwiftResume.WPF.ViewModels
 
                 _loginRenavigator.Renavigate();
             }
-            catch (Exception ex)
+            catch (UserNotFoundException ex)
             {
-
+                SetErrorDialog(ex);
             }
+            catch (InvalidPasswordException ex)
+            {
+                SetErrorDialog(ex);
+            }
+        }
+
+        private void SetErrorDialog(Exception ex)
+        {
+            _alertDialogViewModel.Message = ex.Message;
+            _dialogService.OpenDialog(_alertDialogViewModel);
         }
 
         private bool CanLoginin()

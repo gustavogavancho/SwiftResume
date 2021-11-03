@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SwiftResume.BIZ.Exceptions;
 using SwiftResume.BIZ.Repositories;
 using SwiftResume.COMMON.Enums;
 using SwiftResume.COMMON.Models;
@@ -24,13 +25,13 @@ namespace SwiftResume.BIZ.Services
 
             if (user is null)
             {
-                //TODO: Implemente logic for user not found
+                throw new UserNotFoundException($"El nombre de usuario {username} no existe.");
             }
             PasswordVerificationResult passwordResult = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
 
             if (passwordResult != PasswordVerificationResult.Success)
             {
-                //TODO : Implemente logic for invalid login
+                throw new InvalidPasswordException("Clave incorrecta, por favor intenta de nuevo.");
             }
 
             return user;

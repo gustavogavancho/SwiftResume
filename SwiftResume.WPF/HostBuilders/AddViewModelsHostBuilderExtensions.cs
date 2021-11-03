@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using SwiftResume.WPF.Core;
 using SwiftResume.WPF.CustomControls.Dialogs.Alert;
 using SwiftResume.WPF.CustomControls.Dialogs.Resume;
+using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
 using SwiftResume.WPF.State.Authenticators;
 using SwiftResume.WPF.State.Navigators;
@@ -44,7 +45,9 @@ namespace SwiftResume.WPF.HostBuilders
             return new LoginViewModel(
                         services.GetRequiredService<IAuthenticator>(),
                         services.GetRequiredService<ViewModelDelegateRenavigator<ResumeViewModel>>(),
-                        services.GetRequiredService<ViewModelDelegateRenavigator<RegisterViewModel>>());
+                        services.GetRequiredService<ViewModelDelegateRenavigator<RegisterViewModel>>(),
+                        services.GetRequiredService<IDialogService>(),
+                        services.GetRequiredService<AlertDialogViewModel>());
         }
 
         private static RegisterViewModel CreateRegisterViewModel(IServiceProvider services)

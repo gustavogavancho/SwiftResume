@@ -80,8 +80,7 @@ namespace SwiftResume.WPF.ViewModels
         #region Constructor
 
         public RegisterViewModel(IAuthenticator authenticator, 
-            IRenavigator loginRenavigator,
-            ViewModelDelegateRenavigator<LoginViewModel> viewModelDelegateRenavigator,)
+            IRenavigator loginRenavigator)
         {
             _authenticator = authenticator;
             _loginRenavigator = loginRenavigator;
