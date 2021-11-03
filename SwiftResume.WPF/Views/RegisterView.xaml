@@ -7,35 +7,28 @@
              xmlns:local="clr-namespace:SwiftResume.WPF.Views"
              mc:Ignorable="d" 
              FontSize="18"
+             Foreground="{StaticResource PrimaryBrush}"
              d:DesignHeight="450" d:DesignWidth="800"
              FocusManager.FocusedElement="{Binding ElementName=txtEmail}">
-    
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-    </UserControl.Resources>
 
     <UserControl.Background>
         <ImageBrush ImageSource="/Images/loginbackground.jpg" Stretch="UniformToFill" Opacity="0.5"/>
     </UserControl.Background>
 
-    <Border Margin="50" Padding="50" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{StaticResource PrimaryBrush}" CornerRadius="10" BorderThickness="3" Background="White">
-        <Border.Effect>
-            <DropShadowEffect BlurRadius="10" Color="Gray"/>
-        </Border.Effect>
+    <Border Margin="50 40 50 40" Padding="50 40 50 50" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{StaticResource PrimaryBrush}" CornerRadius="10" BorderThickness="3" Background="White">
         <Grid Grid.IsSharedSizeScope="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" 
-                       FontSize="32" 
-                       HorizontalAlignment="Center" 
-                       Text="Registrarse"/>
+            <TextBlock Grid.Row="0" FontSize="32" HorizontalAlignment="Center" Text="Registrarse"/>
 
-            <Grid Grid.Row="1" Margin="0 20">
+            <TextBlock Grid.Row="1" Margin="0 10" FontSize="18" HorizontalAlignment="Center" FontWeight="Thin" Text="Llene todos los campos para completar su registro."/>
+
+            <Grid Grid.Row="2" Margin="0 20">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -50,11 +43,8 @@
                         <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Text="Email"/>
-                    <TextBox x:Name="txtEmail" 
-                             Grid.Column="1" 
-                             Margin="20 0 0 0" 
-                             Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Grid.Column="0" Text="Correo:"/>
+                    <TextBox x:Name="txtEmail" Grid.Column="1" Margin="20 0 0 0" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
 
                 <Grid Grid.Row="1" Margin="0 10">
@@ -63,10 +53,8 @@
                         <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Text="Username"/>
-                    <TextBox Grid.Column="1" Margin="20,0,0,0"
-                             CharacterCasing="Upper"
-                             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Grid.Column="0" Text="Usuario:"/>
+                    <TextBox Grid.Column="1" Margin="20,0,0,0" CharacterCasing="Upper" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
 
                 <Grid Grid.Row="2" Margin="0 10">
@@ -75,9 +63,8 @@
                         <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Text="Password"/>
-                    <components:BindablePasswordBox Margin="20 0 0 0" Grid.Column="1" 
-                                                    Password="{Binding Password}"/>
+                    <TextBlock Grid.Column="0" Text="Contraseña:"/>
+                    <components:BindablePasswordBox Margin="20 0 0 0" Grid.Column="1"  Password="{Binding Password}"/>
                 </Grid>
 
                 <Grid Grid.Row="3" Margin="0 10">
@@ -86,16 +73,17 @@
                         <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Text="Confirm Password"/>
-                    <components:BindablePasswordBox Margin="20 0 0 0" Grid.Column="1"
-                                                    Password="{Binding ConfirmPassword}"/>
+                    <TextBlock Grid.Column="0" Text="Confirmar Contraseña"/>
+                    <components:BindablePasswordBox Margin="20 0 0 0" Grid.Column="1" Password="{Binding ConfirmPassword}"/>
                 </Grid>
 
                 <Button Grid.Row="4" 
                         Content="Register" 
                         HorizontalAlignment="Center" 
+                        Padding="10 5 10 5" 
                         Margin="0 10" 
                         Command="{Binding RegisterCommand}" 
+                        Style="{StaticResource SecondaryNormalButtonSytle}" 
                         IsDefault="True"/>
 
                 <Button Grid.Row="5" 
@@ -104,13 +92,6 @@
                         Margin="0 10 0 0" 
                         Content="Iniciar Sesión" 
                         Command="{Binding ViewLoginCommand}"/>
-
-                <TextBlock Grid.Row="6" Margin="0,10,0,0"
-                           HorizontalAlignment="Center"
-                           DataContext="{Binding ErrorMessageViewModel}"
-                           Foreground="DarkRed"
-                           Text="{Binding Message}"
-                           Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
             </Grid>
         </Grid>

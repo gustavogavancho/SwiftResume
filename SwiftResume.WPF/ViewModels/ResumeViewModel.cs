@@ -91,6 +91,7 @@ namespace SwiftResume.WPF.ViewModels
             DeleteCommand = new DelegateCommand(OnDelete);
         }
 
+        #region Methods
         private void OnAdd()
         {
             var result = _dialogService.OpenDialog(_resumeDialogViewModel);
@@ -106,7 +107,7 @@ namespace SwiftResume.WPF.ViewModels
             if (Resume != null)
             {
                 _yesNoDialogViewModel.Message = $"¿Deseal eliminar el curriculum de {Resume.Nombres} {Resume.Apellidos}?";
-    
+
                 var result = _dialogService.OpenDialog(_yesNoDialogViewModel);
 
                 if (result == DialogResults.Si)
@@ -126,6 +127,8 @@ namespace SwiftResume.WPF.ViewModels
             var resume = await _resumeRepository.GetAll();
             Resumes = resume.ToObservableCollection();
         }
+
+        #endregion
 
         #endregion
 

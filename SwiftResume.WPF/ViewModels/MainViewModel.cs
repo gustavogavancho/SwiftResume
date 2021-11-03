@@ -21,7 +21,6 @@ namespace SwiftResume.WPF.ViewModels
         #region Fields
 
         private readonly INavigator _navigator;
-        private readonly ISwiftResumeViewModelFactory _viewModelFactory;
         private readonly IAuthenticator _authenticator;
         private readonly ViewModelDelegateRenavigator<LoginViewModel> _viewModelDelegateRenavigator;
         private readonly IDialogService _dialogService;
@@ -59,7 +58,6 @@ namespace SwiftResume.WPF.ViewModels
             YesNoDialogViewModel yesNoDialogViewModel)
         {
             _navigator = navigator;
-            _viewModelFactory = viewModelFactory;
             _authenticator = authenticator;
             _viewModelDelegateRenavigator = viewModelDelegateRenavigator;
             _dialogService = dialogService;
@@ -68,13 +66,25 @@ namespace SwiftResume.WPF.ViewModels
             _navigator.StateChanged += Navigator_StateChanged;
             _authenticator.StateChanged += Authenticator_StateChanged;
             
-            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, _viewModelFactory);
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, viewModelFactory);
             //Startup View
             UpdateCurrentViewModelCommand.Execute(EnumLanguage.ViewType.Login);
 
             MinimizeWindowCommand = new DelegateCommand(OnMinimizeCommand);
             CloseWindowCommand = new DelegateCommand(OnCloseCommand);
             LogoutCommand = new DelegateCommand(OnLogout);
+        }
+
+        #endregion
+
+        #region Methods
+
+        public override void Dispose()
+        {
+            _navigator.StateChanged -= Navigator_StateChanged;
+            _authenticator.StateChanged -= Authenticator_StateChanged;
+
+            base.Dispose();
         }
 
         private void OnLogout()
@@ -85,7 +95,7 @@ namespace SwiftResume.WPF.ViewModels
             if (result == DialogResults.Si)
             {
                 _authenticator.Logout();
-                (_viewModelDelegateRenavigator as IRenavigator).Renavigate();
+                _viewModelDelegateRenavigator.Renavigate();
             }
         }
 
@@ -110,16 +120,6 @@ namespace SwiftResume.WPF.ViewModels
             Application.Current.Windows.OfType<MainWindow>().FirstOrDefault().WindowState = WindowState.Minimized;
         }
 
-        #endregion
-
-        #region Methods
-        public override void Dispose()
-        {
-            _navigator.StateChanged -= Navigator_StateChanged;
-            _authenticator.StateChanged -= Authenticator_StateChanged;
-
-            base.Dispose();
-        }
 
         #endregion
     }

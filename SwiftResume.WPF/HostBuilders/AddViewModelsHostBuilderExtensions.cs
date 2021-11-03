@@ -51,7 +51,6 @@ namespace SwiftResume.WPF.HostBuilders
         {
             return new RegisterViewModel(
                         services.GetRequiredService<IAuthenticator>(),
-                        services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
                         services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>());
         }
 

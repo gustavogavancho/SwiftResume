@@ -12,7 +12,6 @@ namespace SwiftResume.WPF.ViewModels
         #region Fields
 
         private readonly IAuthenticator _authenticator;
-        private readonly IRenavigator _registerRenavigator;
         private readonly IRenavigator _loginRenavigator;
 
         #endregion
@@ -80,10 +79,11 @@ namespace SwiftResume.WPF.ViewModels
 
         #region Constructor
 
-        public RegisterViewModel(IAuthenticator authenticator, IRenavigator registerRenavigator, IRenavigator loginRenavigator)
+        public RegisterViewModel(IAuthenticator authenticator, 
+            IRenavigator loginRenavigator,
+            ViewModelDelegateRenavigator<LoginViewModel> viewModelDelegateRenavigator,)
         {
             _authenticator = authenticator;
-            _registerRenavigator = registerRenavigator;
             _loginRenavigator = loginRenavigator;
 
             RegisterCommand = new DelegateCommand(OnRegister, CanRegisterUser);
@@ -91,6 +91,10 @@ namespace SwiftResume.WPF.ViewModels
 
             this.PropertyChanged += RegisterViewModel_PropertyChanged;
         }
+
+        #endregion
+
+        #region Methods
 
         private void OnViewLogin()
         {
@@ -105,9 +109,6 @@ namespace SwiftResume.WPF.ViewModels
             }
         }
 
-        #endregion
-
-        #region Methods
         private async void OnRegister()
         {
             try
@@ -121,7 +122,7 @@ namespace SwiftResume.WPF.ViewModels
                 switch (registrationResult)
                 {
                     case RegistrationResult.Success:
-                        _registerRenavigator.Renavigate();
+                        _loginRenavigator.Renavigate();
                         break;
                     case RegistrationResult.PasswordsNoDotMatch:
                         //TODO: Implement password do not match
