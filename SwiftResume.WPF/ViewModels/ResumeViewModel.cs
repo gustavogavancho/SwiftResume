@@ -56,17 +56,6 @@ namespace SwiftResume.WPF.ViewModels
             }
         }
 
-        private int _index;
-        public int Index
-        {
-            get => _index;
-            set 
-            {
-                _index = value;
-                OnPropertyChanged(nameof(Index));
-            }
-        }
-
         #endregion
 
         #region Commands

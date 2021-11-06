@@ -8,7 +8,7 @@
              xmlns:enum="clr-namespace:SwiftResume.COMMON.Enums;assembly=SwiftResume.COMMON"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
-             Height="360" Width="400">
+             Height="400" Width="400">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -31,21 +31,21 @@
         <TextBlock Text="Curriculum:" Style="{StaticResource SubTitleTextBlockStyle}"/>
         <StackPanel Grid.Row="1">
             <TextBlock Text="Nombres:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-            <TextBox Text="{Binding Resume.Nombres}" Style="{StaticResource TextBoxStyle}"/>
+            <TextBox x:Name="txtNombres" Text="{Binding ResumeWrapper.Nombres, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
         </StackPanel>
-        <StackPanel Grid.Row="2">
+        <StackPanel Grid.Row="2" Margin="0 10 0 0">
             <TextBlock Text="Apellidos:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-            <TextBox Text="{Binding Resume.Apellidos}" Style="{StaticResource TextBoxStyle}"/>
+            <TextBox Text="{Binding ResumeWrapper.Apellidos, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
         </StackPanel>
-        <StackPanel Grid.Row="3">
+        <StackPanel Grid.Row="3" Margin="0 10 0 0">
             <TextBlock Text="Genero:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-            <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Genero}}}" SelectedValue="{Binding Resume.Genero}" Style="{StaticResource ComboBoxStyle}"/>
+            <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Genero}}}" SelectedValue="{Binding ResumeWrapper.Genero}" Style="{StaticResource ComboBoxStyle}"/>
         </StackPanel>
-        <StackPanel Grid.Row="4">
+        <StackPanel Grid.Row="4" Margin="0 10 0 0">
             <TextBlock Text="Language:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-            <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Language}}}" SelectedValue="{Binding Resume.Lenguaje}" Style="{StaticResource ComboBoxStyle}"/>
+            <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Language}}}" SelectedValue="{Binding ResumeWrapper.Lenguaje}" Style="{StaticResource ComboBoxStyle}"/>
         </StackPanel>
-        <StackPanel Grid.Row="5">
+        <StackPanel Grid.Row="5" Margin="0 10 0 0">
             <TextBlock Text="Foto:" Style="{StaticResource BlueTextTextBlockStyle}"/>
             <ComboBox />
         </StackPanel>

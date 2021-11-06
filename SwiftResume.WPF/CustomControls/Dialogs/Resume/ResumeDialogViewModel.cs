@@ -2,6 +2,7 @@
 using SwiftResume.BIZ.Repositories;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.State.Users;
+using SwiftResume.WPF.Wrapper;
 using Model = SwiftResume.COMMON.Models;
 
 namespace SwiftResume.WPF.CustomControls.Dialogs.Resume
@@ -18,7 +19,6 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Resume
         #region Properties
 
         private Model.Resume _resume = new Model.Resume();
-
         public Model.Resume Resume
         {
             get => _resume;
@@ -26,6 +26,17 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Resume
             {
                 _resume = value;
                 OnPropertyChanged(nameof(Resume));
+            }
+        }
+
+        private ResumeWrapper _resumeWrapper;
+        public ResumeWrapper ResumeWrapper
+        {
+            get => _resumeWrapper;
+            set 
+            {
+                _resumeWrapper = value;
+                OnPropertyChanged(nameof(ResumeWrapper));
             }
         }
 
@@ -45,13 +56,18 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Resume
         {
             _resumeRepository = resumeRepository;
             _userStored = userStored;
-            SaveCommand = new DelegateCommand<IDialogWindow>(OnSave);
+            SaveCommand = new DelegateCommand<IDialogWindow>(OnSave, CanSave);
             CancelCommand = new DelegateCommand<IDialogWindow>(OnCancel);
         }
 
         #endregion
 
         #region Methods
+
+        private bool CanSave(IDialogWindow arg)
+        {
+            return ResumeWrapper != null && !ResumeWrapper.HasErrors;
+        }
 
         private void OnSave(IDialogWindow window)
         {
@@ -68,6 +84,22 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Resume
         public void OnLoad()
         {
             Resume = new Model.Resume();
+
+            ResumeWrapper = new ResumeWrapper(new Model.Resume());
+            ResumeWrapper.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(ResumeWrapper.HasErrors))
+                {
+                    SaveCommand.RaiseCanExecuteChanged();
+                }
+            };
+
+            SaveCommand.RaiseCanExecuteChanged();
+
+            if (ResumeWrapper.Id == 0)
+            {
+                ResumeWrapper.Nombres = "";
+            }
         }
 
         #endregion
