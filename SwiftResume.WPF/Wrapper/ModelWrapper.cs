@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace SwiftResume.WPF.Wrapper
 {
     public class ModelWrapper<T> : NotifyDataErrorInfoBase
     {
+        public T Model { get; }
+
         public ModelWrapper(T model)
         {
             Model = model;
+            Validate();
         }
-        public T Model { get; }
 
         protected virtual TValue GetValue<TValue>([CallerMemberName] string propertyName = null)
         {
@@ -21,27 +24,27 @@ namespace SwiftResume.WPF.Wrapper
         {
             typeof(T).GetProperty(propertyName).SetValue(Model, value);
             OnPropertyChanged(propertyName);
-            ValidatePropertyInternal(propertyName, value);
+            ValidatePropertyInternal(propertyName);
         }
 
-        private void ValidatePropertyInternal(string propertyName, object currentValue)
+        private void ValidatePropertyInternal(string propertyName)
         {
-            ClearErrors(propertyName);
+            ClearErrors();
 
-            ValidateDataAnnotations(propertyName, currentValue);
+            Validate();
 
             ValidateCustomErrors(propertyName);
         }
 
-        private void ValidateDataAnnotations(string propertyName, object currentValue)
+        private void Validate()
         {
             var results = new List<ValidationResult>();
-            var context = new ValidationContext(Model) { MemberName = propertyName };
-            Validator.TryValidateProperty(currentValue, context, results);
+            var context = new ValidationContext(this.Model);
+            Validator.TryValidateObject(this.Model, context, results, true);
 
-            foreach (var result in results)
+            foreach (var result in results.SelectMany(r=> r.MemberNames).Distinct())
             {
-                AddError(propertyName, result.ErrorMessage);
+                AddError(result, results.FirstOrDefault(r => r.MemberNames.Contains(result)).ErrorMessage);
             }
         }
 

@@ -41,9 +41,9 @@ namespace SwiftResume.WPF.Wrapper
             }
         }
 
-        protected void ClearErrors(string propertyName)
+        protected void ClearErrors()
         {
-            if (_errorsByPropertyName.ContainsKey(propertyName))
+            foreach (var propertyName in _errorsByPropertyName.Keys)
             {
                 _errorsByPropertyName.Remove(propertyName);
                 OnErrorsChanged(propertyName);

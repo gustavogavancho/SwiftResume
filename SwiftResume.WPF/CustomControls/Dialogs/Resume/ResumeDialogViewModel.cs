@@ -95,11 +95,6 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Resume
             };
 
             SaveCommand.RaiseCanExecuteChanged();
-
-            if (ResumeWrapper.Id == 0)
-            {
-                ResumeWrapper.Nombres = "";
-            }
         }
 
         #endregion
