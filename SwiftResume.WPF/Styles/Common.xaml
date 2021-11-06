@@ -72,8 +72,6 @@
                 <Setter Property="Background" Value="{StaticResource TertiaryBrush}"/>
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
-                <Setter Property="ToolTip.Background" Value="{StaticResource TertiaryBrush}"/>
-                <Setter Property="ToolTip.Foreground" Value="White"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -209,10 +207,29 @@
         <Setter Property="CornerRadius" Value="20"/>
     </Style>
     
-    <!-- Combo Box-->
+    <!-- Combo Box-->    
+    <Style TargetType="ComboBox" x:Key="ValidationComboBoxStyle">
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder x:Name="placeholder" />
+                        <TextBlock FontSize="12" Foreground="{StaticResource TertiaryBrush}" Text="{Binding ElementName=placeholder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="Background" Value="{StaticResource TertiaryBrush}"/>
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
-    <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+    <Style x:Key="ComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource ValidationComboBoxStyle}">
         <Setter Property="Height" Value="21"/>
+        <Setter Property="Foreground" Value="Black"/>
     </Style>
 
     <!-- DateTimePicker-->

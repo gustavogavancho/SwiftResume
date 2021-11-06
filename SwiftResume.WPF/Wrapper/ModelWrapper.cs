@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -24,16 +25,16 @@ namespace SwiftResume.WPF.Wrapper
         {
             typeof(T).GetProperty(propertyName).SetValue(Model, value);
             OnPropertyChanged(propertyName);
-            ValidatePropertyInternal(propertyName);
+            ValidatePropertyInternal();
         }
 
-        private void ValidatePropertyInternal(string propertyName)
+        private void ValidatePropertyInternal()
         {
             ClearErrors();
 
             Validate();
 
-            ValidateCustomErrors(propertyName);
+            ValidateCustomErrors();
         }
 
         private void Validate()
@@ -48,19 +49,19 @@ namespace SwiftResume.WPF.Wrapper
             }
         }
 
-        private void ValidateCustomErrors(string propertyName)
+        private void ValidateCustomErrors()
         {
-            var errors = ValidateProperty(propertyName);
+            var errors = ValidateProperty();
             if (errors != null)
             {
                 foreach (var error in errors)
                 {
-                    AddError(propertyName, error);
+                    AddError(error.Item1, error.Item2);
                 }
             }
         }
 
-        protected virtual IEnumerable<string> ValidateProperty(string propertyName)
+        protected virtual IEnumerable<Tuple<string, string>> ValidateProperty()
         {
             return null;
         }

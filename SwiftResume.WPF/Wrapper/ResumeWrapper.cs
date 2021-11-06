@@ -30,16 +30,36 @@ namespace SwiftResume.WPF.Wrapper
             }
         }
 
-        protected override IEnumerable<string> ValidateProperty(string propertyName)
+        public string Genero
         {
-            switch (propertyName)
+            get { return GetValue<string>(); }
+            set
             {
-                case nameof(Nombres):
-                    if (string.Equals(Nombres, "Gustavo", StringComparison.OrdinalIgnoreCase))
-                    {
-                        yield return "Gustavo es un nombre baneado momentaneamente.";
-                    }
-                    break;
+                SetValue(value);
+            }
+        }
+
+        public string Lenguaje
+        {
+            get { return GetValue<string>(); }
+            set
+            {
+                SetValue(value);
+            }
+        }
+
+        protected override IEnumerable<Tuple<string, string>> ValidateProperty()
+        {
+            if (Nombres == "Gustavo")
+            {
+                Tuple<string, string> t = new Tuple<string, string>(nameof(Nombres), "Gustavo es un nombre baneado momentaneamente.");
+                yield return t;
+            }
+
+            if (Apellidos == "Gavancho")
+            {
+                Tuple<string, string> t = new Tuple<string, string>(nameof(Apellidos), "Gavancho es un apellido baneado momentaneamente.");
+                yield return t;
             }
         }
     }

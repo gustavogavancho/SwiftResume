@@ -18,17 +18,6 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Resume
 
         #region Properties
 
-        private Model.Resume _resume = new Model.Resume();
-        public Model.Resume Resume
-        {
-            get => _resume;
-            set
-            {
-                _resume = value;
-                OnPropertyChanged(nameof(Resume));
-            }
-        }
-
         private ResumeWrapper _resumeWrapper;
         public ResumeWrapper ResumeWrapper
         {
@@ -71,9 +60,9 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Resume
 
         private void OnSave(IDialogWindow window)
         {
-            Resume.Username = _userStored.CurrentUser.Username;
-            _resumeRepository.Add(Resume);
-            CloseDialogWithResult(window, Resume);
+            ResumeWrapper.Model.Username = _userStored.CurrentUser.Username;
+            _resumeRepository.Add(ResumeWrapper.Model);
+            CloseDialogWithResult(window, ResumeWrapper.Model);
         }
 
         private void OnCancel(IDialogWindow window)
@@ -83,8 +72,6 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Resume
 
         public void OnLoad()
         {
-            Resume = new Model.Resume();
-
             ResumeWrapper = new ResumeWrapper(new Model.Resume());
             ResumeWrapper.PropertyChanged += (s, e) =>
             {

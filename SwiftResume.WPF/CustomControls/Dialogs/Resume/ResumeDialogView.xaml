@@ -39,11 +39,12 @@
         </StackPanel>
         <StackPanel Grid.Row="3" Margin="0 10 0 0">
             <TextBlock Text="Genero:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-            <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Genero}}}" SelectedValue="{Binding ResumeWrapper.Genero}" Style="{StaticResource ComboBoxStyle}"/>
+            <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Genero}}}" SelectedValue="{Binding ResumeWrapper.Genero, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}"/>
         </StackPanel>
         <StackPanel Grid.Row="4" Margin="0 10 0 0">
             <TextBlock Text="Language:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-            <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Language}}}" SelectedValue="{Binding ResumeWrapper.Lenguaje}" Style="{StaticResource ComboBoxStyle}"/>
+            <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Language}}}" SelectedValue="{Binding ResumeWrapper.Lenguaje, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}"/>
+
         </StackPanel>
         <StackPanel Grid.Row="5" Margin="0 10 0 0">
             <TextBlock Text="Foto:" Style="{StaticResource BlueTextTextBlockStyle}"/>
