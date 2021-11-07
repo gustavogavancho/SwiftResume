@@ -14,7 +14,10 @@ namespace SwiftResume.DAL.EFCORE.Services
         Task Add(TEntity entity);
         Task AddRange(IEnumerable<TEntity> entities);
 
-        Task Remove(TEntity entity);
-        Task RemoveRange(IEnumerable<TEntity> entities);
+        void Remove(TEntity entity);
+        void RemoveRange(IEnumerable<TEntity> entities);
+
+        Task SaveAsync();
+        bool HasChanges();
     }
 }

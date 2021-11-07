@@ -37,11 +37,9 @@ namespace SwiftResume.WPF
         {
             await _host.StartAsync();
 
-            SwiftResumeDbContextFactory contextFactory = _host.Services.GetRequiredService<SwiftResumeDbContextFactory>();
-            using (SwiftResumeDbContext context = contextFactory.CreateDbContext())
-            {
-                context.Database.Migrate();
-            }
+            SwiftResumeDbContext context = _host.Services.GetRequiredService<SwiftResumeDbContext>();
+
+            context.Database.Migrate();
 
             Window window = _host.Services.GetRequiredService<MainWindow>();
             window.Show();

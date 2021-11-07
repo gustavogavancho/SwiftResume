@@ -16,7 +16,6 @@ namespace SwiftResume.WPF.HostBuilders
                 string connectionString = context.Configuration.GetConnectionString("sqlite");
                 Action<DbContextOptionsBuilder> configureDbContext = o => o.UseSqlite(connectionString);
                 services.AddDbContext<SwiftResumeDbContext>(configureDbContext);
-                services.AddSingleton<SwiftResumeDbContextFactory>(new SwiftResumeDbContextFactory(configureDbContext));
             });
 
             return host;

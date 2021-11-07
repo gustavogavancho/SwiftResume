@@ -13,6 +13,7 @@ using SwiftResume.WPF.State.Users;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using EnumLanguage = SwiftResume.COMMON.Enums;
@@ -84,7 +85,10 @@ namespace SwiftResume.WPF.ViewModels
             DeleteCommand = new DelegateCommand(OnDelete);
         }
 
+        #endregion
+
         #region Methods
+
         private void OnAdd()
         {
             var result = _dialogService.OpenDialog(_resumeDialogViewModel);
@@ -105,8 +109,10 @@ namespace SwiftResume.WPF.ViewModels
 
                 if (result == DialogResults.Si)
                 {
-                    await _resumeRepository.Remove(Resume);
+                    _resumeRepository.Remove(Resume);
                     Resumes.Remove(Resume);
+
+                    await _resumeRepository.SaveAsync();
 
                     _alertDialogViewModel.Message = "Se eliminó correctamente el registro.";
 
@@ -122,8 +128,5 @@ namespace SwiftResume.WPF.ViewModels
         }
 
         #endregion
-
-        #endregion
-
     }
 }

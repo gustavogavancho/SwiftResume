@@ -9,75 +9,56 @@ namespace SwiftResume.DAL.EFCORE.Services
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly SwiftResumeDbContextFactory _contextFactory;
+        private readonly SwiftResumeDbContext _context;
 
-        public Repository(SwiftResumeDbContextFactory contextFactory)
+        public Repository(SwiftResumeDbContext context)
         {
-            _contextFactory = contextFactory;
+            _context = context;
         }
 
         public async Task<TEntity> Get(int id)
         {
-            using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
-            {
-                return await context.Set<TEntity>().FindAsync(id);
-            }
+            return await _context.Set<TEntity>().FindAsync(id);
         }
 
         public async Task<IEnumerable<TEntity>> GetAll()
         {
-            using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
-            {
-                return await context.Set<TEntity>().ToListAsync();
-            }
+            return await _context.Set<TEntity>().AsNoTracking().ToListAsync();
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
-            {
-                return context.Set<TEntity>().Where(predicate);
-            }
+            return _context.Set<TEntity>().Where(predicate);
         }
 
         public async Task Add(TEntity entity)
         {
-            using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
-            {
-                await context.Set<TEntity>().AddAsync(entity);
-
-                await context.SaveChangesAsync();
-            }
+            await _context.Set<TEntity>().AddAsync(entity);
         }
 
         public async Task AddRange(IEnumerable<TEntity> entities)
         {
-            using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
-            {
-                await context.Set<TEntity>().AddRangeAsync(entities);
-
-                await context.SaveChangesAsync();
-            }
+            await _context.Set<TEntity>().AddRangeAsync(entities);
         }
 
-        public async Task Remove(TEntity entity)
+        public void Remove(TEntity entity)
         {
-            using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
-            {
-                context.Set<TEntity>().Remove(entity);
-
-                await context.SaveChangesAsync();
-            }
+            _context.Set<TEntity>().Remove(entity);
         }
 
-        public async Task RemoveRange(IEnumerable<TEntity> entities)
+        public void RemoveRange(IEnumerable<TEntity> entities)
         {
-            using (SwiftResumeDbContext context = _contextFactory.CreateDbContext())
-            {
-                context.Set<TEntity>().RemoveRange(entities);
+            _context.Set<TEntity>().RemoveRange(entities);
+        }
 
-                await context.SaveChangesAsync();
-            }
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync(); 
+        }
+
+        public bool HasChanges()
+        {
+            return _context.ChangeTracker.HasChanges();
         }
     }
 }
