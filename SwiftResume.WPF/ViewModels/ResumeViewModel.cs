@@ -108,7 +108,7 @@ namespace SwiftResume.WPF.ViewModels
                     await _resumeRepository.Remove(Resume);
                     Resumes.Remove(Resume);
 
-                    _alertDialogViewModel.Message = "Se eliminó correctamente el curriculum";
+                    _alertDialogViewModel.Message = "Se eliminó correctamente el registro.";
 
                     _dialogService.OpenDialog(_alertDialogViewModel);
                 }

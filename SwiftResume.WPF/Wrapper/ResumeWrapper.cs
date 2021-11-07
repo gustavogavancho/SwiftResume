@@ -62,5 +62,20 @@ namespace SwiftResume.WPF.Wrapper
                 yield return t;
             }
         }
+
+        protected override IEnumerable<string> ValidateProperty(string propertyName)
+        {
+            switch (propertyName)
+            {
+                case nameof(Nombres):
+                    if (string.Equals(Nombres, "Gustavo", StringComparison.OrdinalIgnoreCase))
+                        yield return "Gustavo es un nombre baneado momentaneamente.";
+                    break;
+                case nameof(Apellidos):
+                    if (string.Equals(Apellidos, "Gavancho", StringComparison.OrdinalIgnoreCase))
+                        yield return "Gavancho es un nombre baneado momentaneamente.";
+                    break;
+            }
+        }
     }
 }

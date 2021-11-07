@@ -25,19 +25,19 @@ namespace SwiftResume.WPF.Wrapper
         {
             typeof(T).GetProperty(propertyName).SetValue(Model, value);
             OnPropertyChanged(propertyName);
-            ValidatePropertyInternal();
+            ValidatePropertyInternal(propertyName, value);
         }
 
-        private void ValidatePropertyInternal()
+        private void ValidatePropertyInternal(string propertyName, object currentValue)
         {
-            ClearErrors();
+            ClearErrors(propertyName);
 
-            Validate();
+            ValidateDataAnnotations(propertyName, currentValue);
 
-            ValidateCustomErrors();
+            ValidateCustomErrors(propertyName);
         }
 
-        private void Validate()
+        protected void Validate()
         {
             var results = new List<ValidationResult>();
             var context = new ValidationContext(this.Model);
@@ -46,6 +46,30 @@ namespace SwiftResume.WPF.Wrapper
             foreach (var result in results.SelectMany(r=> r.MemberNames).Distinct())
             {
                 AddError(result, results.FirstOrDefault(r => r.MemberNames.Contains(result)).ErrorMessage);
+            }
+        }
+
+        private void ValidateDataAnnotations(string propertyName, object currentValue)
+        {
+            var results = new List<ValidationResult>();
+            var context = new ValidationContext(Model) { MemberName = propertyName };
+            Validator.TryValidateProperty(currentValue, context, results);
+
+            foreach (var result in results)
+            {
+                AddError(propertyName, result.ErrorMessage);
+            }
+        }
+
+        private void ValidateCustomErrors(string propertyName)
+        {
+            var errors = ValidateProperty(propertyName);
+            if (errors != null)
+            {
+                foreach (var error in errors)
+                {
+                    AddError(propertyName, error);
+                }
             }
         }
 
@@ -62,6 +86,11 @@ namespace SwiftResume.WPF.Wrapper
         }
 
         protected virtual IEnumerable<Tuple<string, string>> ValidateProperty()
+        {
+            return null;
+        }
+
+        protected virtual IEnumerable<string> ValidateProperty(string propertyName)
         {
             return null;
         }

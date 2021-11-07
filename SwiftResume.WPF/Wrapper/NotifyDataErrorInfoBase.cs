@@ -49,5 +49,14 @@ namespace SwiftResume.WPF.Wrapper
                 OnErrorsChanged(propertyName);
             }
         }
+
+        protected void ClearErrors(string propertyName)
+        {
+            if (_errorsByPropertyName.ContainsKey(propertyName))
+            {
+                _errorsByPropertyName.Remove(propertyName);
+                OnErrorsChanged(propertyName);
+            }
+        }
     }
 }
