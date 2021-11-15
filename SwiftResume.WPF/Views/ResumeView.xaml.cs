@@ -8,10 +8,4 @@ public partial class ResumeView : UserControl
     {
         InitializeComponent();
     }
-
-    private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-    {
-        var checkSender = sender;
-        var checkE = sender;
-    }
 }

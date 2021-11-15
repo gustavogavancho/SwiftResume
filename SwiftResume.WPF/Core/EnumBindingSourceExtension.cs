@@ -9,7 +9,7 @@ public class EnumBindingSourceExtension : MarkupExtension
     public EnumBindingSourceExtension(Type enumType)
     {
         if (enumType is null || !enumType.IsEnum)
-            throw new Exception("EnumType must not be null and of type Enum");
+            return;
 
         EnumType = enumType;
     }

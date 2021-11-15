@@ -50,13 +50,13 @@ public class ResumeWrapper : ModelWrapper<Resume>
     {
         if (Nombres == "Gustavo")
         {
-            Tuple<string, string> t = new Tuple<string, string>(nameof(Nombres), "Gustavo es un nombre baneado momentaneamente.");
+            Tuple<string, string> t = new(nameof(Nombres), "Gustavo es un nombre baneado momentaneamente.");
             yield return t;
         }
 
         if (Apellidos == "Gavancho")
         {
-            Tuple<string, string> t = new Tuple<string, string>(nameof(Apellidos), "Gavancho es un apellido baneado momentaneamente.");
+            Tuple<string, string> t = new(nameof(Apellidos), "Gavancho es un apellido baneado momentaneamente.");
             yield return t;
         }
     }

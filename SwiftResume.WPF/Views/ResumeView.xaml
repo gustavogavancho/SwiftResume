@@ -36,7 +36,6 @@
                   HorizontalAlignment="Left"
                   SelectedItem="{Binding Resume, UpdateSourceTrigger=PropertyChanged}"
                   BorderBrush="Transparent" 
-                  PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown"
                   HorizontalContentAlignment="Stretch">
             <ListView.Resources>
                 <Style TargetType="ListViewItem">

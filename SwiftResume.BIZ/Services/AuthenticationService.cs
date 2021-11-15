@@ -60,7 +60,7 @@ public class AuthenticationService : IAuthenticationService
 
         if (result == RegistrationResult.Success)
         {
-            User user = new User
+            User user = new()
             {
                 Email = email,
                 Username = username,
