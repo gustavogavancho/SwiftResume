@@ -84,11 +84,15 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Resume
 
         private void OnSave(IDialogWindow window)
         {
-            ResumeWrapper.Model.Username = _userStored.CurrentUser.Username;
-            _resumeRepository.Add(ResumeWrapper.Model);
-            _resumeRepository.SaveAsync();
-            HasChanges = _resumeRepository.HasChanges();
-            CloseDialogWithResult(window, ResumeWrapper.Model);
+            ResumeWrapper.Validate();
+            if (!ResumeWrapper.HasErrors)
+            {
+                ResumeWrapper.Model.Username = _userStored.CurrentUser.Username;
+                _resumeRepository.Add(ResumeWrapper.Model);
+                _resumeRepository.SaveAsync();
+                HasChanges = _resumeRepository.HasChanges();
+                CloseDialogWithResult(window, ResumeWrapper.Model);
+            }
         }
 
         private void OnCancel(IDialogWindow window)

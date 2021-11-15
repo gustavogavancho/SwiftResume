@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace SwiftResume.WPF.Commands
 {
-   public class UpdateCurrentViewModelCommand : ICommand
+    public class UpdateCurrentViewModelCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
 

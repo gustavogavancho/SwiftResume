@@ -13,7 +13,7 @@ namespace SwiftResume.WPF.Wrapper
         public ModelWrapper(T model)
         {
             Model = model;
-            Validate();
+            //Validate();
         }
 
         protected virtual TValue GetValue<TValue>([CallerMemberName] string propertyName = null)
@@ -37,7 +37,7 @@ namespace SwiftResume.WPF.Wrapper
             ValidateCustomErrors(propertyName);
         }
 
-        protected void Validate()
+        public void Validate()
         {
             var results = new List<ValidationResult>();
             var context = new ValidationContext(this.Model);
