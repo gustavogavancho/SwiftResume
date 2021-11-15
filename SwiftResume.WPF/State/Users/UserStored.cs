@@ -1,22 +1,20 @@
 ﻿using SwiftResume.COMMON.Models;
-using System;
 
-namespace SwiftResume.WPF.State.Users
+namespace SwiftResume.WPF.State.Users;
+
+public class UserStored : IUserStored
 {
-    public class UserStored : IUserStored
+    private User _currentUser;
+
+    public User CurrentUser
     {
-        private User _currentUser;
-
-        public User CurrentUser
+        get => _currentUser;
+        set
         {
-            get => _currentUser;
-            set
-            {
-                _currentUser = value;
-                StateChanged?.Invoke();
-            }
+            _currentUser = value;
+            StateChanged?.Invoke();
         }
-
-        public event Action StateChanged;
     }
+
+    public event Action StateChanged;
 }

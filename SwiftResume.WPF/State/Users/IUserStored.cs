@@ -1,11 +1,9 @@
 ﻿using SwiftResume.COMMON.Models;
-using System;
 
-namespace SwiftResume.WPF.State.Users
+namespace SwiftResume.WPF.State.Users;
+
+public interface IUserStored
 {
-    public interface IUserStored
-    {
-        User CurrentUser { get; set; }
-        event Action StateChanged;
-    }
+    User CurrentUser { get; set; }
+    event Action StateChanged;
 }

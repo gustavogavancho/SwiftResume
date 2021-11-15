@@ -1,10 +1,9 @@
-﻿namespace SwiftResume.COMMON.Enums
+﻿namespace SwiftResume.COMMON.Enums;
+
+public enum RegistrationResult
 {
-    public enum RegistrationResult
-    {
-        Success,
-        PasswordsNoDotMatch,
-        EmailAlreadyExists,
-        UsernameAlreadyExists
-    }
+    Success,
+    PasswordsNoDotMatch,
+    EmailAlreadyExists,
+    UsernameAlreadyExists
 }

@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
-namespace SwiftResume.WPF.Extensions
+namespace SwiftResume.WPF.Extensions;
+
+public static class IEnumerableToObservableCollection
 {
-    public static class IEnumerableToObservableCollection
+    public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> _LinqResult)
     {
-        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> _LinqResult)
-        {
-            return new ObservableCollection<T>(_LinqResult);
-        }
+        return new ObservableCollection<T>(_LinqResult);
     }
 }

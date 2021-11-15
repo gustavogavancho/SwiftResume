@@ -1,17 +1,14 @@
 ﻿using SwiftResume.COMMON.Enums;
 using SwiftResume.COMMON.Models;
-using System;
-using System.Threading.Tasks;
 
-namespace SwiftResume.WPF.State.Authenticators
+namespace SwiftResume.WPF.State.Authenticators;
+
+public interface IAuthenticator
 {
-    public interface IAuthenticator
-    {
-        User CurrentUser { get; }
-        bool IsLoggedIn { get; }
-        event Action StateChanged;
-        Task<RegistrationResult> Register(string email, string username, string password, string confirmpassword);
-        Task Login(string username, string password);
-        void Logout();
-    }
+    User CurrentUser { get; }
+    bool IsLoggedIn { get; }
+    event Action StateChanged;
+    Task<RegistrationResult> Register(string email, string username, string password, string confirmpassword);
+    Task Login(string username, string password);
+    void Logout();
 }

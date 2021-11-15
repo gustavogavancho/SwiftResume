@@ -1,7 +1,6 @@
-﻿namespace SwiftResume.WPF.State.Navigators
+﻿namespace SwiftResume.WPF.State.Navigators;
+
+public interface IRenavigator
 {
-    public interface IRenavigator
-    {
-        void Renavigate();
-    }
+    void Renavigate();
 }

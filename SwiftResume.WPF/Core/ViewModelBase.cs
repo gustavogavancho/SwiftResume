@@ -1,18 +1,15 @@
-﻿using System.ComponentModel;
+﻿namespace SwiftResume.WPF.Core;
 
-namespace SwiftResume.WPF.Core
+public delegate TViewModel CreateViewModel<TViewModel>() where TViewModel : ViewModelBase;
+
+public class ViewModelBase : INotifyPropertyChanged
 {
-    public delegate TViewModel CreateViewModel<TViewModel>() where TViewModel : ViewModelBase;
+    public virtual void Dispose() { }
 
-    public class ViewModelBase : INotifyPropertyChanged
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected void OnPropertyChanged(string propertyName)
     {
-        public virtual void Dispose() { }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

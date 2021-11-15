@@ -1,23 +1,22 @@
-﻿using System;
-using System.Windows.Markup;
+﻿using System.Windows.Markup;
 
-namespace SwiftResume.WPF.Core
+namespace SwiftResume.WPF.Core;
+
+public class EnumBindingSourceExtension : MarkupExtension
 {
-    public class EnumBindingSourceExtension : MarkupExtension
+    public Type EnumType { get; private set; }
+
+    public EnumBindingSourceExtension(Type enumType)
     {
-        public Type EnumType { get; private set; }
+        if (enumType is null || !enumType.IsEnum)
+            throw new Exception("EnumType must not be null and of type Enum");
 
-        public EnumBindingSourceExtension(Type enumType)
-        {
-            if (enumType is null || !enumType.IsEnum)
-                throw new Exception("EnumType must not be null and of type Enum");
+        EnumType = enumType;
+    }
 
-            EnumType = enumType;
-        }
-
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return Enum.GetValues(EnumType);
-        }
+    public override object ProvideValue(IServiceProvider serviceProvider)
+    {
+        return Enum.GetValues(EnumType);
     }
 }
+

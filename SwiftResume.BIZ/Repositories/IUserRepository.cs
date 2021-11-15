@@ -1,12 +1,10 @@
 ﻿using SwiftResume.COMMON.Models;
 using SwiftResume.DAL.EFCORE.Services;
-using System.Threading.Tasks;
 
-namespace SwiftResume.BIZ.Repositories
+namespace SwiftResume.BIZ.Repositories;
+
+public interface IUserRepository : IRepository<User>
 {
-    public interface IUserRepository : IRepository<User>
-    {
-        Task<User> GetByUserName(string username);
-        Task<User> GetByEmail(string email);
-    }
+    Task<User> GetByUserName(string username);
+    Task<User> GetByEmail(string email);
 }

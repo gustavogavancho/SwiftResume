@@ -1,24 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 
-namespace SwiftResume.DAL.EFCORE
+namespace SwiftResume.DAL.EFCORE;
+
+public class SwiftResumeDbContextFactory
 {
-    public class SwiftResumeDbContextFactory
+    private readonly Action<DbContextOptionsBuilder> _configureDbContext;
+
+    public SwiftResumeDbContextFactory(Action<DbContextOptionsBuilder> configureDbContext)
     {
-        private readonly Action<DbContextOptionsBuilder> _configureDbContext;
+        _configureDbContext = configureDbContext;
+    }
 
-        public SwiftResumeDbContextFactory(Action<DbContextOptionsBuilder> configureDbContext)
-        {
-            _configureDbContext = configureDbContext;
-        }
+    public SwiftResumeDbContext CreateDbContext()
+    {
+        var options = new DbContextOptionsBuilder<SwiftResumeDbContext>();
 
-        public SwiftResumeDbContext CreateDbContext()
-        {
-            var options = new DbContextOptionsBuilder<SwiftResumeDbContext>();
+        _configureDbContext(options);
 
-            _configureDbContext(options);
-
-            return new SwiftResumeDbContext(options.Options);
-        }
+        return new SwiftResumeDbContext(options.Options);
     }
 }

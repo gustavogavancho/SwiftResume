@@ -1,25 +1,23 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
-namespace SwiftResume.BIZ.Exceptions
+namespace SwiftResume.BIZ.Exceptions;
+
+[Serializable]
+public class InvalidPasswordException : Exception
 {
-    [Serializable]
-    public class InvalidPasswordException : Exception
+    public InvalidPasswordException()
     {
-        public InvalidPasswordException()
-        {
-        }
+    }
 
-        public InvalidPasswordException(string message) : base(message)
-        {
-        }
+    public InvalidPasswordException(string message) : base(message)
+    {
+    }
 
-        public InvalidPasswordException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+    public InvalidPasswordException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 
-        protected InvalidPasswordException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+    protected InvalidPasswordException(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
     }
 }

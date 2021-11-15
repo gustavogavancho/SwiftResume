@@ -1,25 +1,24 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
-namespace SwiftResume.BIZ.Exceptions
+namespace SwiftResume.BIZ.Exceptions;
+
+[Serializable]
+public class UserNotFoundException : Exception
 {
-    [Serializable]
-    public class UserNotFoundException : Exception
+    public UserNotFoundException()
     {
-        public UserNotFoundException()
-        {
-        }
+    }
 
-        public UserNotFoundException(string message) : base(message)
-        {
-        }
+    public UserNotFoundException(string message) : base(message)
+    {
+    }
 
-        public UserNotFoundException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+    public UserNotFoundException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 
-        protected UserNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+    protected UserNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
     }
 }
+

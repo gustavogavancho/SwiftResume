@@ -1,28 +1,27 @@
 ﻿using SwiftResume.WPF.Core;
 
-namespace SwiftResume.WPF.CustomControls.Dialogs.Service
+namespace SwiftResume.WPF.CustomControls.Dialogs.Service;
+
+public abstract class DialogViewModelBase<T> : ViewModelBase
 {
-    public abstract class DialogViewModelBase<T> : ViewModelBase
+    private string _message;
+    public string Message
     {
-        private string _message;
-        public string Message
+        get => _message;
+        set
         {
-            get => _message;
-            set
-            {
-                _message = value;
-                OnPropertyChanged(nameof(Message));
-            }
+            _message = value;
+            OnPropertyChanged(nameof(Message));
         }
+    }
 
-        public T DialogResult { get; set; }
+    public T DialogResult { get; set; }
 
-        protected void CloseDialogWithResult(IDialogWindow dialog, T result)
-        {
-            DialogResult = result;
+    protected void CloseDialogWithResult(IDialogWindow dialog, T result)
+    {
+        DialogResult = result;
 
-            if (dialog != null)
-                dialog.DialogResult = true;
-        }
+        if (dialog != null)
+            dialog.DialogResult = true;
     }
 }

@@ -2,38 +2,34 @@
 using SwiftResume.COMMON.Models;
 using SwiftResume.DAL.EFCORE;
 using SwiftResume.DAL.EFCORE.Services;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace SwiftResume.BIZ.Repositories
+namespace SwiftResume.BIZ.Repositories;
+
+public class ResumeRepository : Repository<Resume>, IResumeRepository
 {
-    public class ResumeRepository : Repository<Resume>, IResumeRepository
+    private readonly SwiftResumeDbContext _context;
+
+    public ResumeRepository(SwiftResumeDbContext context) : base(context)
     {
-        private readonly SwiftResumeDbContext _context;
+        _context = context;
+    }
 
-        public ResumeRepository(SwiftResumeDbContext context) : base(context)
-        {
-            _context = context;
-        }
+    public IEnumerable<Resume> GetTopResumes(int count)
+    {
+        return _context.Resumes.OrderByDescending(c => c.Nombres).Take(count).ToList();
+    }
 
-        public IEnumerable<Resume> GetTopResumes(int count)
-        {
-            return _context.Resumes.OrderByDescending(c => c.Nombres).Take(count).ToList();
-        }
+    public IEnumerable<Resume> GetResumes(int pageIndex, int pageSize)
+    {
+        return _context.Resumes
+            .OrderBy(c => c.Nombres)
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize);
+    }
 
-        public IEnumerable<Resume> GetResumes(int pageIndex, int pageSize)
-        {
-            return _context.Resumes
-                .OrderBy(c => c.Nombres)
-                .Skip((pageIndex - 1) * pageSize)
-                .Take(pageSize);
-        }
+    public async Task<IEnumerable<Resume>> GetResumesByUsername(string username)
+    {
+        return await _context.Resumes.Where(x => x.Username == username).ToListAsync();
 
-        public async Task<IEnumerable<Resume>> GetResumesByUsername(string username)
-        {
-            return await _context.Resumes.Where(x => x.Username == username).ToListAsync();
-
-        }
     }
 }

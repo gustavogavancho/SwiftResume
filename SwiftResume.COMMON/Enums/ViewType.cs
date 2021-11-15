@@ -1,8 +1,7 @@
-﻿namespace SwiftResume.COMMON.Enums
+﻿namespace SwiftResume.COMMON.Enums;
+
+public enum ViewType : short
 {
-    public enum ViewType : short
-    {
-        Resume,
-        Login
-    }
+    Resume,
+    Login
 }

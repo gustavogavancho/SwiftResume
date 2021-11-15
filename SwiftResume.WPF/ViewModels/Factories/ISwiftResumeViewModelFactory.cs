@@ -1,10 +1,9 @@
 ﻿using SwiftResume.COMMON.Enums;
 using SwiftResume.WPF.Core;
 
-namespace SwiftResume.WPF.ViewModels.Factories
+namespace SwiftResume.WPF.ViewModels.Factories;
+
+public interface ISwiftResumeViewModelFactory
 {
-    public interface ISwiftResumeViewModelFactory
-    {
-        ViewModelBase CreateViewModel(ViewType viewType);
-    }
+    ViewModelBase CreateViewModel(ViewType viewType);
 }

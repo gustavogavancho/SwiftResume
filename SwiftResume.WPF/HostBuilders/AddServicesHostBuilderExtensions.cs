@@ -1,31 +1,27 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using SwiftResume.BIZ.Repositories;
+﻿using SwiftResume.BIZ.Repositories;
 using SwiftResume.BIZ.Services;
 using SwiftResume.COMMON.Models;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.State.Users;
 
-namespace SwiftResume.WPF.HostBuilders
+namespace SwiftResume.WPF.HostBuilders;
+
+public static class AddServicesHostBuilderExtensions
 {
-    public static class AddServicesHostBuilderExtensions
+    public static IHostBuilder AddServices(this IHostBuilder host)
     {
-        public static IHostBuilder AddServices(this IHostBuilder host)
+        host.ConfigureServices(services =>
         {
-            host.ConfigureServices(services =>
-            {
-                services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
+            services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
 
-                services.AddSingleton<IAuthenticationService, AuthenticationService>();
-                services.AddSingleton<IUserStored, UserStored>();
-                services.AddSingleton<IDialogService, DialogService>();
+            services.AddSingleton<IAuthenticationService, AuthenticationService>();
+            services.AddSingleton<IUserStored, UserStored>();
+            services.AddSingleton<IDialogService, DialogService>();
 
-                services.AddSingleton<IUserRepository, UserRepository>();
-                services.AddSingleton<IResumeRepository, ResumeRepository>();
-            });
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IResumeRepository, ResumeRepository>();
+        });
 
-            return host;
-        }
+        return host;
     }
 }

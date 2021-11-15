@@ -1,9 +1,8 @@
-﻿namespace SwiftResume.COMMON.Enums
+﻿namespace SwiftResume.COMMON.Enums;
+
+public enum Genero
 {
-    public enum Genero
-    {
-        //TODO: Replace data for resx dictionary
-        Masculino,
-        Femenino
-    }
+    //TODO: Replace data for resx dictionary
+    Masculino,
+    Femenino
 }

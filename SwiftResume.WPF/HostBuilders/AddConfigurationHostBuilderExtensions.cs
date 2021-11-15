@@ -1,19 +1,15 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
+﻿namespace SwiftResume.WPF.HostBuilders;
 
-namespace SwiftResume.WPF.HostBuilders
+public static class AddConfigurationHostBuilderExtensions
 {
-    public static class AddConfigurationHostBuilderExtensions
+    public static IHostBuilder AddConfiguration(this IHostBuilder host)
     {
-        public static IHostBuilder AddConfiguration(this IHostBuilder host)
+        host.ConfigureAppConfiguration(c =>
         {
-            host.ConfigureAppConfiguration(c =>
-            {
-                c.AddJsonFile("appsettings.json");
-                c.AddEnvironmentVariables();
-            });
+            c.AddJsonFile("appsettings.json");
+            c.AddEnvironmentVariables();
+        });
 
-            return host;
-        }
+        return host;
     }
 }

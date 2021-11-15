@@ -1,62 +1,57 @@
 ﻿using SwiftResume.WPF.Core;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 
-namespace SwiftResume.WPF.Wrapper
+namespace SwiftResume.WPF.Wrapper;
+
+public class NotifyDataErrorInfoBase : ViewModelBase, INotifyDataErrorInfo
 {
-    public class NotifyDataErrorInfoBase : ViewModelBase, INotifyDataErrorInfo
+    private Dictionary<string, List<string>> _errorsByPropertyName = new Dictionary<string, List<string>>();
+
+    public bool HasErrors => _errorsByPropertyName.Any();
+
+    public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+    public IEnumerable GetErrors(string propertyName)
     {
-        private Dictionary<string, List<string>> _errorsByPropertyName = new Dictionary<string, List<string>>();
+        return _errorsByPropertyName.ContainsKey(propertyName)
+            ? _errorsByPropertyName[propertyName]
+            : null;
+    }
 
-        public bool HasErrors => _errorsByPropertyName.Any();
+    protected virtual void OnErrorsChanged(string propertyName)
+    {
+        ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        base.OnPropertyChanged(nameof(HasErrors));
+    }
 
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-
-        public IEnumerable GetErrors(string propertyName)
+    protected void AddError(string propertyName, string error)
+    {
+        if (!_errorsByPropertyName.ContainsKey(propertyName))
         {
-            return _errorsByPropertyName.ContainsKey(propertyName)
-                ? _errorsByPropertyName[propertyName]
-                : null;
+            _errorsByPropertyName[propertyName] = new List<string>();
         }
-
-        protected virtual void OnErrorsChanged(string propertyName)
+        if (!_errorsByPropertyName[propertyName].Contains(error))
         {
-            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-            base.OnPropertyChanged(nameof(HasErrors));
+            _errorsByPropertyName[propertyName].Add(error);
+            OnErrorsChanged(propertyName);
         }
+    }
 
-        protected void AddError(string propertyName, string error)
+    protected void ClearErrors()
+    {
+        foreach (var propertyName in _errorsByPropertyName.Keys)
         {
-            if (!_errorsByPropertyName.ContainsKey(propertyName))
-            {
-                _errorsByPropertyName[propertyName] = new List<string>();
-            }
-            if (!_errorsByPropertyName[propertyName].Contains(error))
-            {
-                _errorsByPropertyName[propertyName].Add(error);
-                OnErrorsChanged(propertyName);
-            }
+            _errorsByPropertyName.Remove(propertyName);
+            OnErrorsChanged(propertyName);
         }
+    }
 
-        protected void ClearErrors()
+    protected void ClearErrors(string propertyName)
+    {
+        if (_errorsByPropertyName.ContainsKey(propertyName))
         {
-            foreach (var propertyName in _errorsByPropertyName.Keys)
-            {
-                _errorsByPropertyName.Remove(propertyName);
-                OnErrorsChanged(propertyName);
-            }
-        }
-
-        protected void ClearErrors(string propertyName)
-        {
-            if (_errorsByPropertyName.ContainsKey(propertyName))
-            {
-                _errorsByPropertyName.Remove(propertyName);
-                OnErrorsChanged(propertyName);
-            }
+            _errorsByPropertyName.Remove(propertyName);
+            OnErrorsChanged(propertyName);
         }
     }
 }

@@ -1,22 +1,20 @@
 ﻿using SwiftResume.WPF.Core;
-using System;
 
-namespace SwiftResume.WPF.State.Navigators
+namespace SwiftResume.WPF.State.Navigators;
+
+public class Navigator : INavigator
 {
-    public class Navigator : INavigator
+    private ViewModelBase _currentViewModel;
+    public ViewModelBase CurrentViewModel
     {
-        private ViewModelBase _currentViewModel;
-        public ViewModelBase CurrentViewModel
+        get => _currentViewModel;
+        set
         {
-            get => _currentViewModel;
-            set
-            {
-                _currentViewModel?.Dispose();
-                _currentViewModel = value;
-                StateChanged?.Invoke();
-            }
+            _currentViewModel?.Dispose();
+            _currentViewModel = value;
+            StateChanged?.Invoke();
         }
-
-        public event Action StateChanged;
     }
+
+    public event Action StateChanged;
 }

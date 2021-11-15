@@ -1,7 +1,6 @@
-﻿namespace SwiftResume.WPF.CustomControls.Dialogs.Service
+﻿namespace SwiftResume.WPF.CustomControls.Dialogs.Service;
+
+public interface IDialogService
 {
-    public interface IDialogService
-    {
-        T OpenDialog<T>(DialogViewModelBase<T> viewModel);
-    }
+    T OpenDialog<T>(DialogViewModelBase<T> viewModel);
 }

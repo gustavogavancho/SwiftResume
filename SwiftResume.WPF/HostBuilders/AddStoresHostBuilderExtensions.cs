@@ -1,21 +1,18 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using SwiftResume.WPF.State.Authenticators;
+﻿using SwiftResume.WPF.State.Authenticators;
 using SwiftResume.WPF.State.Navigators;
 
-namespace SwiftResume.WPF.HostBuilders
-{
-    public static class AddStoresHostBuilderExtensions
-    {
-        public static IHostBuilder AddStores(this IHostBuilder host)
-        {
-            host.ConfigureServices(services =>
-            {
-                services.AddSingleton<IAuthenticator, Authenticator>();
-                services.AddSingleton<INavigator, Navigator>();
-            });
+namespace SwiftResume.WPF.HostBuilders;
 
-            return host;
-        }
+public static class AddStoresHostBuilderExtensions
+{
+    public static IHostBuilder AddStores(this IHostBuilder host)
+    {
+        host.ConfigureServices(services =>
+        {
+            services.AddSingleton<IAuthenticator, Authenticator>();
+            services.AddSingleton<INavigator, Navigator>();
+        });
+
+        return host;
     }
 }

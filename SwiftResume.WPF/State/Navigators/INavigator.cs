@@ -1,11 +1,9 @@
 ﻿using SwiftResume.WPF.Core;
-using System;
 
-namespace SwiftResume.WPF.State.Navigators
+namespace SwiftResume.WPF.State.Navigators;
+
+public interface INavigator
 {
-    public interface INavigator
-    {
-        ViewModelBase CurrentViewModel { get; set; }
-        event Action StateChanged;
-    }
+    ViewModelBase CurrentViewModel { get; set; }
+    event Action StateChanged;
 }

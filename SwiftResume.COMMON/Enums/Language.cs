@@ -1,8 +1,7 @@
-﻿namespace SwiftResume.COMMON.Enums
+﻿namespace SwiftResume.COMMON.Enums;
+
+public enum Language : short
 {
-    public enum Language : short
-    {
-        Español = 1,
-        English = 2
-    }
+    Español = 1,
+    English = 2
 }

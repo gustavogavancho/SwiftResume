@@ -1,9 +1,8 @@
-﻿namespace SwiftResume.COMMON.Enums
+﻿namespace SwiftResume.COMMON.Enums;
+
+public enum DialogResults : short
 {
-    public enum DialogResults : short
-    {
-        Indefinido,
-        Si,
-        No
-    }
+    Indefinido,
+    Si,
+    No
 }
