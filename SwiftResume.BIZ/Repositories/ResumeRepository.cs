@@ -30,6 +30,5 @@ public class ResumeRepository : Repository<Resume>, IResumeRepository
     public async Task<IEnumerable<Resume>> GetResumesByUsername(string username)
     {
         return await _context.Resumes.Where(x => x.Username == username).ToListAsync();
-
     }
 }

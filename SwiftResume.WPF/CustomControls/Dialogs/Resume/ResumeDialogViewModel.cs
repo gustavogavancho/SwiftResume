@@ -109,6 +109,9 @@ public class ResumeDialogViewModel : DialogViewModelBase<Model.Resume>
 
     public void OnLoad()
     {
+        //Restore has changes to false
+        HasChanges = false;
+
         var resume = CreateNewResume();
 
         InitializeResume(resume);
