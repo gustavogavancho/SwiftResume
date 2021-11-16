@@ -18,18 +18,11 @@ public class SwiftResumeViewModelFactory : ISwiftResumeViewModelFactory
         _createEditViewModel = createEditViewModel;
     }
 
-    public ViewModelBase CreateViewModel(ViewType viewType)
+    public ViewModelBase CreateViewModel(ViewType viewType) => viewType switch
     {
-        switch (viewType)
-        {
-            case ViewType.Resume:
-                return _createResumeViewModel();
-            case ViewType.Login:
-                return _createLoginViewModel();
-            case ViewType.Edit:
-                return _createEditViewModel();
-            default:
-                throw new ArgumentException("The ViewType does not have a ViewModel.", "viewType");
-        }
-    }
+        ViewType.Resume => _createResumeViewModel(),
+        ViewType.Login => _createLoginViewModel(),
+        ViewType.Edit => _createEditViewModel(),
+        _ => throw new ArgumentException("The ViewType does not have a ViewModel.", "viewType")
+    };
 }
