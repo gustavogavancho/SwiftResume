@@ -18,6 +18,7 @@ public static class AddViewModelsHostBuilderExtensions
         {
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<ResumeViewModel>();
+            services.AddSingleton<EditViewModel>();
 
             services.AddSingleton<ResumeDialogViewModel>();
             services.AddSingleton<AlertDialogViewModel>();
@@ -26,10 +27,12 @@ public static class AddViewModelsHostBuilderExtensions
             services.AddSingleton<CreateViewModel<ResumeViewModel>>(services => () => services.GetRequiredService<ResumeViewModel>());
             services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
             services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => () => CreateRegisterViewModel(services));
+            services.AddSingleton<CreateViewModel<EditViewModel>>(services => () => services.GetRequiredService<EditViewModel>());
 
             services.AddSingleton<ViewModelDelegateRenavigator<ResumeViewModel>>();
             services.AddSingleton<ViewModelDelegateRenavigator<RegisterViewModel>>();
             services.AddSingleton<ViewModelDelegateRenavigator<LoginViewModel>>();
+            services.AddSingleton<ViewModelDelegateRenavigator<EditViewModel>>();
 
             services.AddSingleton<ISwiftResumeViewModelFactory, SwiftResumeViewModelFactory>();
         });

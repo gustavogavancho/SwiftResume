@@ -5,10 +5,10 @@ using SwiftResume.WPF.State.Navigators;
 using SwiftResume.WPF.ViewModels.Factories;
 using SwiftResume.WPF.Views;
 using System.Windows;
-using EnumLanguage = SwiftResume.COMMON.Enums;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
 using SwiftResume.COMMON.Enums;
+using EnumLanguage = SwiftResume.COMMON.Enums;
 using Application = System.Windows.Application;
 
 namespace SwiftResume.WPF.ViewModels;

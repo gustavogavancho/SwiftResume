@@ -3,5 +3,6 @@
 public enum ViewType : short
 {
     Resume,
-    Login
+    Login,
+    Edit
 }

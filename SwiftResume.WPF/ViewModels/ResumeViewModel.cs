@@ -8,6 +8,7 @@ using SwiftResume.WPF.CustomControls.Dialogs.Resume;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
 using SwiftResume.WPF.Extensions;
+using SwiftResume.WPF.State.Navigators;
 using SwiftResume.WPF.State.Users;
 
 namespace SwiftResume.WPF.ViewModels;
@@ -22,6 +23,7 @@ public class ResumeViewModel : ViewModelBase
     private readonly YesNoDialogViewModel _yesNoDialogViewModel;
     private readonly AlertDialogViewModel _alertDialogViewModel;
     private readonly IUserStored _userStored;
+    private readonly ViewModelDelegateRenavigator<EditViewModel> _editNavigator;
 
     #endregion
 
@@ -54,6 +56,7 @@ public class ResumeViewModel : ViewModelBase
     #region Commands
 
     public DelegateCommand AddCommand { get; private set; }
+    public DelegateCommand EditCommand { get; private set; }
     public DelegateCommand DeleteCommand { get; private set; }
 
     #endregion
@@ -65,7 +68,8 @@ public class ResumeViewModel : ViewModelBase
         ResumeDialogViewModel resumeDialogViewModel,
         YesNoDialogViewModel yesNoDialogViewModel,
         AlertDialogViewModel alertDialogViewModel,
-        IUserStored userStored)
+        IUserStored userStored,
+        ViewModelDelegateRenavigator<EditViewModel> editNavigator)
     {
         _resumeRepository = resumeRepository;
         _dialogService = dialogService;
@@ -73,7 +77,10 @@ public class ResumeViewModel : ViewModelBase
         _yesNoDialogViewModel = yesNoDialogViewModel;
         _alertDialogViewModel = alertDialogViewModel;
         _userStored = userStored;
+        _editNavigator = editNavigator;
+
         AddCommand = new DelegateCommand(OnAdd);
+        EditCommand = new DelegateCommand(OnEdit);
         DeleteCommand = new DelegateCommand(OnDelete);
     }
 
@@ -118,6 +125,12 @@ public class ResumeViewModel : ViewModelBase
         var resume = await _resumeRepository.GetResumesByUsername(_userStored.CurrentUser.Username);
         Resumes = resume.ToObservableCollection();
     }
+
+    private void OnEdit()
+    {
+        _editNavigator.Renavigate();
+    }
+
 
     #endregion
 }

@@ -26,6 +26,10 @@
                 <views:ResumeView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModels:EditViewModel}">
+                <views:EditView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type alert:AlertDialogViewModel}">
                 <alert:AlertDialogView/>
             </DataTemplate>

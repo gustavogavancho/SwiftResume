@@ -7,8 +7,13 @@
              xmlns:core="clr-namespace:SwiftResume.WPF.Core"
              xmlns:enum="clr-namespace:SwiftResume.COMMON.Enums;assembly=SwiftResume.COMMON"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:viewModels="clr-namespace:SwiftResume.WPF.ViewModels"
              mc:Ignorable="d" 
              Height="400" Width="400">
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+    </UserControl.InputBindings>
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
