@@ -2,8 +2,6 @@
 using SwiftResume.WPF.Core;
 using SwiftResume.WPF.State.Authenticators;
 using SwiftResume.WPF.State.Navigators;
-using SwiftResume.WPF.Views;
-using System.Windows;
 
 namespace SwiftResume.WPF.ViewModels;
 

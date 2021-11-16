@@ -1,12 +1,11 @@
 ﻿using System.Windows;
 
-namespace SwiftResume.WPF.CustomControls.Dialogs.Service
+namespace SwiftResume.WPF.CustomControls.Dialogs.Service;
+
+public partial class DialogWindow : Window, IDialogWindow
 {
-    public partial class DialogWindow : Window, IDialogWindow
+    public DialogWindow()
     {
-        public DialogWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
