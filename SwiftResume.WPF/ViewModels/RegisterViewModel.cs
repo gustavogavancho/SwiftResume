@@ -114,7 +114,7 @@ public class RegisterViewModel : ViewModelBase
         return UserWrapper != null && !UserWrapper.HasErrors;
     }
 
-    public async void OnLoad() 
+    public void OnLoad() 
     {
         //Restore has changes to false
         HasChanges = false;

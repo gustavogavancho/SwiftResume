@@ -3,7 +3,6 @@
 public enum RegistrationResult
 {
     Success,
-    PasswordsNoDotMatch,
     EmailAlreadyExists,
     UsernameAlreadyExists
 }
