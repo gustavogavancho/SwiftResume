@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:components="clr-namespace:PasswordBoxMVVM.Components;assembly=PasswordBoxMVVM">
 
     <!-- Colors -->
     <Color x:Key="PrimaryColor">#003366</Color>
@@ -93,6 +94,41 @@
 
     <Style x:Key="TextBoxStyle" BasedOn="{StaticResource ValidationTextBoxStyle}" TargetType="TextBox">
         <Setter Property="Height" Value="21"/>
+    </Style>
+    
+    <!-- PasswordTextBox -->
+    <Style x:Key="PasswordTextBoxStyle" TargetType="components:BindablePasswordBox">
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder x:Name="placeholder" />
+                        <ItemsControl ItemsSource="{Binding}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ErrorContent}" Foreground="Red" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!--<TextBlock FontSize="12" Foreground="{StaticResource TertiaryBrush}" Text="{Binding ElementName=placeholder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>-->
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="Background" Value="{StaticResource TertiaryBrush}"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <ToolTip DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget}">
+                            <ItemsControl ItemsSource="{Binding Path=(Validation.Errors)}" DisplayMemberPath="ErrorContent" />
+                        </ToolTip>
+                    </Setter.Value>
+                </Setter>
+                <!--<Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>-->
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!-- Button -->

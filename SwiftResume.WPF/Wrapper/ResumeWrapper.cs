@@ -12,38 +12,26 @@ public class ResumeWrapper : ModelWrapper<Resume>
 
     public string Nombres
     {
-        get { return GetValue<string>(); }
-        set
-        {
-            SetValue(value);
-        }
+        get => GetValue<string>();
+        set => SetValue(value);
     }
 
     public string Apellidos
     {
-        get { return GetValue<string>(); }
-        set
-        {
-            SetValue(value);
-        }
+        get => GetValue<string>();
+        set => SetValue(value);
     }
 
     public string Genero
     {
-        get { return GetValue<string>(); }
-        set
-        {
-            SetValue(value);
-        }
+        get => GetValue<string>();
+        set => SetValue(value);
     }
 
     public string Lenguaje
     {
-        get { return GetValue<string>(); }
-        set
-        {
-            SetValue(value);
-        }
+        get => GetValue<string>();
+        set => SetValue(value);
     }
 
     protected override IEnumerable<Tuple<string, string>> ValidateProperty()

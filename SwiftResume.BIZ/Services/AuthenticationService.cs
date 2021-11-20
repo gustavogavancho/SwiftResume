@@ -25,7 +25,7 @@ public class AuthenticationService : IAuthenticationService
         {
             throw new UserNotFoundException($"El nombre de usuario {username} no existe.");
         }
-        PasswordVerificationResult passwordResult = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
+        PasswordVerificationResult passwordResult = _passwordHasher.VerifyHashedPassword(user, user.PasswordHashed, password);
 
         if (passwordResult != PasswordVerificationResult.Success)
         {
@@ -33,47 +33,5 @@ public class AuthenticationService : IAuthenticationService
         }
 
         return user;
-    }
-
-    public async Task<RegistrationResult> Register(string email, string username, string password, string confirmpassword)
-    {
-        RegistrationResult result = RegistrationResult.Success;
-
-        if (password != confirmpassword)
-        {
-            result = RegistrationResult.PasswordsNoDotMatch;
-        }
-
-        User emailUser = await _userRepository.GetByEmail(email);
-
-        if (emailUser != null)
-        {
-            result = RegistrationResult.EmailAlreadyExists;
-        }
-
-        User userName = await _userRepository.GetByUserName(username);
-
-        if (userName != null)
-        {
-            result = RegistrationResult.UsernameAlreadyExists;
-        }
-
-        if (result == RegistrationResult.Success)
-        {
-            User user = new()
-            {
-                Email = email,
-                Username = username,
-                DateJoined = DateTime.Now,
-            };
-
-            string hashedPassword = _passwordHasher.HashPassword(user, password);
-
-            user.PasswordHash = hashedPassword;
-
-            await _userRepository.Add(user);
-        }
-
-        return result;
     }
 }

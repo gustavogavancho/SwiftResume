@@ -1,4 +1,6 @@
-﻿using SwiftResume.WPF.Core;
+﻿using SwiftResume.BIZ.Repositories;
+using SwiftResume.COMMON.Models;
+using SwiftResume.WPF.Core;
 using SwiftResume.WPF.CustomControls.Dialogs.Alert;
 using SwiftResume.WPF.CustomControls.Dialogs.Resume;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
@@ -53,8 +55,10 @@ public static class AddViewModelsHostBuilderExtensions
     private static RegisterViewModel CreateRegisterViewModel(IServiceProvider services)
     {
         return new RegisterViewModel(
-                    services.GetRequiredService<IAuthenticator>(),
-                    services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>());
+                    services.GetRequiredService<IUserRepository>(),
+                    services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
+                    services.GetRequiredService<IPasswordHasher<User>>(),
+                    services.GetRequiredService<IDialogService>(),
+                    services.GetRequiredService<AlertDialogViewModel>());
     }
-
 }

@@ -67,6 +67,7 @@ public class ResumeDialogViewModel : DialogViewModelBase<Model.Resume>
         _userStored = userStored;
         _dialogService = dialogService;
         _yesNoDialogViewModel = yesNoDialogViewModel;
+
         SaveCommand = new DelegateCommand<IDialogWindow>(OnSave, CanSave);
         CancelCommand = new DelegateCommand<IDialogWindow>(OnCancel);
     }

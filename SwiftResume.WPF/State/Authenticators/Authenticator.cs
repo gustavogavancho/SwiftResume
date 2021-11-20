@@ -39,9 +39,4 @@ public class Authenticator : IAuthenticator
     {
         CurrentUser = null;
     }
-
-    public async Task<RegistrationResult> Register(string email, string username, string password, string confirmpassword)
-    {
-        return await _authenticationService.Register(email, username, password, confirmpassword);
-    }
 }

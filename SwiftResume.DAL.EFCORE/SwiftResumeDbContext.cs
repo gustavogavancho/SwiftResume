@@ -24,7 +24,7 @@ public class SwiftResumeDbContext : DbContext
             Email = "ggavancholeon@gmail.com",
             Username = "GGAVANCHO",
             DateJoined = DateTime.Now,
-            PasswordHash = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA=="
+            PasswordHashed = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA=="
         });
     }
 }

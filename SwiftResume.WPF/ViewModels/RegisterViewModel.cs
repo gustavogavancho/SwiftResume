@@ -1,7 +1,11 @@
-﻿using SwiftResume.COMMON.Enums;
+﻿using SwiftResume.BIZ.Repositories;
+using SwiftResume.COMMON.Enums;
+using SwiftResume.COMMON.Models;
 using SwiftResume.WPF.Core;
-using SwiftResume.WPF.State.Authenticators;
+using SwiftResume.WPF.CustomControls.Dialogs.Alert;
+using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.State.Navigators;
+using SwiftResume.WPF.Wrapper;
 
 namespace SwiftResume.WPF.ViewModels;
 
@@ -9,62 +13,41 @@ public class RegisterViewModel : ViewModelBase
 {
     #region Fields
 
-    private readonly IAuthenticator _authenticator;
+    private readonly IUserRepository _userRepository;
     private readonly IRenavigator _loginRenavigator;
+    private readonly IPasswordHasher<User> _passwordHasher;
+    private readonly IDialogService _dialogService;
+    private readonly AlertDialogViewModel _alertDialogViewModel;
 
     #endregion
 
     #region Properties
 
-    private string _email;
-    public string Email
+    private UserWrapper _userWrapper;
+    public UserWrapper UserWrapper
     {
-        get => _email;
-        set
-        {
-            _email = value;
-            OnPropertyChanged(nameof(Email));
+        get => _userWrapper;
+        set 
+        { 
+            _userWrapper = value;
+            OnPropertyChanged(nameof(UserWrapper));
         }
     }
 
-    private string _username;
-    public string Username
+    private bool _hasChanges;
+    public bool HasChanges
     {
-        get => _username;
-        set
+        get => _hasChanges;
+        set 
         {
-            _username = value;
-            OnPropertyChanged(nameof(Username));
+            if (_hasChanges != value) 
+            {
+                _hasChanges = value;
+                OnPropertyChanged(nameof(HasChanges));
+            }
         }
     }
 
-    private string _password;
-    public string Password
-    {
-        get => _password;
-        set
-        {
-            _password = value;
-            OnPropertyChanged(nameof(Password));
-        }
-    }
-
-    private string _confirmPassword;
-    public string ConfirmPassword
-    {
-        get => _confirmPassword;
-        set
-        {
-            _confirmPassword = value;
-            OnPropertyChanged(nameof(ConfirmPassword));
-            OnPropertyChanged(nameof(CanRegister));
-        }
-    }
-
-    public bool CanRegister => !string.IsNullOrWhiteSpace(Email) &&
-        !string.IsNullOrWhiteSpace(Username) &&
-        !string.IsNullOrWhiteSpace(Password) &&
-        !string.IsNullOrWhiteSpace(ConfirmPassword);
 
     #endregion
 
@@ -77,16 +60,19 @@ public class RegisterViewModel : ViewModelBase
 
     #region Constructor
 
-    public RegisterViewModel(IAuthenticator authenticator,
-        IRenavigator loginRenavigator)
+    public RegisterViewModel(IUserRepository userRepository,
+        IRenavigator loginRenavigator,
+        IPasswordHasher<User> passwordHasher,
+        IDialogService dialogService,
+        AlertDialogViewModel alertDialogViewModel)
     {
-        _authenticator = authenticator;
+        _userRepository = userRepository;
         _loginRenavigator = loginRenavigator;
-
+        _passwordHasher = passwordHasher;
+        _dialogService = dialogService;
+        _alertDialogViewModel = alertDialogViewModel;
         RegisterCommand = new DelegateCommand(OnRegister, CanRegisterUser);
         ViewLoginCommand = new DelegateCommand(OnViewLogin);
-
-        this.PropertyChanged += RegisterViewModel_PropertyChanged;
     }
 
     #endregion
@@ -98,52 +84,66 @@ public class RegisterViewModel : ViewModelBase
         _loginRenavigator.Renavigate();
     }
 
-    private void RegisterViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-    {
-        if (e.PropertyName == nameof(CanRegister))
-        {
-            RegisterCommand.RaiseCanExecuteChanged();
-        }
-    }
-
     private async void OnRegister()
     {
-        try
+        UserWrapper.Validate();
+        if (!UserWrapper.HasErrors)
         {
-            RegistrationResult registrationResult = await _authenticator.Register(
-                Email,
-                Username,
-                Password,
-                ConfirmPassword);
-
-            switch (registrationResult)
+            RegistrationResult result = await _userRepository.ValidateUserRegistration(UserWrapper.Model);
+            switch (result)
             {
                 case RegistrationResult.Success:
+                    UserWrapper.Model.PasswordHashed = _passwordHasher.HashPassword(UserWrapper.Model, UserWrapper.Model.Password);
+                    await _userRepository.SaveAsync();
                     _loginRenavigator.Renavigate();
                     break;
-                case RegistrationResult.PasswordsNoDotMatch:
-                    //TODO: Implement password do not match
-                    break;
                 case RegistrationResult.EmailAlreadyExists:
-                    //TODO: Implement email already exists
+                    _alertDialogViewModel.Message = $"El correo {UserWrapper.Model.Email} ya se encuentra registrado";
+                    _dialogService.OpenDialog(_alertDialogViewModel);
                     break;
                 case RegistrationResult.UsernameAlreadyExists:
-                    //TODO: Implement username already exists
-                    break;
-                default:
-                    //TODO: Implement registration already exists
+                    _alertDialogViewModel.Message = $"El usuario {UserWrapper.Model.Username} ya se encuentra registrado";
+                    _dialogService.OpenDialog(_alertDialogViewModel);
                     break;
             }
-        }
-        catch (Exception ex)
-        {
-            //TODO: Implement catch exception
         }
     }
 
     private bool CanRegisterUser()
     {
-        return CanRegister;
+        return UserWrapper != null && !UserWrapper.HasErrors;
+    }
+
+    public async void OnLoad() 
+    {
+        //Restore has changes to false
+        HasChanges = false;
+
+        var user = CreateNewUser();
+
+        InitializeUser(user);
+    }
+
+    private void InitializeUser(User user)
+    {
+        UserWrapper = new UserWrapper(user);
+        UserWrapper.PropertyChanged += (s, e) =>
+        {
+            //if (!HasChanges)
+            //    HasChanges = _resumeRepository.HasChanges();
+
+            if (e.PropertyName == nameof(UserWrapper.HasErrors))
+                RegisterCommand.RaiseCanExecuteChanged();
+        };
+
+        RegisterCommand.RaiseCanExecuteChanged();
+    }
+
+    private User CreateNewUser()
+    {
+        var user = new User();
+        _userRepository.Add(user);
+        return user;
     }
 
     #endregion
