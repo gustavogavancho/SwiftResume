@@ -4,6 +4,7 @@ using SwiftResume.COMMON.Models;
 using SwiftResume.WPF.Core;
 using SwiftResume.WPF.CustomControls.Dialogs.Alert;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
+using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
 using SwiftResume.WPF.State.Navigators;
 using SwiftResume.WPF.Wrapper;
 
@@ -18,6 +19,7 @@ public class RegisterViewModel : ViewModelBase
     private readonly IPasswordHasher<User> _passwordHasher;
     private readonly IDialogService _dialogService;
     private readonly AlertDialogViewModel _alertDialogViewModel;
+    private readonly YesNoDialogViewModel _yesNoDialogViewModel;
 
     #endregion
 
@@ -44,6 +46,7 @@ public class RegisterViewModel : ViewModelBase
             {
                 _hasChanges = value;
                 OnPropertyChanged(nameof(HasChanges));
+                RegisterCommand.RaiseCanExecuteChanged();
             }
         }
     }
@@ -64,13 +67,15 @@ public class RegisterViewModel : ViewModelBase
         IRenavigator loginRenavigator,
         IPasswordHasher<User> passwordHasher,
         IDialogService dialogService,
-        AlertDialogViewModel alertDialogViewModel)
+        AlertDialogViewModel alertDialogViewModel,
+        YesNoDialogViewModel yesNoDialogViewModel)
     {
         _userRepository = userRepository;
         _loginRenavigator = loginRenavigator;
         _passwordHasher = passwordHasher;
         _dialogService = dialogService;
         _alertDialogViewModel = alertDialogViewModel;
+        _yesNoDialogViewModel = yesNoDialogViewModel;
         RegisterCommand = new DelegateCommand(OnRegister, CanRegisterUser);
         ViewLoginCommand = new DelegateCommand(OnViewLogin);
     }
@@ -81,6 +86,14 @@ public class RegisterViewModel : ViewModelBase
 
     private void OnViewLogin()
     {
+        if (HasChanges) 
+        {
+            _yesNoDialogViewModel.Message = $"Hay cambios pendientes, al cerrar la ventana se borrarán los cambios, ¿Desea cerrar la ventana?";
+            var dialog = _dialogService.OpenDialog(_yesNoDialogViewModel);
+            if (dialog == DialogResults.No)
+                return;
+        }
+        _userRepository.Remove(UserWrapper.Model);
         _loginRenavigator.Renavigate();
     }
 
@@ -95,6 +108,7 @@ public class RegisterViewModel : ViewModelBase
                 case RegistrationResult.Success:
                     UserWrapper.Model.PasswordHashed = _passwordHasher.HashPassword(UserWrapper.Model, UserWrapper.Model.Password);
                     await _userRepository.SaveAsync();
+                    HasChanges = _userRepository.HasChanges();
                     _loginRenavigator.Renavigate();
                     break;
                 case RegistrationResult.EmailAlreadyExists:
@@ -111,7 +125,7 @@ public class RegisterViewModel : ViewModelBase
 
     private bool CanRegisterUser()
     {
-        return UserWrapper != null && !UserWrapper.HasErrors;
+        return UserWrapper != null && !UserWrapper.HasErrors && HasChanges;
     }
 
     public void OnLoad() 
@@ -129,8 +143,8 @@ public class RegisterViewModel : ViewModelBase
         UserWrapper = new UserWrapper(user);
         UserWrapper.PropertyChanged += (s, e) =>
         {
-            //if (!HasChanges)
-            //    HasChanges = _resumeRepository.HasChanges();
+            if (!HasChanges)
+                HasChanges = _userRepository.HasChanges();
 
             if (e.PropertyName == nameof(UserWrapper.HasErrors))
                 RegisterCommand.RaiseCanExecuteChanged();

@@ -11,8 +11,8 @@ using SwiftResume.DAL.EFCORE;
 namespace SwiftResume.DAL.EFCORE.Migrations
 {
     [DbContext(typeof(SwiftResumeDbContext))]
-    [Migration("20211120173619_Init")]
-    partial class Init
+    [Migration("20211120223933_UserTableChanged")]
+    partial class UserTableChanged
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,12 +62,14 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PasswordHash")
+                    b.Property<string>("PasswordHashed")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -78,9 +80,9 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         new
                         {
                             Id = 1,
-                            DateJoined = new DateTime(2021, 11, 20, 12, 36, 19, 218, DateTimeKind.Local).AddTicks(1505),
+                            DateJoined = new DateTime(2021, 11, 20, 17, 39, 33, 96, DateTimeKind.Local).AddTicks(7570),
                             Email = "ggavancholeon@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==",
+                            PasswordHashed = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==",
                             Username = "GGAVANCHO"
                         });
                 });

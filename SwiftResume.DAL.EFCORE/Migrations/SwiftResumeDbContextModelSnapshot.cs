@@ -64,7 +64,6 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHashed")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Username")
@@ -79,7 +78,7 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         new
                         {
                             Id = 1,
-                            DateJoined = new DateTime(2021, 11, 20, 14, 48, 19, 464, DateTimeKind.Local).AddTicks(2647),
+                            DateJoined = new DateTime(2021, 11, 20, 17, 39, 33, 96, DateTimeKind.Local).AddTicks(7570),
                             Email = "ggavancholeon@gmail.com",
                             PasswordHashed = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==",
                             Username = "GGAVANCHO"

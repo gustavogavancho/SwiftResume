@@ -61,7 +61,7 @@ public class ResumeDialogViewModel : DialogViewModelBase<Model.Resume>
     public ResumeDialogViewModel(IResumeRepository resumeRepository,
         IUserStored userStored,
         IDialogService dialogService,
-        YesNoDialogViewModel yesNoDialogViewModel) : base()
+        YesNoDialogViewModel yesNoDialogViewModel)
     {
         _resumeRepository = resumeRepository;
         _userStored = userStored;
@@ -101,9 +101,7 @@ public class ResumeDialogViewModel : DialogViewModelBase<Model.Resume>
             _yesNoDialogViewModel.Message = $"Hay cambios pendientes, al cerrar la ventana se borrarán los cambios, ¿Desea cerrar la ventana?";
             var dialog = _dialogService.OpenDialog(_yesNoDialogViewModel);
             if (dialog == DialogResults.No)
-            {
                 return;
-            }
         }
         CloseDialogWithResult(window, null);
     }

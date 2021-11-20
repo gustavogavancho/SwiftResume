@@ -59,6 +59,7 @@ public static class AddViewModelsHostBuilderExtensions
                     services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
                     services.GetRequiredService<IPasswordHasher<User>>(),
                     services.GetRequiredService<IDialogService>(),
-                    services.GetRequiredService<AlertDialogViewModel>());
+                    services.GetRequiredService<AlertDialogViewModel>(),
+                    services.GetRequiredService<YesNoDialogViewModel>());
     }
 }

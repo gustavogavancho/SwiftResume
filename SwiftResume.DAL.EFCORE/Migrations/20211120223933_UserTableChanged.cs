@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SwiftResume.DAL.EFCORE.Migrations
 {
-    public partial class Init : Migration
+    public partial class UserTableChanged : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,9 +33,9 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    Username = table.Column<string>(type: "TEXT", nullable: true),
-                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    Username = table.Column<string>(type: "TEXT", nullable: false),
+                    PasswordHashed = table.Column<string>(type: "TEXT", nullable: true),
                     DateJoined = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -45,8 +45,8 @@ namespace SwiftResume.DAL.EFCORE.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "DateJoined", "Email", "PasswordHash", "Username" },
-                values: new object[] { 1, new DateTime(2021, 11, 20, 12, 36, 19, 218, DateTimeKind.Local).AddTicks(1505), "ggavancholeon@gmail.com", "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==", "GGAVANCHO" });
+                columns: new[] { "Id", "DateJoined", "Email", "PasswordHashed", "Username" },
+                values: new object[] { 1, new DateTime(2021, 11, 20, 17, 39, 33, 96, DateTimeKind.Local).AddTicks(7570), "ggavancholeon@gmail.com", "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==", "GGAVANCHO" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
