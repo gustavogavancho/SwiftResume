@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwiftResume.DAL.EFCORE;
 
+#nullable disable
+
 namespace SwiftResume.DAL.EFCORE.Migrations
 {
     [DbContext(typeof(SwiftResumeDbContext))]
@@ -13,8 +15,7 @@ namespace SwiftResume.DAL.EFCORE.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.10");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
 
             modelBuilder.Entity("SwiftResume.COMMON.Models.Resume", b =>
                 {
@@ -75,7 +76,7 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         new
                         {
                             Id = 1,
-                            DateJoined = new DateTime(2021, 11, 6, 15, 34, 24, 573, DateTimeKind.Local).AddTicks(4747),
+                            DateJoined = new DateTime(2021, 11, 20, 12, 36, 19, 218, DateTimeKind.Local).AddTicks(1505),
                             Email = "ggavancholeon@gmail.com",
                             PasswordHash = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==",
                             Username = "GGAVANCHO"

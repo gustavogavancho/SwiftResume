@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace SwiftResume.DAL.EFCORE.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,10 +16,10 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Username = table.Column<string>(type: "TEXT", nullable: true),
-                    Nombres = table.Column<string>(type: "TEXT", nullable: true),
-                    Apellidos = table.Column<string>(type: "TEXT", nullable: true),
-                    Genero = table.Column<string>(type: "TEXT", nullable: true),
-                    Lenguaje = table.Column<string>(type: "TEXT", nullable: true),
+                    Nombres = table.Column<string>(type: "TEXT", nullable: false),
+                    Apellidos = table.Column<string>(type: "TEXT", nullable: false),
+                    Genero = table.Column<string>(type: "TEXT", nullable: false),
+                    Lenguaje = table.Column<string>(type: "TEXT", nullable: false),
                     Foto = table.Column<byte[]>(type: "BLOB", nullable: true)
                 },
                 constraints: table =>
@@ -44,7 +46,7 @@ namespace SwiftResume.DAL.EFCORE.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "DateJoined", "Email", "PasswordHash", "Username" },
-                values: new object[] { 1, new DateTime(2021, 11, 3, 15, 33, 22, 215, DateTimeKind.Local).AddTicks(7854), "ggavancholeon@gmail.com", "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==", "GGAVANCHO" });
+                values: new object[] { 1, new DateTime(2021, 11, 20, 12, 36, 19, 218, DateTimeKind.Local).AddTicks(1505), "ggavancholeon@gmail.com", "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==", "GGAVANCHO" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

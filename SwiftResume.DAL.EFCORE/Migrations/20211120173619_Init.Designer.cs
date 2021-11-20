@@ -6,17 +6,18 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwiftResume.DAL.EFCORE;
 
+#nullable disable
+
 namespace SwiftResume.DAL.EFCORE.Migrations
 {
     [DbContext(typeof(SwiftResumeDbContext))]
-    [Migration("20211103203322_Initial")]
-    partial class Initial
+    [Migration("20211120173619_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.10");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
 
             modelBuilder.Entity("SwiftResume.COMMON.Models.Resume", b =>
                 {
@@ -25,18 +26,22 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Apellidos")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Foto")
                         .HasColumnType("BLOB");
 
                     b.Property<string>("Genero")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Lenguaje")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nombres")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Username")
@@ -73,7 +78,7 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         new
                         {
                             Id = 1,
-                            DateJoined = new DateTime(2021, 11, 3, 15, 33, 22, 215, DateTimeKind.Local).AddTicks(7854),
+                            DateJoined = new DateTime(2021, 11, 20, 12, 36, 19, 218, DateTimeKind.Local).AddTicks(1505),
                             Email = "ggavancholeon@gmail.com",
                             PasswordHash = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==",
                             Username = "GGAVANCHO"
