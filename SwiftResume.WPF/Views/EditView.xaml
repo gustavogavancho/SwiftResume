@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:core="clr-namespace:SwiftResume.WPF.Core"
+             xmlns:enum="clr-namespace:SwiftResume.COMMON.Enums;assembly=SwiftResume.COMMON"
              xmlns:local="clr-namespace:SwiftResume.WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -12,8 +14,114 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button Content="Return" Command="{Binding ReturnCommand}" Style="{StaticResource PrimaryNormalButtonSytle}" Width="50" Height="30" Margin="5" HorizontalAlignment="Right"/>
-        <TextBlock Grid.Row="1" Text="Edit View" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Command="{Binding ReturnCommand}" Style="{StaticResource ButtonPrimaryStyle}" Content="&#xE966;" FontSize="18" Foreground="{StaticResource PrimaryBrush}" Margin="5" HorizontalAlignment="Right">
+            <Button.ToolTip>
+                <ToolTip Style="{StaticResource ToolTipStyle}" Content="Regresar a inicio"/>
+            </Button.ToolTip>
+        </Button>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Perfil">
+                <ScrollViewer>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Margin="15,10,15,10" FocusManager.FocusedElement="{Binding ElementName=txtNombres}">
+                            <TextBlock Text="Nombres:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <TextBox x:Name="txtNombres" Text="{Binding ResumeWrapper.Nombres, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Margin="15,10,15,10" FocusManager.FocusedElement="{Binding ElementName=txtNombres}">
+                            <TextBlock Text="Apellidos:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <TextBox Text="{Binding ResumeWrapper.Nombres, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Margin="15,10,15,10" FocusManager.FocusedElement="{Binding ElementName=txtNombres}">
+                            <TextBlock Text="Género:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Genero}}}" SelectedValue="{Binding ResumeWrapper.Genero, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" Margin="15,10,15,10" FocusManager.FocusedElement="{Binding ElementName=txtNombres}">
+                            <TextBlock Text="Idioma:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Language}}}" SelectedValue="{Binding ResumeWrapper.Lenguaje, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="4" Margin="15,10,15,10" FocusManager.FocusedElement="{Binding ElementName=txtProfesion}">
+                            <TextBlock Text="Profesión:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <TextBox  Text="{Binding ResumeWrapper.Nombres, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="5" Margin="15 10 15 10">
+                            <TextBlock Text="Resumen:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <TextBox Text="{Binding ResumeWrapper.Resumen, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="6" Margin="15 10 15 10">
+                            <TextBlock Text="Dirección:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <TextBox Text="{Binding ResumeWrapper.Resumen, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="7" Margin="15 10 15 10">
+                            <TextBlock Text="Teléfono:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <TextBox Text="{Binding ResumeWrapper.Resumen, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="8" Margin="15 10 15 10">
+                            <TextBlock Text="Email:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <TextBox Text="{Binding ResumeWrapper.Resumen, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="9" Margin="15 10 15 10">
+                            <TextBlock Text="Email2:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <TextBox Text="{Binding ResumeWrapper.Resumen, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="10" Margin="15 10 15 10">
+                            <TextBlock Text="Fecha Nacimiento:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <DatePicker Text="{Binding ResumeWrapper.Resumen, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="11" Margin="15 10 15 10">
+                            <TextBlock Text="Linkedin:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <TextBox Text="{Binding ResumeWrapper.Resumen, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="12" Margin="15 10 15 10">
+                            <TextBlock Text="Github:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <TextBox Text="{Binding ResumeWrapper.Resumen, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="13" Margin="15 10 15 10">
+                            <TextBlock Text="Blog:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <TextBox Text="{Binding ResumeWrapper.Resumen, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="14" Margin="15 10 15 10">
+                            <TextBlock Text="Blog:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <TextBox Text="{Binding ResumeWrapper.Resumen, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Idiomas/Habildades/Sofware">
+                
+            </TabItem>
+            <TabItem Header="Educación/Experiencia">
+                
+            </TabItem>
+            <TabItem Header="Certificados">
+                
+            </TabItem>
+            <TabItem Header="Artículo de Blog">
+
+            </TabItem>
+            <TabItem Header="Proyectos">
+                
+            </TabItem>
+            <TabItem Header="Info. Adicional/Intereses">
+                
+            </TabItem>
+        </TabControl>
     </Grid>
     
 </UserControl>
