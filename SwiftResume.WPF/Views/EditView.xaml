@@ -22,7 +22,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Button Command="{Binding ReturnCommand}" Style="{StaticResource ButtonPrimaryStyle}" Content="&#xE966;" FontSize="18" Foreground="{StaticResource PrimaryBrush}" Margin="5" HorizontalAlignment="Right">
             <Button.ToolTip>
@@ -132,7 +132,7 @@
                 
             </TabItem>
         </TabControl>
-        <Grid Grid.Row="6" Margin="0 5 0 0">
+        <Grid Grid.Row="2" Margin="0 5 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
