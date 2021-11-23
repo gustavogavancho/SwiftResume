@@ -15,4 +15,6 @@ public class Perfil : BaseEntity
     public string Github { get; set; }
     public string Blog { get; set; }
     public string StackOverflow { get; set; }
+
+    public int ResumeId { get; set; }
 }

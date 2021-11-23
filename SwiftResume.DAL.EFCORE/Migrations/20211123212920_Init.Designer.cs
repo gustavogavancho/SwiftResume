@@ -11,8 +11,8 @@ using SwiftResume.DAL.EFCORE;
 namespace SwiftResume.DAL.EFCORE.Migrations
 {
     [DbContext(typeof(SwiftResumeDbContext))]
-    [Migration("20211122115808_ResumeTableChanged")]
-    partial class ResumeTableChanged
+    [Migration("20211123212920_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,6 +52,9 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ResumeId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Resumen")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -64,6 +67,9 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ResumeId")
+                        .IsUnique();
 
                     b.ToTable("Perfil");
                 });
@@ -93,15 +99,10 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("PerfilId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PerfilId");
 
                     b.ToTable("Resumes");
                 });
@@ -134,19 +135,24 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         new
                         {
                             Id = 1,
-                            DateJoined = new DateTime(2021, 11, 22, 6, 58, 7, 907, DateTimeKind.Local).AddTicks(8728),
+                            DateJoined = new DateTime(2021, 11, 23, 16, 29, 20, 195, DateTimeKind.Local).AddTicks(2160),
                             Email = "ggavancholeon@gmail.com",
                             PasswordHashed = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==",
                             Username = "GGAVANCHO"
                         });
                 });
 
+            modelBuilder.Entity("SwiftResume.COMMON.Models.Perfil", b =>
+                {
+                    b.HasOne("SwiftResume.COMMON.Models.Resume", null)
+                        .WithOne("Perfil")
+                        .HasForeignKey("SwiftResume.COMMON.Models.Perfil", "ResumeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("SwiftResume.COMMON.Models.Resume", b =>
                 {
-                    b.HasOne("SwiftResume.COMMON.Models.Perfil", "Perfil")
-                        .WithMany()
-                        .HasForeignKey("PerfilId");
-
                     b.Navigation("Perfil");
                 });
 #pragma warning restore 612, 618

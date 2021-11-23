@@ -4,10 +4,6 @@ namespace SwiftResume.COMMON.Models;
 
 public class Resume : BaseEntity
 {
-    public Resume()
-    {
-        Perfil = new Perfil();
-    }
     public string Username { get; set; }
     [Required] [MinLength(2)] public string Nombres { get; set; }
     [Required] [MinLength(2)] public string Apellidos { get; set; }
