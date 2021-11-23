@@ -11,7 +11,7 @@ public static class AddDbContextHostBuilderExtensions
             services.AddDbContext<SwiftResumeDbContext>(options => 
             {
                 options.UseSqlite(context.Configuration.GetConnectionString("sqlite"));
-            }, ServiceLifetime.Singleton);
+            }/*, ServiceLifetime.Singleton*/);
         });
 
         return host;

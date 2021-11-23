@@ -11,5 +11,4 @@ public class User : BaseEntity
     [Required, Compare(nameof(Password)), NotMapped] public string ConfirmPassword { get; set; }
     public string PasswordHashed { get; set; }
     public DateTime DateJoined { get; set; } = DateTime.Now;
-    public Perfil Perfil { get; set; }
 }

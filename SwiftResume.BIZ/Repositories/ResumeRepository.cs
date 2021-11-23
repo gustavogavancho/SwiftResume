@@ -14,21 +14,13 @@ public class ResumeRepository : Repository<Resume>, IResumeRepository
         _context = context;
     }
 
-    public IEnumerable<Resume> GetTopResumes(int count)
-    {
-        return _context.Resumes.OrderByDescending(c => c.Nombres).Take(count).ToList();
-    }
-
-    public IEnumerable<Resume> GetResumes(int pageIndex, int pageSize)
-    {
-        return _context.Resumes
-            .OrderBy(c => c.Nombres)
-            .Skip((pageIndex - 1) * pageSize)
-            .Take(pageSize);
-    }
-
     public async Task<IEnumerable<Resume>> GetResumesByUsername(string username)
     {
         return await _context.Resumes.Where(x => x.Username == username).ToListAsync();
+    }
+
+    public async Task<Resume> GetResumeWithProfile(int id)
+    {
+        return await _context.Resumes.Where(x => x.Id == id).Include(x=> x.Perfil).FirstOrDefaultAsync();
     }
 }

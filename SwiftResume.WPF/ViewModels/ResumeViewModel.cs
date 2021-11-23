@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using Prism.Events;
 using SwiftResume.BIZ.Repositories;
 using SwiftResume.COMMON.Enums;
 using SwiftResume.COMMON.Models;
@@ -7,6 +8,7 @@ using SwiftResume.WPF.CustomControls.Dialogs.Alert;
 using SwiftResume.WPF.CustomControls.Dialogs.Resume;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
+using SwiftResume.WPF.Events;
 using SwiftResume.WPF.Extensions;
 using SwiftResume.WPF.State.Navigators;
 using SwiftResume.WPF.State.Users;
@@ -24,6 +26,7 @@ public class ResumeViewModel : ViewModelBase
     private readonly AlertDialogViewModel _alertDialogViewModel;
     private readonly IUserStored _userStored;
     private readonly ViewModelDelegateRenavigator<EditViewModel> _editNavigator;
+    private readonly IEventAggregator _eventAggregator;
 
     #endregion
 
@@ -69,7 +72,8 @@ public class ResumeViewModel : ViewModelBase
         YesNoDialogViewModel yesNoDialogViewModel,
         AlertDialogViewModel alertDialogViewModel,
         IUserStored userStored,
-        ViewModelDelegateRenavigator<EditViewModel> editNavigator)
+        ViewModelDelegateRenavigator<EditViewModel> editNavigator,
+        IEventAggregator eventAggregator)
     {
         _resumeRepository = resumeRepository;
         _dialogService = dialogService;
@@ -78,7 +82,7 @@ public class ResumeViewModel : ViewModelBase
         _alertDialogViewModel = alertDialogViewModel;
         _userStored = userStored;
         _editNavigator = editNavigator;
-
+        _eventAggregator = eventAggregator;
         AddCommand = new DelegateCommand(OnAdd);
         EditCommand = new DelegateCommand(OnEdit);
         DeleteCommand = new DelegateCommand(OnDelete);
@@ -88,7 +92,7 @@ public class ResumeViewModel : ViewModelBase
 
     #region Methods
 
-    private void OnAdd()
+    private async void OnAdd()
     {
         var result = _dialogService.OpenDialog(_resumeDialogViewModel);
 
@@ -129,6 +133,7 @@ public class ResumeViewModel : ViewModelBase
     private void OnEdit()
     {
         _editNavigator.Renavigate();
+        _eventAggregator.GetEvent<NavigateToEditResume>().Publish(new NavigateToEditResumeArgs { Id = Resume.Id });
     }
 
 

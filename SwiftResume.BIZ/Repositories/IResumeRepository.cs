@@ -5,7 +5,6 @@ namespace SwiftResume.BIZ.Repositories;
 
 public interface IResumeRepository : IRepository<Resume>
 {
+    Task<Resume> GetResumeWithProfile(int id);
     Task<IEnumerable<Resume>> GetResumesByUsername(string username);
-    IEnumerable<Resume> GetTopResumes(int count);
-    IEnumerable<Resume> GetResumes(int pageIndex, int pageSize);
 }

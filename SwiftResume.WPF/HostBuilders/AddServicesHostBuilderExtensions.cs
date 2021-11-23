@@ -1,4 +1,5 @@
-﻿using SwiftResume.BIZ.Repositories;
+﻿using Prism.Events;
+using SwiftResume.BIZ.Repositories;
 using SwiftResume.BIZ.Services;
 using SwiftResume.COMMON.Models;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
@@ -13,6 +14,7 @@ public static class AddServicesHostBuilderExtensions
         host.ConfigureServices(services =>
         {
             services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
+            services.AddSingleton<IEventAggregator, EventAggregator>();
 
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
             services.AddSingleton<IUserStored, UserStored>();
