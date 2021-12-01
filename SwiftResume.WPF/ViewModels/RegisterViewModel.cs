@@ -138,6 +138,13 @@ public class RegisterViewModel : ViewModelBase
         InitializeUser(user);
     }
 
+    private User CreateNewUser()
+    {
+        var user = new User();
+        _userRepository.Add(user);
+        return user;
+    }
+
     private void InitializeUser(User user)
     {
         UserWrapper = new UserWrapper(user);
@@ -153,12 +160,6 @@ public class RegisterViewModel : ViewModelBase
         RegisterCommand.RaiseCanExecuteChanged();
     }
 
-    private User CreateNewUser()
-    {
-        var user = new User();
-        _userRepository.Add(user);
-        return user;
-    }
 
     #endregion
 }

@@ -21,6 +21,6 @@ public class ResumeRepository : Repository<Resume>, IResumeRepository
 
     public async Task<Resume> GetResumeWithProfile(int id)
     {
-        return await _context.Resumes.Where(x => x.Id == id).Include(x=> x.Perfil).FirstOrDefaultAsync();
+        return await _context.Resumes.Include(x=> x.Perfil).FirstOrDefaultAsync(x => x.Id == id);
     }
 }

@@ -4,6 +4,7 @@ using SwiftResume.COMMON.Models;
 using SwiftResume.WPF.Core;
 using SwiftResume.WPF.Events;
 using SwiftResume.WPF.State.Navigators;
+using SwiftResume.WPF.Wrapper;
 
 namespace SwiftResume.WPF.ViewModels;
 
@@ -17,8 +18,8 @@ public class EditViewModel : ViewModelBase
     #endregion
 
     #region Properties
-    private Resume _resume;
 
+    private Resume _resume;
     public Resume Resume
     {
         get => _resume;
@@ -26,6 +27,28 @@ public class EditViewModel : ViewModelBase
         {
             _resume = value;
             OnPropertyChanged(nameof(Resume));
+        }
+    }
+
+    private PerfilWrapper _perfilWrapper;
+    public PerfilWrapper PerfilWrapper
+    {
+        get => _perfilWrapper;
+        set 
+        { 
+            _perfilWrapper = value; 
+            OnPropertyChanged(nameof(PerfilWrapper));
+        }
+    }
+
+    private bool _hasChanges;
+    public bool HasChanges
+    {
+        get => _hasChanges;
+        set 
+        { 
+            _hasChanges = value;
+            OnPropertyChanged(nameof(HasChanges));
         }
     }
 
@@ -49,18 +72,38 @@ public class EditViewModel : ViewModelBase
             .Subscribe(OnNavigateToEditResume);
 
         ReturnCommand = new DelegateCommand(OnReturn);
-        SaveCommand = new DelegateCommand(OnSave);
+        SaveCommand = new DelegateCommand(OnSave, CanSave);
     }
+
 
     private async void OnSave()
     {
-        var check = Resume;
-        await _resumeRepository.SaveAsync();
+        PerfilWrapper.Validate();
+        if (!PerfilWrapper.HasErrors)
+        {
+            await _resumeRepository.SaveAsync();
+        }
+    }
+
+    private bool CanSave()
+    {
+        return PerfilWrapper != null && !PerfilWrapper.HasErrors;
+    }
+
+    public void OnLoad()
+    {
+        //Restore has changes to false
+        HasChanges = false;
+
+        InitializePerfil(Resume.Perfil);
     }
 
     private async void OnNavigateToEditResume(NavigateToEditResumeArgs model)
     {
         Resume = await _resumeRepository.GetResumeWithProfile(model.Id);
+
+        if (Resume.Perfil == null)
+            Resume.Perfil = new Perfil();
     }
 
     private void OnReturn()
@@ -68,12 +111,21 @@ public class EditViewModel : ViewModelBase
         _resumeRenavigator.Renavigate();
     }
 
-    #endregion
-
-    #region Methods
-    public void OnLoad()
+    private void InitializePerfil(Perfil perfil)
     {
-        
+        PerfilWrapper = new PerfilWrapper(perfil);
+        PerfilWrapper.PropertyChanged += (s, e) =>
+        {
+            if (!HasChanges)
+                HasChanges = _resumeRepository.HasChanges();
+
+            if (e.PropertyName == nameof(PerfilWrapper.HasErrors))
+                SaveCommand.RaiseCanExecuteChanged();
+        };
+
+        SaveCommand.RaiseCanExecuteChanged();
     }
+
+
     #endregion
 }

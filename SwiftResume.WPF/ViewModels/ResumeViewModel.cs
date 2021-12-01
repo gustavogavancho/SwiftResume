@@ -92,7 +92,7 @@ public class ResumeViewModel : ViewModelBase
 
     #region Methods
 
-    private async void OnAdd()
+    private void OnAdd()
     {
         var result = _dialogService.OpenDialog(_resumeDialogViewModel);
 

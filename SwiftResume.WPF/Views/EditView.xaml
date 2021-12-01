@@ -17,19 +17,12 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Command="{Binding ReturnCommand}" Style="{StaticResource ButtonPrimaryStyle}" Content="&#xE966;" FontSize="18" Foreground="{StaticResource PrimaryBrush}" Margin="5" HorizontalAlignment="Right">
-            <Button.ToolTip>
-                <ToolTip Style="{StaticResource ToolTipStyle}" Content="Regresar a inicio"/>
-            </Button.ToolTip>
-        </Button>
-        <TabControl Grid.Row="1">
+        <TabControl Grid.Row="0" Margin="10 10 10 0">
             <TabItem Header="Perfil">
                 <ScrollViewer>
                     <Grid>
@@ -50,65 +43,69 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Margin="15,10,15,10" FocusManager.FocusedElement="{Binding ElementName=txtNombres}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="15,10,15,10" FocusManager.FocusedElement="{Binding ElementName=txtNombres}">
                             <TextBlock Text="Nombres:" Style="{StaticResource BlueTextTextBlockStyle}"/>
                             <TextBox x:Name="txtNombres" Text="{Binding Resume.Nombres, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="1" Margin="15,10,15,10">
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="15,10,15,10">
                             <TextBlock Text="Apellidos:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding Resume.Nombres, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                            <TextBox Text="{Binding Resume.Apellidos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="2" Margin="15,10,15,10">
+                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="15,10,15,10">
                             <TextBlock Text="Género:" Style="{StaticResource BlueTextTextBlockStyle}"/>
                             <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Genero}}}" SelectedItem="{Binding Resume.Genero, Converter={StaticResource GenderEnumToString}, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="3" Margin="15,10,15,10">
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="15,10,15,10">
                             <TextBlock Text="Idioma:" Style="{StaticResource BlueTextTextBlockStyle}"/>
                             <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Language}}}" SelectedItem="{Binding Resume.Lenguaje, Converter={StaticResource LanguageEnumToString}, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="4" Margin="15,10,15,10">
-                            <TextBlock Text="Profesión:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox  Text="{Binding Resume.Perfil.Profesion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="5" Margin="15 10 15 10">
+                        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="15 10 15 10">
                             <TextBlock Text="Resumen:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding Resume.Perfil.Resumen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                            <TextBox Text="{Binding PerfilWrapper.Resumen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" Height="120"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="6" Margin="15 10 15 10">
+                        <StackPanel Grid.Row="3" Grid.Column="0" Margin="15,10,15,10">
+                            <TextBlock Text="Profesión:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                            <TextBox  Text="{Binding PerfilWrapper.Profesion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" Grid.Column="1" Margin="15 10 15 10">
                             <TextBlock Text="Dirección:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding Resume.Perfil.Direccion, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                            <TextBox Text="{Binding PerfilWrapper.Direccion, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="7" Margin="15 10 15 10">
+                        <StackPanel Grid.Row="4" Grid.Column="0" Margin="15 10 15 10">
                             <TextBlock Text="Teléfono:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding Resume.Perfil.Telefono, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                            <TextBox Text="{Binding PerfilWrapper.Telefono, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="8" Margin="15 10 15 10">
+                        <StackPanel Grid.Row="4" Grid.Column="1" Margin="15 10 15 10">
                             <TextBlock Text="Email:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding Resume.Perfil.Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                            <TextBox Text="{Binding PerfilWrapper.Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="9" Margin="15 10 15 10">
+                        <StackPanel Grid.Row="5" Grid.Column="0" Margin="15 10 15 10">
                             <TextBlock Text="Email2:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding Resume.Perfil.Email2, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                            <TextBox Text="{Binding PerfilWrapper.Email2, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="10" Margin="15 10 15 10">
+                        <StackPanel Grid.Row="5" Grid.Column="1" Margin="15 10 15 10">
                             <TextBlock Text="Fecha Nacimiento:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <DatePicker SelectedDate="{Binding Resume.Perfil.FechaNacimiento, UpdateSourceTrigger=PropertyChanged}"/>
+                            <DatePicker SelectedDate="{Binding PerfilWrapper.FechaNacimiento, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="11" Margin="15 10 15 10">
+                        <StackPanel Grid.Row="6" Grid.Column="0" Margin="15 10 15 10">
                             <TextBlock Text="Linkedin:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding Resume.Perfil.Linkedin, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                            <TextBox Text="{Binding PerfilWrapper.Linkedin, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="12" Margin="15 10 15 10">
+                        <StackPanel Grid.Row="6" Grid.Column="1" Margin="15 10 15 10">
                             <TextBlock Text="Github:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding Resume.Perfil.Github, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                            <TextBox Text="{Binding PerfilWrapper.Github, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="13" Margin="15 10 15 10">
+                        <StackPanel Grid.Row="7" Grid.Column="0" Margin="15 10 15 10">
                             <TextBlock Text="Blog:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding Resume.Perfil.Blog, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                            <TextBox Text="{Binding PerfilWrapper.Blog, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="14" Margin="15 10 15 10">
+                        <StackPanel Grid.Row="7" Grid.Column="1" Margin="15 10 15 10">
                             <TextBlock Text="StackOverFlow:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding Resume.Perfil.StackOverflow, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                            <TextBox Text="{Binding PerfilWrapper.StackOverflow, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
@@ -132,7 +129,7 @@
                 
             </TabItem>
         </TabControl>
-        <Grid Grid.Row="2" Margin="0 5 0 0">
+        <Grid Grid.Row="1" Margin="0 5 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -156,7 +153,7 @@
                     FontSize="18"
                     Foreground="White"
                     HorizontalAlignment="Right"
-                    Command="{Binding CancelCommand}"
+                    Command="{Binding ReturnCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}">
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource ToolTipStyle}" Content="Cancelar"/>

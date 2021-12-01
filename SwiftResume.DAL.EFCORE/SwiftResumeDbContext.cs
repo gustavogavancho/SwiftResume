@@ -7,6 +7,7 @@ public class SwiftResumeDbContext : DbContext
 {
     public DbSet<Resume> Resumes { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<Perfil> Perfiles { get; set; }
 
     public SwiftResumeDbContext(DbContextOptions<SwiftResumeDbContext> options) : base(options)
     {
