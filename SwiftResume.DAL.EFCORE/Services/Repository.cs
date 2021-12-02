@@ -49,7 +49,15 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 
     public async Task SaveAsync()
     {
-        await _context.SaveChangesAsync();
+        //TODO: Implement fail safe logic
+        try
+        {
+            var check = await _context.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            var check = ex;
+        }
     }
 
     public bool HasChanges()

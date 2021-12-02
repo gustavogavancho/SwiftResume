@@ -6,6 +6,7 @@
 
     <converters:LanguageEnumToString x:Key="LanguageEnumToString"/>
     <converters:GenderEnumToString x:Key="GenderEnumToString"/>
+    <converters:CharacterCounter x:Key="CharacterCounter"/>
 
     <!-- Colors -->
     <Color x:Key="PrimaryColor">#003366</Color>
@@ -82,8 +83,6 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
-                <Setter Property="Background" Value="{StaticResource TertiaryBrush}"/>
-                <Setter Property="Foreground" Value="White"/>
                 <Setter Property="ToolTip">
                     <Setter.Value>
                         <ToolTip DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget}">
@@ -121,8 +120,6 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
-                <Setter Property="Background" Value="{StaticResource TertiaryBrush}"/>
-                <Setter Property="Foreground" Value="White"/>
                 <Setter Property="ToolTip">
                     <Setter.Value>
                         <ToolTip DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget}">
@@ -134,6 +131,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
 
     <!-- Button -->
     <Style x:Key="ButtonPrimaryStyle" TargetType="Button">
@@ -283,7 +281,6 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
-                <Setter Property="Background" Value="{StaticResource TertiaryBrush}"/>
                 <Setter Property="ToolTip">
                     <Setter.Value>
                         <ToolTip DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget}">
@@ -302,7 +299,41 @@
     </Style>
 
     <!-- DateTimePicker-->
-    <Style x:Key="DateTimePickerStyle" TargetType="DatePicker">
+
+    <Style x:Key="DatePickerValidationStyle" TargetType="DatePicker">
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder x:Name="placeholder" />
+                        <ItemsControl ItemsSource="{Binding}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ErrorContent}" Foreground="Red" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!--<TextBlock FontSize="12" Foreground="{StaticResource TertiaryBrush}" Text="{Binding ElementName=placeholder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>-->
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <ToolTip DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget}">
+                            <ItemsControl ItemsSource="{Binding Path=(Validation.Errors)}" DisplayMemberPath="ErrorContent" />
+                        </ToolTip>
+                    </Setter.Value>
+                </Setter>
+                <!--<Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>-->
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="DateTimePickerStyle" TargetType="DatePicker" BasedOn="{StaticResource DatePickerValidationStyle}">
         <Setter Property="Height" Value="25"/>
     </Style>
 

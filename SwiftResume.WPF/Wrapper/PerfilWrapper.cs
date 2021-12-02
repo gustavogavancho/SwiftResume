@@ -8,6 +8,18 @@ public class PerfilWrapper : ModelWrapper<Perfil>
 
     public int Id { get { return Model.Id; } }
 
+    public string Nombres 
+    {
+        get => GetValue<string>();
+        set => SetValue(value);
+    }
+
+    public string Apellidos 
+    {
+        get => GetValue<string>();
+        set => SetValue(value);
+    }
+
     public string Profesion
     {
         get => GetValue<string>();

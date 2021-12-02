@@ -27,6 +27,7 @@ public class EditViewModel : ViewModelBase
         {
             _resume = value;
             OnPropertyChanged(nameof(Resume));
+            OnPropertyChanged(nameof(PerfilWrapper));
         }
     }
 
@@ -38,6 +39,7 @@ public class EditViewModel : ViewModelBase
         { 
             _perfilWrapper = value; 
             OnPropertyChanged(nameof(PerfilWrapper));
+            OnPropertyChanged(nameof(Resume));
         }
     }
 
@@ -75,12 +77,16 @@ public class EditViewModel : ViewModelBase
         SaveCommand = new DelegateCommand(OnSave, CanSave);
     }
 
-
     private async void OnSave()
     {
         PerfilWrapper.Validate();
         if (!PerfilWrapper.HasErrors)
         {
+            //Workaround
+            Resume.Nombres = PerfilWrapper.Nombres;
+            Resume.Apellidos = PerfilWrapper.Nombres;
+            Resume.Perfil = PerfilWrapper.Model;
+
             await _resumeRepository.SaveAsync();
         }
     }
@@ -102,7 +108,7 @@ public class EditViewModel : ViewModelBase
     {
         Resume = await _resumeRepository.GetResumeWithProfile(model.Id);
 
-        if (Resume.Perfil == null)
+        if (Resume?.Perfil == null)
             Resume.Perfil = new Perfil();
     }
 
@@ -124,8 +130,11 @@ public class EditViewModel : ViewModelBase
         };
 
         SaveCommand.RaiseCanExecuteChanged();
-    }
 
+        //Workaround
+        PerfilWrapper.Nombres = Resume.Nombres; 
+        PerfilWrapper.Apellidos = Resume.Apellidos; 
+    }
 
     #endregion
 }
