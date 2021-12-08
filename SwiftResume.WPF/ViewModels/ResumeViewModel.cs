@@ -134,6 +134,7 @@ public class ResumeViewModel : ViewModelBase
     {
         _editNavigator.Renavigate();
         _eventAggregator.GetEvent<NavigateToEditResume>().Publish(new NavigateToEditResumeArgs { Id = Resume.Id });
+        _eventAggregator.GetEvent<BackButtonVisibility>().Publish();
     }
 
 

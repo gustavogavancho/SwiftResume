@@ -9,6 +9,8 @@ using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
 using SwiftResume.COMMON.Enums;
 using EnumLanguage = SwiftResume.COMMON.Enums;
+using Prism.Events;
+using SwiftResume.WPF.Events;
 using Application = System.Windows.Application;
 
 namespace SwiftResume.WPF.ViewModels;
@@ -19,7 +21,8 @@ public class MainViewModel : ViewModelBase
 
     private readonly INavigator _navigator;
     private readonly IAuthenticator _authenticator;
-    private readonly ViewModelDelegateRenavigator<LoginViewModel> _viewModelDelegateRenavigator;
+    private readonly ViewModelDelegateRenavigator<LoginViewModel> _loginRenavigator;
+    private readonly ViewModelDelegateRenavigator<ResumeViewModel> _resumeRenavigator;
     private readonly IDialogService _dialogService;
     private readonly YesNoDialogViewModel _yesNoDialogViewModel;
 
@@ -29,11 +32,19 @@ public class MainViewModel : ViewModelBase
 
     public bool IsLoggedIn => _authenticator.IsLoggedIn;
     public string Username => $"Bienvenido {_authenticator.CurrentUser?.Username}!";
-
     public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
-    public INavigator Navigator { get; set; }
     public ICommand UpdateCurrentViewModelCommand { get; }
-    public string Language { get; set; }
+
+    private bool _backButtonVisibility;
+    public bool BackButtonVisibility
+    {
+        get => _backButtonVisibility;
+        set 
+        {
+            _backButtonVisibility = value;
+            OnPropertyChanged(nameof(BackButtonVisibility));
+        }
+    }
 
     #endregion
 
@@ -41,6 +52,7 @@ public class MainViewModel : ViewModelBase
 
     public DelegateCommand MinimizeWindowCommand { get; private set; }
     public DelegateCommand CloseWindowCommand { get; private set; }
+    public DelegateCommand ResumeNavigatorCommand { get; private set; }
     public DelegateCommand LogoutCommand { get; set; }
 
     #endregion
@@ -50,13 +62,16 @@ public class MainViewModel : ViewModelBase
     public MainViewModel(INavigator navigator,
         ISwiftResumeViewModelFactory viewModelFactory,
         IAuthenticator authenticator,
-        ViewModelDelegateRenavigator<LoginViewModel> viewModelDelegateRenavigator,
+        ViewModelDelegateRenavigator<LoginViewModel> loginRenavigator,
+        ViewModelDelegateRenavigator<ResumeViewModel> resumeRenavigator,
         IDialogService dialogService,
-        YesNoDialogViewModel yesNoDialogViewModel)
+        YesNoDialogViewModel yesNoDialogViewModel,
+        IEventAggregator eventAggregator)
     {
         _navigator = navigator;
         _authenticator = authenticator;
-        _viewModelDelegateRenavigator = viewModelDelegateRenavigator;
+        _loginRenavigator = loginRenavigator;
+        _resumeRenavigator = resumeRenavigator;
         _dialogService = dialogService;
         _yesNoDialogViewModel = yesNoDialogViewModel;
 
@@ -70,6 +85,10 @@ public class MainViewModel : ViewModelBase
         MinimizeWindowCommand = new DelegateCommand(OnMinimizeCommand);
         CloseWindowCommand = new DelegateCommand(OnCloseCommand);
         LogoutCommand = new DelegateCommand(OnLogout);
+        ResumeNavigatorCommand = new DelegateCommand(OnResumeNavigator);
+
+        eventAggregator.GetEvent<BackButtonVisibility>()
+            .Subscribe(OnBackButtonVisibility);
     }
 
     #endregion
@@ -92,7 +111,7 @@ public class MainViewModel : ViewModelBase
         if (result == DialogResults.Si)
         {
             _authenticator.Logout();
-            _viewModelDelegateRenavigator.Renavigate();
+            _loginRenavigator.Renavigate();
         }
     }
 
@@ -117,6 +136,15 @@ public class MainViewModel : ViewModelBase
         Application.Current.Windows.OfType<MainWindow>().FirstOrDefault().WindowState = WindowState.Minimized;
     }
 
+    private void OnBackButtonVisibility()
+    {
+        BackButtonVisibility = true;
+    }
 
+    private void OnResumeNavigator()
+    {
+        _resumeRenavigator.Renavigate();
+        BackButtonVisibility = false;
+    }
     #endregion
 }

@@ -7,109 +7,25 @@
              xmlns:enum="clr-namespace:SwiftResume.COMMON.Enums;assembly=SwiftResume.COMMON"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:SwiftResume.WPF.Views"
+             xmlns:controls="clr-namespace:SwiftResume.WPF.CustomControls.Tab"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:CallMethodAction TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext}"
-                                MethodName="OnLoad"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TabControl Grid.Row="0" Margin="10 10 10 0">
-            <TabItem Header="Perfil">
-                <ScrollViewer>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="15,10,15,10" FocusManager.FocusedElement="{Binding ElementName=txtNombres}">
-                            <TextBlock Text="Nombres:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox x:Name="txtNombres" Text="{Binding PerfilWrapper.Nombres, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" />
-                        </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="15,10,15,10">
-                            <TextBlock Text="Apellidos:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding PerfilWrapper.Apellidos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="15,10,15,10">
-                            <TextBlock Text="Género:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Genero}}}" SelectedItem="{Binding Resume.Genero, Converter={StaticResource GenderEnumToString}, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="15,10,15,10">
-                            <TextBlock Text="Idioma:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Language}}}" SelectedItem="{Binding Resume.Lenguaje, Converter={StaticResource LanguageEnumToString}, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="15 10 15 10">
-                            <TextBlock Text="Resumen:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox x:Name="txtResumen" Text="{Binding PerfilWrapper.Resumen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" Height="120"/>
-                            <TextBlock Text="{Binding Text, UpdateSourceTrigger=PropertyChanged, ElementName=txtResumen, Converter={StaticResource CharacterCounter}}" HorizontalAlignment="Right"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="3" Grid.Column="0" Margin="15,10,15,10">
-                            <TextBlock Text="Profesión:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox  Text="{Binding PerfilWrapper.Profesion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="3" Grid.Column="1" Margin="15 10 15 10">
-                            <TextBlock Text="Dirección:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding PerfilWrapper.Direccion, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="4" Grid.Column="0" Margin="15 10 15 10">
-                            <TextBlock Text="Teléfono:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding PerfilWrapper.Telefono, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="4" Grid.Column="1" Margin="15 10 15 10">
-                            <TextBlock Text="Email:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding PerfilWrapper.Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="5" Grid.Column="0" Margin="15 10 15 10">
-                            <TextBlock Text="Email2:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding PerfilWrapper.Email2, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="5" Grid.Column="1" Margin="15 10 15 10">
-                            <TextBlock Text="Fecha Nacimiento:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <DatePicker SelectedDate="{Binding PerfilWrapper.FechaNacimiento, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DateTimePickerStyle}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="6" Grid.Column="0" Margin="15 10 15 10">
-                            <TextBlock Text="Linkedin:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding Resume.Perfil.Linkedin, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="6" Grid.Column="1" Margin="15 10 15 10">
-                            <TextBlock Text="Github:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding Resume.Perfil.Github, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="7" Grid.Column="0" Margin="15 10 15 10">
-                            <TextBlock Text="Blog:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding Resume.Perfil.Blog, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="7" Grid.Column="1" Margin="15 10 15 10">
-                            <TextBlock Text="StackOverFlow:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                            <TextBox Text="{Binding Resume.Perfil.StackOverflow, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
-                        </StackPanel>
-                    </Grid>
-                </ScrollViewer>
+        <TabControl Grid.Row="0" Margin="10 10 10 10"
+                    ItemsSource="{Binding Tabs}">
+            <TabControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type controls:ITab}">
+                    <TextBlock>
+                        <Run Text="{Binding Name}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <!--<TabItem Header="Perfil">
+                
             </TabItem>
             <TabItem Header="Idiomas/Habildades/Sofware">
                 
@@ -128,40 +44,7 @@
             </TabItem>
             <TabItem Header="Info. Adicional/Intereses">
                 
-            </TabItem>
+            </TabItem>-->
         </TabControl>
-        <Grid Grid.Row="1" Margin="0 5 0 0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource ButtonSecondaryStyle}" 
-                    Content="&#xE74E;" 
-                    Grid.Column="1" 
-                    FontSize="18"
-                    Foreground="White"
-                    HorizontalAlignment="Right" 
-                    Command="{Binding SaveCommand}"
-                    IsDefault="True">
-                <Button.ToolTip>
-                    <ToolTip Style="{StaticResource ToolTipStyle}" Content="Guardar Datos"/>
-                </Button.ToolTip>
-            </Button>
-            <Button Style="{StaticResource ButtonSecondaryStyle}"
-                    Content="&#xF78A;"
-                    Grid.Column="2"
-                    FontSize="18"
-                    Foreground="White"
-                    HorizontalAlignment="Right"
-                    Command="{Binding ReturnCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}">
-                <Button.ToolTip>
-                    <ToolTip Style="{StaticResource ToolTipStyle}" Content="Cancelar"/>
-                </Button.ToolTip>
-            </Button>
-        </Grid>
-
     </Grid>
-    
 </UserControl>

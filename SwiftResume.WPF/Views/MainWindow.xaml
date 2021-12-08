@@ -51,6 +51,11 @@
                             <ToolTip Style="{StaticResource ToolTipStyle}" Content="Cerrar Sesión"/>
                         </Button.ToolTip>
                     </Button>
+                    <Button Style="{StaticResource ButtonPrimaryStyle}" Visibility="{Binding BackButtonVisibility, Converter={StaticResource BoolToVisibility}}" Content="&#xE72B;" FontSize="18" Foreground="{StaticResource PrimaryBrush}" HorizontalAlignment="Right" Command="{Binding ResumeNavigatorCommand}">
+                        <Button.ToolTip>
+                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Regresar"/>
+                        </Button.ToolTip>
+                    </Button>
                 </StackPanel>
             </Border>
             <Button Style="{StaticResource ButtonPrimaryStyle}" Content="&#xE738;" Grid.Column="3" FontSize="18" Foreground="{StaticResource PrimaryBrush}" HorizontalAlignment="Right" Command="{Binding MinimizeWindowCommand}">

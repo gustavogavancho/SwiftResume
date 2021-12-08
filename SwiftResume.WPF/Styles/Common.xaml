@@ -7,6 +7,7 @@
     <converters:LanguageEnumToString x:Key="LanguageEnumToString"/>
     <converters:GenderEnumToString x:Key="GenderEnumToString"/>
     <converters:CharacterCounter x:Key="CharacterCounter"/>
+    <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
 
     <!-- Colors -->
     <Color x:Key="PrimaryColor">#003366</Color>

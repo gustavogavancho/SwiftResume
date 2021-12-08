@@ -4,5 +4,6 @@ public enum ViewType : short
 {
     Resume,
     Login,
-    Edit
+    Edit,
+    Perfil
 }

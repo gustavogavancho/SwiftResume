@@ -7,6 +7,7 @@
              xmlns:alert="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Alert"
              xmlns:yesno="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.YesNo"
              xmlns:resume="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Resume"
+             xmlns:controls="clr-namespace:SwiftResume.WPF.CustomControls.Tab"
              Startup="Application_Startup">
     <Application.Resources>
         <ResourceDictionary>
@@ -30,6 +31,10 @@
                 <views:EditView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModels:PerfilViewModel}">
+                <views:PerfilView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type alert:AlertDialogViewModel}">
                 <alert:AlertDialogView/>
             </DataTemplate>
@@ -41,7 +46,10 @@
             <DataTemplate DataType="{x:Type resume:ResumeDialogViewModel}">
                 <resume:ResumeDialogView/>
             </DataTemplate>
-            
+
+            <DataTemplate DataType="{x:Type controls:DateTab}">
+                <controls:DateTimeView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

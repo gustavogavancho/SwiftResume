@@ -21,6 +21,7 @@ public static class AddViewModelsHostBuilderExtensions
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<ResumeViewModel>();
             services.AddSingleton<EditViewModel>();
+            services.AddSingleton<PerfilViewModel>();
 
             services.AddSingleton<ResumeDialogViewModel>();
             services.AddSingleton<AlertDialogViewModel>();
@@ -30,6 +31,7 @@ public static class AddViewModelsHostBuilderExtensions
             services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
             services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => () => CreateRegisterViewModel(services));
             services.AddSingleton<CreateViewModel<EditViewModel>>(services => () => services.GetRequiredService<EditViewModel>());
+            services.AddSingleton<CreateViewModel<PerfilViewModel>>(services => () => services.GetRequiredService<PerfilViewModel>());
 
             services.AddSingleton<ViewModelDelegateRenavigator<ResumeViewModel>>();
             services.AddSingleton<ViewModelDelegateRenavigator<RegisterViewModel>>();

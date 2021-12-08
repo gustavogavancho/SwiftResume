@@ -47,7 +47,6 @@ public class LoginViewModel : ViewModelBase
             OnPropertyChanged(nameof(CanLogin));
         }
     }
-
     public bool CanLogin => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password);
 
     #endregion
