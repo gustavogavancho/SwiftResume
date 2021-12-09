@@ -28,6 +28,6 @@ public class SwiftResumeViewModelFactory : ISwiftResumeViewModelFactory
         ViewType.Login => _createLoginViewModel(),
         ViewType.Edit => _createEditViewModel(),
         ViewType.Perfil => _createPerfilViewModel(),
-        _ => throw new ArgumentException("The ViewType does not have a ViewModel.", "viewType")
+        _ => throw new ArgumentException("The ViewType does not have a ViewModel.")
     };
 }

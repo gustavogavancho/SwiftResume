@@ -16,7 +16,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TabControl Grid.Row="0" Margin="10 10 10 10"
-                    ItemsSource="{Binding Tabs}">
+                    ItemsSource="{Binding Tabs}"
+                    SelectedItem="{Binding Tab}">
             <TabControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type controls:ITab}">
                     <TextBlock>
@@ -24,27 +25,6 @@
                     </TextBlock>
                 </DataTemplate>
             </TabControl.ItemTemplate>
-            <!--<TabItem Header="Perfil">
-                
-            </TabItem>
-            <TabItem Header="Idiomas/Habildades/Sofware">
-                
-            </TabItem>
-            <TabItem Header="Educación/Experiencia">
-                
-            </TabItem>
-            <TabItem Header="Certificados">
-                
-            </TabItem>
-            <TabItem Header="Artículo de Blog">
-
-            </TabItem>
-            <TabItem Header="Proyectos">
-                
-            </TabItem>
-            <TabItem Header="Info. Adicional/Intereses">
-                
-            </TabItem>-->
         </TabControl>
     </Grid>
 </UserControl>

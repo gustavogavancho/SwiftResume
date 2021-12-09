@@ -76,6 +76,17 @@ public class ResumeDialogViewModel : DialogViewModelBase<Model.Resume>
 
     #region Methods
 
+    public void OnLoad()
+    {
+        //Restore has changes to false
+        HasChanges = false;
+        _resumeRepository.DetachAllProperties();
+
+        var resume = CreateNewResume();
+
+        InitializeResume(resume);
+    }
+
     private bool CanSave(IDialogWindow arg)
     {
         return ResumeWrapper != null && !ResumeWrapper.HasErrors && HasChanges;
@@ -87,7 +98,6 @@ public class ResumeDialogViewModel : DialogViewModelBase<Model.Resume>
         if (!ResumeWrapper.HasErrors)
         {
             ResumeWrapper.Model.Username = _userStored.CurrentUser.Username;
-            _resumeRepository.Add(ResumeWrapper.Model);
             _resumeRepository.SaveAsync();
             HasChanges = _resumeRepository.HasChanges();
             CloseDialogWithResult(window, ResumeWrapper.Model);
@@ -104,16 +114,6 @@ public class ResumeDialogViewModel : DialogViewModelBase<Model.Resume>
                 return;
         }
         CloseDialogWithResult(window, null);
-    }
-
-    public void OnLoad()
-    {
-        //Restore has changes to false
-        HasChanges = false;
-
-        var resume = CreateNewResume();
-
-        InitializeResume(resume);
     }
 
     private void InitializeResume(Model.Resume resume)

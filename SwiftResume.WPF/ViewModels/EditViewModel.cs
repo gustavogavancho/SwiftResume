@@ -13,18 +13,12 @@ public class EditViewModel : ViewModelBase
 
     #endregion
 
-    #region Commands
-
-    public DelegateCommand SaveCommand { get; set; }
-
-    #endregion
-
     #region Constructor
 
     public EditViewModel(PerfilViewModel perfilViewModel)
     {
-        Tabs.Add(new DateTab());
         Tabs.Add(perfilViewModel);
+        Tab = Tabs.FirstOrDefault();
     }
 
     #endregion

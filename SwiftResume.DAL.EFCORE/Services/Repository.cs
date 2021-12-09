@@ -64,4 +64,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         return _context.ChangeTracker.HasChanges();
     }
+
+    public void DetachAllProperties()
+    {
+        _context.ChangeTracker.Clear();
+    }
 }

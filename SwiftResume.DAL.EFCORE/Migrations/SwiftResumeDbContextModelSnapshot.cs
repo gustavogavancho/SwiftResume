@@ -133,7 +133,7 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         new
                         {
                             Id = 1,
-                            DateJoined = new DateTime(2021, 11, 29, 22, 14, 15, 896, DateTimeKind.Local).AddTicks(437),
+                            DateJoined = new DateTime(2021, 12, 8, 12, 52, 27, 369, DateTimeKind.Local).AddTicks(2916),
                             Email = "ggavancholeon@gmail.com",
                             PasswordHashed = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==",
                             Username = "GGAVANCHO"

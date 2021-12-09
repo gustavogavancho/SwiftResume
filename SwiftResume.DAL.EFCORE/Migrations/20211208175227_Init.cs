@@ -44,7 +44,7 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Perfil",
+                name: "Perfiles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -64,9 +64,9 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Perfil", x => x.Id);
+                    table.PrimaryKey("PK_Perfiles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Perfil_Resumes_ResumeId",
+                        name: "FK_Perfiles_Resumes_ResumeId",
                         column: x => x.ResumeId,
                         principalTable: "Resumes",
                         principalColumn: "Id",
@@ -76,11 +76,11 @@ namespace SwiftResume.DAL.EFCORE.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "DateJoined", "Email", "PasswordHashed", "Username" },
-                values: new object[] { 1, new DateTime(2021, 11, 23, 16, 29, 20, 195, DateTimeKind.Local).AddTicks(2160), "ggavancholeon@gmail.com", "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==", "GGAVANCHO" });
+                values: new object[] { 1, new DateTime(2021, 12, 8, 12, 52, 27, 369, DateTimeKind.Local).AddTicks(2916), "ggavancholeon@gmail.com", "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==", "GGAVANCHO" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Perfil_ResumeId",
-                table: "Perfil",
+                name: "IX_Perfiles_ResumeId",
+                table: "Perfiles",
                 column: "ResumeId",
                 unique: true);
         }
@@ -88,7 +88,7 @@ namespace SwiftResume.DAL.EFCORE.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Perfil");
+                name: "Perfiles");
 
             migrationBuilder.DropTable(
                 name: "Users");

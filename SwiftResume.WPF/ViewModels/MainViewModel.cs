@@ -1,15 +1,15 @@
-﻿using SwiftResume.WPF.Commands;
+﻿using System.Windows;
+using Prism.Events;
+using SwiftResume.WPF.Commands;
 using SwiftResume.WPF.Core;
 using SwiftResume.WPF.State.Authenticators;
 using SwiftResume.WPF.State.Navigators;
 using SwiftResume.WPF.ViewModels.Factories;
 using SwiftResume.WPF.Views;
-using System.Windows;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
 using SwiftResume.COMMON.Enums;
 using EnumLanguage = SwiftResume.COMMON.Enums;
-using Prism.Events;
 using SwiftResume.WPF.Events;
 using Application = System.Windows.Application;
 

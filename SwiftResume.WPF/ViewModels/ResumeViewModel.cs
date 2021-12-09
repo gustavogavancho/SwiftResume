@@ -83,6 +83,7 @@ public class ResumeViewModel : ViewModelBase
         _userStored = userStored;
         _editNavigator = editNavigator;
         _eventAggregator = eventAggregator;
+
         AddCommand = new DelegateCommand(OnAdd);
         EditCommand = new DelegateCommand(OnEdit);
         DeleteCommand = new DelegateCommand(OnDelete);
@@ -92,6 +93,12 @@ public class ResumeViewModel : ViewModelBase
 
     #region Methods
 
+    public async void OnLoad()
+    {
+        var resume = await _resumeRepository.GetResumesByUsername(_userStored.CurrentUser.Username);
+        Resumes = resume.ToObservableCollection();
+    }
+
     private void OnAdd()
     {
         var result = _dialogService.OpenDialog(_resumeDialogViewModel);
@@ -100,6 +107,13 @@ public class ResumeViewModel : ViewModelBase
         {
             Resumes.Add(result);
         }
+    }
+
+    private void OnEdit()
+    {
+        _editNavigator.Renavigate();
+        _eventAggregator.GetEvent<NavigateToEditResume>().Publish(new NavigateToEditResumeArgs { Id = Resume.Id });
+        _eventAggregator.GetEvent<BackButtonVisibility>().Publish();
     }
 
     private async void OnDelete()
@@ -123,20 +137,6 @@ public class ResumeViewModel : ViewModelBase
             }
         }
     }
-
-    public async void OnLoad()
-    {
-        var resume = await _resumeRepository.GetResumesByUsername(_userStored.CurrentUser.Username);
-        Resumes = resume.ToObservableCollection();
-    }
-
-    private void OnEdit()
-    {
-        _editNavigator.Renavigate();
-        _eventAggregator.GetEvent<NavigateToEditResume>().Publish(new NavigateToEditResumeArgs { Id = Resume.Id });
-        _eventAggregator.GetEvent<BackButtonVisibility>().Publish();
-    }
-
 
     #endregion
 }

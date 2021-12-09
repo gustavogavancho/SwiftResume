@@ -1,11 +1,7 @@
-﻿using SwiftResume.BIZ.Repositories;
-using SwiftResume.COMMON.Models;
-using SwiftResume.WPF.Core;
+﻿using SwiftResume.WPF.Core;
 using SwiftResume.WPF.CustomControls.Dialogs.Alert;
 using SwiftResume.WPF.CustomControls.Dialogs.Resume;
-using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
-using SwiftResume.WPF.State.Authenticators;
 using SwiftResume.WPF.State.Navigators;
 using SwiftResume.WPF.ViewModels;
 using SwiftResume.WPF.ViewModels.Factories;
@@ -21,15 +17,17 @@ public static class AddViewModelsHostBuilderExtensions
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<ResumeViewModel>();
             services.AddSingleton<EditViewModel>();
+            services.AddSingleton<RegisterViewModel>();
             services.AddSingleton<PerfilViewModel>();
+            services.AddSingleton<LoginViewModel>();
 
             services.AddSingleton<ResumeDialogViewModel>();
             services.AddSingleton<AlertDialogViewModel>();
             services.AddSingleton<YesNoDialogViewModel>();
 
             services.AddSingleton<CreateViewModel<ResumeViewModel>>(services => () => services.GetRequiredService<ResumeViewModel>());
-            services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
-            services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => () => CreateRegisterViewModel(services));
+            services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => services.GetRequiredService<LoginViewModel>());
+            services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => () => services.GetRequiredService<RegisterViewModel>());
             services.AddSingleton<CreateViewModel<EditViewModel>>(services => () => services.GetRequiredService<EditViewModel>());
             services.AddSingleton<CreateViewModel<PerfilViewModel>>(services => () => services.GetRequiredService<PerfilViewModel>());
 
@@ -42,26 +40,5 @@ public static class AddViewModelsHostBuilderExtensions
         });
 
         return host;
-    }
-
-    private static LoginViewModel CreateLoginViewModel(IServiceProvider services)
-    {
-        return new LoginViewModel(
-                    services.GetRequiredService<IAuthenticator>(),
-                    services.GetRequiredService<ViewModelDelegateRenavigator<ResumeViewModel>>(),
-                    services.GetRequiredService<ViewModelDelegateRenavigator<RegisterViewModel>>(),
-                    services.GetRequiredService<IDialogService>(),
-                    services.GetRequiredService<AlertDialogViewModel>());
-    }
-
-    private static RegisterViewModel CreateRegisterViewModel(IServiceProvider services)
-    {
-        return new RegisterViewModel(
-                    services.GetRequiredService<IUserRepository>(),
-                    services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
-                    services.GetRequiredService<IPasswordHasher<User>>(),
-                    services.GetRequiredService<IDialogService>(),
-                    services.GetRequiredService<AlertDialogViewModel>(),
-                    services.GetRequiredService<YesNoDialogViewModel>());
     }
 }

@@ -1,13 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-                    xmlns:components="clr-namespace:PasswordBoxMVVM.Components;assembly=PasswordBoxMVVM"
-                    xmlns:converters="clr-namespace:SwiftResume.WPF.Converters">
-
-    <converters:LanguageEnumToString x:Key="LanguageEnumToString"/>
-    <converters:GenderEnumToString x:Key="GenderEnumToString"/>
-    <converters:CharacterCounter x:Key="CharacterCounter"/>
-    <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+                    xmlns:components="clr-namespace:PasswordBoxMVVM.Components;assembly=PasswordBoxMVVM">
 
     <!-- Colors -->
     <Color x:Key="PrimaryColor">#003366</Color>

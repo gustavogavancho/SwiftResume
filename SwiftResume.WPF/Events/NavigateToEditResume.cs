@@ -7,7 +7,7 @@ public class NavigateToEditResume : PubSubEvent<NavigateToEditResumeArgs>
 
 }
 
-public class NavigateToEditResumeArgs
+public struct NavigateToEditResumeArgs
 {
     public int Id { get; set; }
 }

@@ -11,8 +11,8 @@ using SwiftResume.DAL.EFCORE;
 namespace SwiftResume.DAL.EFCORE.Migrations
 {
     [DbContext(typeof(SwiftResumeDbContext))]
-    [Migration("20211130031416_ChangesPart1")]
-    partial class ChangesPart1
+    [Migration("20211208175227_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -135,7 +135,7 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         new
                         {
                             Id = 1,
-                            DateJoined = new DateTime(2021, 11, 29, 22, 14, 15, 896, DateTimeKind.Local).AddTicks(437),
+                            DateJoined = new DateTime(2021, 12, 8, 12, 52, 27, 369, DateTimeKind.Local).AddTicks(2916),
                             Email = "ggavancholeon@gmail.com",
                             PasswordHashed = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==",
                             Username = "GGAVANCHO"

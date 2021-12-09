@@ -2,6 +2,8 @@
 using SwiftResume.BIZ.Repositories;
 using SwiftResume.COMMON.Models;
 using SwiftResume.WPF.Core;
+using SwiftResume.WPF.CustomControls.Dialogs.Alert;
+using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Tab;
 using SwiftResume.WPF.Events;
 using SwiftResume.WPF.Wrapper;
@@ -13,10 +15,15 @@ public class PerfilViewModel : ViewModelBase, ITab
     #region Fields
 
     private readonly IResumeRepository _resumeRepository;
+    private readonly IDialogService _dialogService;
+    private readonly AlertDialogViewModel _alertDialogViewModel;
 
     #endregion
 
     #region Properties
+
+    public string Name { get; set; } = "Perfil";
+
 
     private Resume _resume;
     public Resume Resume
@@ -26,6 +33,7 @@ public class PerfilViewModel : ViewModelBase, ITab
         {
             _resume = value;
             OnPropertyChanged(nameof(Resume));
+            OnPropertyChanged(nameof(PerfilWrapper));
         }
     }
 
@@ -51,20 +59,24 @@ public class PerfilViewModel : ViewModelBase, ITab
             SaveCommand.RaiseCanExecuteChanged();
         }
     }
-    public string Name { get; set; }
 
     #endregion
 
     #region Commands
+
     public DelegateCommand SaveCommand { get; set; }
 
     #endregion
 
     #region Constuctor
     public PerfilViewModel(IEventAggregator eventAggregator,
-        IResumeRepository resumeRepository)
+        IResumeRepository resumeRepository,
+        IDialogService dialogService,
+        AlertDialogViewModel alertDialogViewModel)
     {
         _resumeRepository = resumeRepository;
+        _dialogService = dialogService;
+        _alertDialogViewModel = alertDialogViewModel;
 
         eventAggregator.GetEvent<NavigateToEditResume>()
             .Subscribe(OnNavigateToEditResume);
@@ -75,24 +87,6 @@ public class PerfilViewModel : ViewModelBase, ITab
     #endregion
 
     #region Methods
-    private bool CanSave()
-    {
-        return PerfilWrapper != null && !PerfilWrapper.HasErrors && HasChanges;
-    }
-
-    private async void OnSave()
-    {
-        PerfilWrapper.Validate();
-        if (!PerfilWrapper.HasErrors)
-        {
-            //Workaround
-            Resume.Nombres = PerfilWrapper.Nombres;
-            Resume.Apellidos = PerfilWrapper.Nombres;
-            Resume.Perfil = PerfilWrapper.Model;
-
-            await _resumeRepository.SaveAsync();
-        }
-    }
 
     public void OnLoad()
     {
@@ -100,6 +94,28 @@ public class PerfilViewModel : ViewModelBase, ITab
         HasChanges = false;
 
         InitializePerfil(Resume.Perfil);
+    }
+
+    private bool CanSave()
+    {
+        return PerfilWrapper != null && !PerfilWrapper.HasErrors && HasChanges;
+    }
+
+    private async void OnSave()
+    
+    {
+        PerfilWrapper.Validate();
+        if (!PerfilWrapper.HasErrors)
+        {
+            //Workaround
+            Resume.Nombres = PerfilWrapper.Nombres;
+            Resume.Apellidos = PerfilWrapper.Apellidos;
+            Resume.Perfil = PerfilWrapper.Model;
+
+            await _resumeRepository.SaveAsync();
+            _alertDialogViewModel.Message = "Se guardaron los cambios correctamente.";
+            _dialogService.OpenDialog(_alertDialogViewModel);
+        }
     }
 
     private async void OnNavigateToEditResume(NavigateToEditResumeArgs model)
@@ -112,7 +128,6 @@ public class PerfilViewModel : ViewModelBase, ITab
 
     private void InitializePerfil(Perfil perfil)
     {
-        Name = "Perfil";
         PerfilWrapper = new PerfilWrapper(perfil);
         PerfilWrapper.PropertyChanged += (s, e) =>
         {
@@ -128,6 +143,11 @@ public class PerfilViewModel : ViewModelBase, ITab
         //Workaround
         PerfilWrapper.Nombres = Resume.Nombres;
         PerfilWrapper.Apellidos = Resume.Apellidos;
+    }
+    
+    public void OnSelectionChanged()
+    {
+        HasChanges = true;
     }
 
     #endregion

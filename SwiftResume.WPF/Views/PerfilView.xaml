@@ -48,19 +48,47 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Row="0" Grid.Column="0" Margin="15,10,15,10" FocusManager.FocusedElement="{Binding ElementName=txtNombres}">
                     <TextBlock Text="Nombres:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                    <TextBox x:Name="txtNombres" Text="{Binding PerfilWrapper.Nombres, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" />
+                    <TextBox x:Name="txtNombres" Text="{Binding PerfilWrapper.Nombres, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:CallMethodAction TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext}"
+                                MethodName="OnSelectionChanged"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="1" Margin="15,10,15,10">
                     <TextBlock Text="Apellidos:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                    <TextBox Text="{Binding PerfilWrapper.Apellidos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                    <TextBox Text="{Binding PerfilWrapper.Apellidos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:CallMethodAction TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext}"
+                                MethodName="OnSelectionChanged"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="0" Margin="15,10,15,10">
                     <TextBlock Text="Género:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Genero}}}" SelectedItem="{Binding Resume.Genero, Converter={StaticResource GenderEnumToString}, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}"/>
+                    <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Genero}}}" SelectedItem="{Binding Resume.Genero, Converter={StaticResource GenderEnumToString}, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:CallMethodAction TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext}"
+                                MethodName="OnSelectionChanged"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="1" Margin="15,10,15,10">
                     <TextBlock Text="Idioma:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                    <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Language}}}" SelectedItem="{Binding Resume.Lenguaje, Converter={StaticResource LanguageEnumToString}, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}"/>
+                    <ComboBox ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:Language}}}" SelectedItem="{Binding Resume.Lenguaje, Converter={StaticResource LanguageEnumToString}, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:CallMethodAction TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext}"
+                                MethodName="OnSelectionChanged"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="15 10 15 10">
                     <TextBlock Text="Resumen:" Style="{StaticResource BlueTextTextBlockStyle}"/>
@@ -114,7 +142,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Button Style="{StaticResource ButtonSecondaryStyle}" 
                     Content="&#xE74E;" 
@@ -128,21 +155,6 @@
                     <ToolTip Style="{StaticResource ToolTipStyle}" Content="Guardar Datos"/>
                 </Button.ToolTip>
             </Button>
-            <Button Style="{StaticResource ButtonSecondaryStyle}"
-                    Content="&#xF78A;"
-                    Grid.Column="2"
-                    FontSize="18"
-                    Foreground="White"
-                    HorizontalAlignment="Right"
-                    Command="{Binding ReturnCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}">
-                <Button.ToolTip>
-                    <ToolTip Style="{StaticResource ToolTipStyle}" Content="Cancelar"/>
-                </Button.ToolTip>
-            </Button>
         </Grid>
-
     </Grid>
-
-
 </UserControl>

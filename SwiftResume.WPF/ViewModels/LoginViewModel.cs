@@ -12,22 +12,22 @@ public class LoginViewModel : ViewModelBase
     #region Fields
 
     private readonly IAuthenticator _authenticator;
-    private readonly IRenavigator _loginRenavigator;
-    private readonly IRenavigator _registerRenavigator;
     private readonly IDialogService _dialogService;
     private readonly AlertDialogViewModel _alertDialogViewModel;
+    private readonly ViewModelDelegateRenavigator<ResumeViewModel> _loginRenavigator;
+    private readonly ViewModelDelegateRenavigator<RegisterViewModel> _registerRenavigator;
 
     #endregion
 
     #region Properties
 
+    public bool CanLogin => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password);
+
+
     private string _username;
     public string Username
     {
-        get
-        {
-            return _username;
-        }
+        get => _username;
         set
         {
             _username = value;
@@ -47,7 +47,6 @@ public class LoginViewModel : ViewModelBase
             OnPropertyChanged(nameof(CanLogin));
         }
     }
-    public bool CanLogin => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password);
 
     #endregion
 
@@ -60,16 +59,16 @@ public class LoginViewModel : ViewModelBase
 
     #region Constructors
     public LoginViewModel(IAuthenticator authenticator,
-        IRenavigator loginRenavigator,
-        IRenavigator registerRenavigator,
         IDialogService dialogService,
-        AlertDialogViewModel alertDialogViewModel)
+        AlertDialogViewModel alertDialogViewModel,
+        ViewModelDelegateRenavigator<ResumeViewModel> loginRenavigator,
+        ViewModelDelegateRenavigator<RegisterViewModel> registerRenavigator)
     {
         _authenticator = authenticator;
-        _loginRenavigator = loginRenavigator;
-        _registerRenavigator = registerRenavigator;
         _dialogService = dialogService;
         _alertDialogViewModel = alertDialogViewModel;
+        _loginRenavigator = loginRenavigator;
+        _registerRenavigator = registerRenavigator;
 
         LoginCommand = new DelegateCommand(OnLogin, CanLoginin);
         ViewRegisterCommand = new DelegateCommand(OnViewRegister);
@@ -97,6 +96,11 @@ public class LoginViewModel : ViewModelBase
             await _authenticator.Login(Username, Password);
 
             _loginRenavigator.Renavigate();
+
+            //Work around
+            Username = "";
+            Password = "";
+
         }
         catch (UserNotFoundException ex)
         {
@@ -108,15 +112,15 @@ public class LoginViewModel : ViewModelBase
         }
     }
 
+    private bool CanLoginin()
+    {
+        return CanLogin;
+    }
+
     private void SetErrorDialog(Exception ex)
     {
         _alertDialogViewModel.Message = ex.Message;
         _dialogService.OpenDialog(_alertDialogViewModel);
-    }
-
-    private bool CanLoginin()
-    {
-        return CanLogin;
     }
 
     #endregion

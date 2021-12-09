@@ -13,13 +13,12 @@ namespace SwiftResume.WPF.ViewModels;
 public class RegisterViewModel : ViewModelBase
 {
     #region Fields
-
-    private readonly IUserRepository _userRepository;
-    private readonly IRenavigator _loginRenavigator;
     private readonly IPasswordHasher<User> _passwordHasher;
+    private readonly IUserRepository _userRepository;
     private readonly IDialogService _dialogService;
     private readonly AlertDialogViewModel _alertDialogViewModel;
     private readonly YesNoDialogViewModel _yesNoDialogViewModel;
+    private readonly ViewModelDelegateRenavigator<LoginViewModel> _loginRenavigator;
 
     #endregion
 
@@ -51,7 +50,6 @@ public class RegisterViewModel : ViewModelBase
         }
     }
 
-
     #endregion
 
     #region Commands
@@ -63,19 +61,20 @@ public class RegisterViewModel : ViewModelBase
 
     #region Constructor
 
-    public RegisterViewModel(IUserRepository userRepository,
-        IRenavigator loginRenavigator,
-        IPasswordHasher<User> passwordHasher,
+    public RegisterViewModel(IPasswordHasher<User> passwordHasher, 
+        IUserRepository userRepository,
         IDialogService dialogService,
         AlertDialogViewModel alertDialogViewModel,
-        YesNoDialogViewModel yesNoDialogViewModel)
+        YesNoDialogViewModel yesNoDialogViewModel,
+        ViewModelDelegateRenavigator<LoginViewModel> loginRenavigator)
     {
-        _userRepository = userRepository;
-        _loginRenavigator = loginRenavigator;
         _passwordHasher = passwordHasher;
+        _userRepository = userRepository;
         _dialogService = dialogService;
         _alertDialogViewModel = alertDialogViewModel;
         _yesNoDialogViewModel = yesNoDialogViewModel;
+        _loginRenavigator = loginRenavigator;
+
         RegisterCommand = new DelegateCommand(OnRegister, CanRegisterUser);
         ViewLoginCommand = new DelegateCommand(OnViewLogin);
     }
@@ -83,18 +82,14 @@ public class RegisterViewModel : ViewModelBase
     #endregion
 
     #region Methods
-
-    private void OnViewLogin()
+    public void OnLoad()
     {
-        if (HasChanges) 
-        {
-            _yesNoDialogViewModel.Message = $"Hay cambios pendientes, al cerrar la ventana se borrarán los cambios, ¿Desea cerrar la ventana?";
-            var dialog = _dialogService.OpenDialog(_yesNoDialogViewModel);
-            if (dialog == DialogResults.No)
-                return;
-        }
-        _userRepository.Remove(UserWrapper.Model);
-        _loginRenavigator.Renavigate();
+        //Restore has changes to false
+        HasChanges = false;
+
+        var user = CreateNewUser();
+
+        InitializeUser(user);
     }
 
     private async void OnRegister()
@@ -128,16 +123,6 @@ public class RegisterViewModel : ViewModelBase
         return UserWrapper != null && !UserWrapper.HasErrors && HasChanges;
     }
 
-    public void OnLoad() 
-    {
-        //Restore has changes to false
-        HasChanges = false;
-
-        var user = CreateNewUser();
-
-        InitializeUser(user);
-    }
-
     private User CreateNewUser()
     {
         var user = new User();
@@ -160,6 +145,18 @@ public class RegisterViewModel : ViewModelBase
         RegisterCommand.RaiseCanExecuteChanged();
     }
 
+    private void OnViewLogin()
+    {
+        if (HasChanges)
+        {
+            _yesNoDialogViewModel.Message = $"Hay cambios pendientes, al cerrar la ventana se borrarán los cambios, ¿Desea cerrar la ventana?";
+            var dialog = _dialogService.OpenDialog(_yesNoDialogViewModel);
+            if (dialog == DialogResults.No)
+                return;
+        }
+        _userRepository.Remove(UserWrapper.Model);
+        _loginRenavigator.Renavigate();
+    }
 
     #endregion
 }
