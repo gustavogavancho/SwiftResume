@@ -118,9 +118,9 @@ public class PerfilViewModel : ViewModelBase, ITab
         }
     }
 
-    private async void OnNavigateToEditResume(NavigateToEditResumeArgs model)
+    private async void OnNavigateToEditResume(int id)
     {
-        Resume = await _resumeRepository.GetResumeWithProfile(model.Id);
+        Resume = await _resumeRepository.GetResumeWithProfile(id);
 
         if (Resume?.Perfil == null)
             Resume.Perfil = new Perfil();

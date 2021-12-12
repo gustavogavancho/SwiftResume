@@ -85,16 +85,22 @@
                                         <Run Text="{Binding Lenguaje}"/>
                                 </TextBlock>
                                 <StackPanel Grid.Row="4" HorizontalAlignment="Right" Orientation="Horizontal" Margin ="10 0 10 0">
-                                    <Button Style="{StaticResource ButtonPrimaryStyle}" FontSize="16" Content="&#xE74D;" Height="35" Width="35"
-                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.DeleteCommand}">
+                                    <Button Style="{StaticResource ButtonPrimaryStyle}" FontSize="16" Content="&#xE9F9;" Height="35" Width="35"
+                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.ReportCommand}">
                                         <Button.ToolTip>
-                                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Curriculum"/>
+                                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Ver Curriculum"/>
                                         </Button.ToolTip>
                                     </Button>
                                     <Button Style="{StaticResource ButtonPrimaryStyle}" FontSize="16" Content="&#xEB7E;" Height="35" Width="35"
                                             Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.EditCommand}">
                                         <Button.ToolTip>
                                             <ToolTip Style="{StaticResource ToolTipStyle}" Content="Editar Curriculum"/>
+                                        </Button.ToolTip>
+                                    </Button>
+                                    <Button Style="{StaticResource ButtonPrimaryStyle}" FontSize="16" Content="&#xE74D;" Height="35" Width="35"
+                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.DeleteCommand}">
+                                        <Button.ToolTip>
+                                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Curriculum"/>
                                         </Button.ToolTip>
                                     </Button>
                                 </StackPanel>

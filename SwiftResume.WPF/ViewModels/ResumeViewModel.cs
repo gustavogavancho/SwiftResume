@@ -5,6 +5,7 @@ using SwiftResume.COMMON.Enums;
 using SwiftResume.COMMON.Models;
 using SwiftResume.WPF.Core;
 using SwiftResume.WPF.CustomControls.Dialogs.Alert;
+using SwiftResume.WPF.CustomControls.Dialogs.Report;
 using SwiftResume.WPF.CustomControls.Dialogs.Resume;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
@@ -22,6 +23,7 @@ public class ResumeViewModel : ViewModelBase
     private readonly IDialogService _dialogService;
     private readonly IResumeRepository _resumeRepository;
     private readonly ResumeDialogViewModel _resumeDialogViewModel;
+    private readonly ReportDialogViewModel _reportDialogViewModel;
     private readonly YesNoDialogViewModel _yesNoDialogViewModel;
     private readonly AlertDialogViewModel _alertDialogViewModel;
     private readonly IUserStored _userStored;
@@ -61,6 +63,7 @@ public class ResumeViewModel : ViewModelBase
     public DelegateCommand AddCommand { get; private set; }
     public DelegateCommand EditCommand { get; private set; }
     public DelegateCommand DeleteCommand { get; private set; }
+    public DelegateCommand ReportCommand { get; private set; }
 
     #endregion
 
@@ -69,6 +72,7 @@ public class ResumeViewModel : ViewModelBase
     public ResumeViewModel(IResumeRepository resumeRepository,
         IDialogService dialogService,
         ResumeDialogViewModel resumeDialogViewModel,
+        ReportDialogViewModel reportDialogViewModel,
         YesNoDialogViewModel yesNoDialogViewModel,
         AlertDialogViewModel alertDialogViewModel,
         IUserStored userStored,
@@ -78,6 +82,7 @@ public class ResumeViewModel : ViewModelBase
         _resumeRepository = resumeRepository;
         _dialogService = dialogService;
         _resumeDialogViewModel = resumeDialogViewModel;
+        _reportDialogViewModel = reportDialogViewModel;
         _yesNoDialogViewModel = yesNoDialogViewModel;
         _alertDialogViewModel = alertDialogViewModel;
         _userStored = userStored;
@@ -87,6 +92,7 @@ public class ResumeViewModel : ViewModelBase
         AddCommand = new DelegateCommand(OnAdd);
         EditCommand = new DelegateCommand(OnEdit);
         DeleteCommand = new DelegateCommand(OnDelete);
+        ReportCommand = new DelegateCommand(OnReport);
     }
 
     #endregion
@@ -109,10 +115,17 @@ public class ResumeViewModel : ViewModelBase
         }
     }
 
+    private void OnReport()
+    {
+        _eventAggregator.GetEvent<NavigateToReportResume>().Publish(Resume.Id);
+
+        _dialogService.OpenDialog(_reportDialogViewModel);
+    }
+
     private void OnEdit()
     {
         _editNavigator.Renavigate();
-        _eventAggregator.GetEvent<NavigateToEditResume>().Publish(new NavigateToEditResumeArgs { Id = Resume.Id });
+        _eventAggregator.GetEvent<NavigateToEditResume>().Publish(Resume.Id);
         _eventAggregator.GetEvent<BackButtonVisibility>().Publish();
     }
 

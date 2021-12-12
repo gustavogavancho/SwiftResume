@@ -92,7 +92,7 @@
                 </StackPanel>
                 <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="15 10 15 10">
                     <TextBlock Text="Resumen:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-                    <TextBox x:Name="txtResumen" Text="{Binding PerfilWrapper.Resumen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" Height="120"/>
+                    <TextBox x:Name="txtResumen" Text="{Binding PerfilWrapper.Resumen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" Height="120" TextWrapping="Wrap"/>
                     <TextBlock Text="{Binding Text, UpdateSourceTrigger=PropertyChanged, ElementName=txtResumen, Converter={StaticResource CharacterCounter}}" HorizontalAlignment="Right"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.Column="0" Margin="15,10,15,10">

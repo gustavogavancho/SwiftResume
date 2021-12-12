@@ -2,7 +2,4 @@
 
 namespace SwiftResume.WPF.Events;
 
-public class BackButtonVisibility : PubSubEvent
-{
-
-}
+public class BackButtonVisibility : PubSubEvent {}

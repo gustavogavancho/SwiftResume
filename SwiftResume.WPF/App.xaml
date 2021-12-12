@@ -7,6 +7,7 @@
              xmlns:alert="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Alert"
              xmlns:yesno="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.YesNo"
              xmlns:resume="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Resume"
+             xmlns:report="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Report"
              Startup="Application_Startup">
 
     <Application.Resources>
@@ -47,7 +48,11 @@
             <DataTemplate DataType="{x:Type resume:ResumeDialogViewModel}">
                 <resume:ResumeDialogView/>
             </DataTemplate>
-            
+
+            <DataTemplate DataType="{x:Type report:ReportDialogViewModel}">
+                <report:ReportDialogView/>
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

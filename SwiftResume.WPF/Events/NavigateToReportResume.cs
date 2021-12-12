@@ -2,4 +2,4 @@
 
 namespace SwiftResume.WPF.Events;
 
-public class NavigateToEditResume : PubSubEvent<int> {}
+public class NavigateToReportResume : PubSubEvent<int> { }
