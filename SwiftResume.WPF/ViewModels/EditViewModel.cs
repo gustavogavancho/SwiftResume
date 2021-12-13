@@ -15,9 +15,10 @@ public class EditViewModel : ViewModelBase
 
     #region Constructor
 
-    public EditViewModel(PerfilViewModel perfilViewModel)
+    public EditViewModel(PerfilViewModel perfilViewModel, IdiomasHabilidadesSoftwareViewModel idiomasHabilidadesSoftwareViewModel)
     {
         Tabs.Add(perfilViewModel);
+        Tabs.Add(idiomasHabilidadesSoftwareViewModel);
         Tab = Tabs.FirstOrDefault();
     }
 

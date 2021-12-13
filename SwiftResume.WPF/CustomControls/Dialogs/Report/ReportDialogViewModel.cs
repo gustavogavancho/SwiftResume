@@ -2,6 +2,7 @@
 using SwiftResume.BIZ.Repositories;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.Events;
+using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using Model = SwiftResume.COMMON.Models;
@@ -34,6 +35,7 @@ public class ReportDialogViewModel : DialogViewModelBase<Model.Resume>
 
     public DelegateCommand<IDialogWindow> CancelCommand { get; private set; }
     public DelegateCommand<IDocumentPaginatorSource> PrintCommand { get; private set; }
+    public DelegateCommand<string> OpenHyperlinkCommand { get; private set; }
 
     #endregion
 
@@ -48,6 +50,7 @@ public class ReportDialogViewModel : DialogViewModelBase<Model.Resume>
 
         CancelCommand = new DelegateCommand<IDialogWindow>(OnCancel);
         PrintCommand = new DelegateCommand<IDocumentPaginatorSource>(OnPrint);
+        OpenHyperlinkCommand = new DelegateCommand<string>(OnHyperlink);
     }
 
     #endregion
@@ -66,6 +69,11 @@ public class ReportDialogViewModel : DialogViewModelBase<Model.Resume>
         {
             pd.PrintDocument(flowDocument.DocumentPaginator, "FlowDocument");
         }
+    }
+
+    private void OnHyperlink(string uri)
+    {
+        Process.Start(new ProcessStartInfo("cmd", $"/c start {uri}") { CreateNoWindow = true });
     }
 
     private void OnCancel(IDialogWindow window)

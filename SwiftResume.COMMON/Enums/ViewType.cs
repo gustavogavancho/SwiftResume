@@ -5,5 +5,6 @@ public enum ViewType : short
     Resume,
     Login,
     Edit,
-    Perfil
+    Perfil,
+    IdiomasHabilidadesSoftware
 }

@@ -37,6 +37,10 @@
                 <views:PerfilView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModels:IdiomasHabilidadesSoftwareViewModel}">
+                <views:IdiomasHabilidadesSoftwareView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type alert:AlertDialogViewModel}">
                 <alert:AlertDialogView/>
             </DataTemplate>

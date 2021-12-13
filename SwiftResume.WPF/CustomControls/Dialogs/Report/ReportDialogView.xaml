@@ -104,7 +104,7 @@
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="LinkedIn:" FontWeight="Bold"/>
                             <LineBreak/>
-                            <Hyperlink NavigateUri="{Binding Resume.Perfil.Linkedin}">
+                            <Hyperlink NavigateUri="{Binding Resume.Perfil.Linkedin}" Command="{Binding OpenHyperlinkCommand}" CommandParameter="{Binding Resume.Perfil.Linkedin}">
                                 <Hyperlink.Inlines>
                                     <Run Text="{Binding Resume.Perfil.Linkedin}"/>
                                 </Hyperlink.Inlines>
@@ -115,7 +115,7 @@
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="GitHub:" FontWeight="Bold"/>
                             <LineBreak/>
-                            <Hyperlink NavigateUri="{Binding Resume.Perfil.Github}">
+                            <Hyperlink NavigateUri="{Binding Resume.Perfil.Github}" Command="{Binding OpenHyperlinkCommand}" CommandParameter="{Binding Resume.Perfil.Github}">
                                 <Hyperlink.Inlines>
                                     <Run Text="{Binding Resume.Perfil.Github}"/>
                                 </Hyperlink.Inlines>
@@ -126,7 +126,7 @@
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="Blog:" FontWeight="Bold"/>
                             <LineBreak/>
-                            <Hyperlink NavigateUri="{Binding Resume.Perfil.Blog}">
+                            <Hyperlink NavigateUri="{Binding Resume.Perfil.Blog}" Command="{Binding OpenHyperlinkCommand}" CommandParameter="{Binding Resume.Perfil.Blog}">
                                 <Hyperlink.Inlines>
                                     <Run Text="{Binding Resume.Perfil.Blog}"/>
                                 </Hyperlink.Inlines>
@@ -137,7 +137,7 @@
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="StackOverflow:" FontWeight="Bold"/>
                             <LineBreak/>
-                            <Hyperlink NavigateUri="{Binding Resume.Perfil.StackOverflow}">
+                            <Hyperlink NavigateUri="{Binding Resume.Perfil.StackOverflow}" Command="{Binding OpenHyperlinkCommand}" CommandParameter="{Binding Resume.Perfil.StackOverflow}">
                                 <Hyperlink.Inlines>
                                     <Run Text="{Binding Resume.Perfil.StackOverflow}"/>
                                 </Hyperlink.Inlines>
