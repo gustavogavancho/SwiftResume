@@ -7,6 +7,167 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Margin="5" Padding="5" BorderBrush="{StaticResource PrimaryBrush}">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>
+                        <Run Text="&#xE775;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource PrimaryBrush}" FontSize="24" FontWeight="Bold"/>
+                        <Run Text="Idiomas" Foreground="{StaticResource PrimaryBrush}" FontWeight="Bold" BaselineAlignment="Center"/>
+                    </TextBlock>
+                </StackPanel>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ListView BorderBrush="{StaticResource PrimaryBrush}">
+
+                </ListView>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource ButtonSecondaryStyle}" 
+                            Content="&#xE710;" 
+                            Grid.Column="1" 
+                            FontSize="18"
+                            Foreground="White"
+                            HorizontalAlignment="Right" 
+                            Command="{Binding AddIdiomaCommand}"
+                            IsDefault="True">
+                        <Button.ToolTip>
+                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Idioma"/>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Style="{StaticResource ButtonSecondaryStyle}" 
+                            Content="&#xE74D;" 
+                            Grid.Column="2" 
+                            FontSize="18"
+                            Foreground="White"
+                            HorizontalAlignment="Right" 
+                            Command="{Binding DeleteIdiomaCommand}"
+                            IsDefault="True">
+                        <Button.ToolTip>
+                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Idioma"/>
+                        </Button.ToolTip>
+                    </Button>
+                </Grid>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Margin="5" Padding="5" Grid.Column="1" BorderBrush="{StaticResource PrimaryBrush}">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>
+                        <Run Text="&#xED58;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource PrimaryBrush}" FontSize="24" FontWeight="Bold"/>
+                        <Run Text="Habilidades" Foreground="{StaticResource PrimaryBrush}" FontWeight="Bold" BaselineAlignment="Center"/>
+                    </TextBlock>
+                </StackPanel>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ListView BorderBrush="{StaticResource PrimaryBrush}">
+
+                </ListView>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource ButtonSecondaryStyle}" 
+                            Content="&#xE710;" 
+                            Grid.Column="1" 
+                            FontSize="18"
+                            Foreground="White"
+                            HorizontalAlignment="Right" 
+                            Command="{Binding AddHabilidadCommand}"
+                            IsDefault="True">
+                        <Button.ToolTip>
+                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Habilidad"/>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Style="{StaticResource ButtonSecondaryStyle}" 
+                            Content="&#xE74D;" 
+                            Grid.Column="2" 
+                            FontSize="18"
+                            Foreground="White"
+                            HorizontalAlignment="Right" 
+                            Command="{Binding DeleteHabilidadCommand}"
+                            IsDefault="True">
+                        <Button.ToolTip>
+                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Habilidad"/>
+                        </Button.ToolTip>
+                    </Button>
+                </Grid>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Margin="5" Padding="5" Grid.Row="1" BorderBrush="{StaticResource PrimaryBrush}">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>
+                        <Run Text="&#xE703;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource PrimaryBrush}" FontSize="24" FontWeight="Bold"/>
+                        <Run Text="Software" Foreground="{StaticResource PrimaryBrush}" FontWeight="Bold" BaselineAlignment="Center"/>
+                    </TextBlock>
+                </StackPanel>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ListView BorderBrush="{StaticResource PrimaryBrush}">
+
+                </ListView>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource ButtonSecondaryStyle}" 
+                            Content="&#xE710;" 
+                            Grid.Column="1" 
+                            FontSize="18"
+                            Foreground="White"
+                            HorizontalAlignment="Right" 
+                            Command="{Binding AddSoftwareCommand}"
+                            IsDefault="True">
+                        <Button.ToolTip>
+                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Software"/>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Style="{StaticResource ButtonSecondaryStyle}" 
+                            Content="&#xE74D;" 
+                            Grid.Column="2" 
+                            FontSize="18"
+                            Foreground="White"
+                            HorizontalAlignment="Right" 
+                            Command="{Binding DeleteSoftwareCommand}"
+                            IsDefault="True">
+                        <Button.ToolTip>
+                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Software"/>
+                        </Button.ToolTip>
+                    </Button>
+                </Grid>
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>

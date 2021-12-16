@@ -17,7 +17,9 @@
         </Grid.RowDefinitions>
         <TabControl Grid.Row="0" Margin="10 10 10 10"
                     ItemsSource="{Binding Tabs}"
-                    SelectedItem="{Binding Tab}">
+                    SelectedItem="{Binding Tab}"
+                    BorderBrush="{StaticResource PrimaryBrush}"
+                    BorderThickness="2">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
