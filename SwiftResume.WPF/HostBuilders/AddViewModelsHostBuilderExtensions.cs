@@ -1,5 +1,6 @@
 ﻿using SwiftResume.WPF.Core;
 using SwiftResume.WPF.CustomControls.Dialogs.Alert;
+using SwiftResume.WPF.CustomControls.Dialogs.Idioma;
 using SwiftResume.WPF.CustomControls.Dialogs.Report;
 using SwiftResume.WPF.CustomControls.Dialogs.Resume;
 using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
@@ -26,6 +27,7 @@ public static class AddViewModelsHostBuilderExtensions
 
             services.AddSingleton<ResumeDialogViewModel>();
             services.AddSingleton<ReportDialogViewModel>();
+            services.AddSingleton<IdiomaDialogViewModel>();
             services.AddSingleton<AlertDialogViewModel>();
             services.AddSingleton<YesNoDialogViewModel>();
 

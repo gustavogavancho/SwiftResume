@@ -84,6 +84,7 @@ public class PerfilViewModel : ViewModelBase, ITab
         SaveCommand = new DelegateCommand(OnSave, CanSave);
     }
 
+
     #endregion
 
     #region Methods

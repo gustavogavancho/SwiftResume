@@ -8,6 +8,7 @@
              xmlns:yesno="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.YesNo"
              xmlns:resume="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Resume"
              xmlns:report="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Report"
+             xmlns:idioma="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Idioma"
              Startup="Application_Startup">
 
     <Application.Resources>
@@ -55,6 +56,10 @@
 
             <DataTemplate DataType="{x:Type report:ReportDialogViewModel}">
                 <report:ReportDialogView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type idioma:IdiomaDialogViewModel}">
+                <idioma:IdiomaDialogView/>
             </DataTemplate>
 
         </ResourceDictionary>
