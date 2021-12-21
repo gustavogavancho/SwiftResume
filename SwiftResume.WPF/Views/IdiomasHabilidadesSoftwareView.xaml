@@ -41,17 +41,18 @@
                 </Grid.RowDefinitions>
                 <ListView ItemsSource="{Binding Idiomas}"
                           SelectedItem="{Binding Idioma}"
-                          BorderBrush="{StaticResource PrimaryBrush}">
+                          BorderBrush="{StaticResource PrimaryBrush}"
+                          Background="{StaticResource PrimaryBrush}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Background="{StaticResource PrimaryBrush}">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Foreground="{StaticResource SecondaryBrush}">
                                     <Run Text="{Binding Nombre}" FontWeight="Bold"/>
-                                    <Run Text="{Binding Nivel}" FontWeight="Bold" Foreground="{StaticResource TertiaryBrush}"/>
+                                    <Run Text="{Binding Nivel}" FontWeight="Bold" />
                                 </TextBlock>
                             </Grid>
                         </DataTemplate>

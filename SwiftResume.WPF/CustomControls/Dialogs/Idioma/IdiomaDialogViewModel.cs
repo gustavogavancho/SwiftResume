@@ -19,6 +19,9 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Idioma
 
         #region Properties
 
+        public int ResumeId { get; set; }
+
+
         private IdiomaWrapper _idiomaWrapper;
         public IdiomaWrapper IdiomaWrapper
         {
@@ -128,6 +131,7 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Idioma
         private Model.Idioma CreateNewIdioma()
         {
             var idioma = new Model.Idioma();
+            idioma.ResumeId = ResumeId;
             _idiomaRepository.Add(idioma);
             return idioma;
         }

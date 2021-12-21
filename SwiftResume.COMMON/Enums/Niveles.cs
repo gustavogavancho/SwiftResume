@@ -4,5 +4,6 @@ public enum Niveles
 {
     Básico,
     Intermedio,
-    Avanzado
+    Avanzado,
+    Nativo
 }
