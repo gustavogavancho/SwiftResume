@@ -8,29 +8,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:CallMethodAction TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext}"
-                                MethodName="OnLoad"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="GroupedItems" Source="{Binding Habilidades}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Tipo" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
         <GroupBox Margin="5" Padding="5" BorderBrush="{StaticResource PrimaryBrush}">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock>
-                        <Run Text="&#xE775;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource PrimaryBrush}" FontSize="24" FontWeight="Bold"/>
-                        <Run Text="Idiomas" Foreground="{StaticResource PrimaryBrush}" FontWeight="Bold" BaselineAlignment="Center"/>
+                        <Run Text="&#xE726;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource PrimaryBrush}" FontSize="24" FontWeight="Bold"/>
+                        <Run Text="Listado Idiomas/Habilidades/Software" Foreground="{StaticResource PrimaryBrush}" FontWeight="Bold" BaselineAlignment="Center"/>
                     </TextBlock>
                 </StackPanel>
             </GroupBox.Header>
@@ -39,10 +35,40 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <ListView ItemsSource="{Binding Idiomas}"
-                          SelectedItem="{Binding Idioma}"
+                <ListView ItemsSource="{Binding Source={StaticResource GroupedItems}}"
+                          SelectedItem="{Binding Habilidad}"
                           BorderBrush="{StaticResource PrimaryBrush}"
                           Background="{StaticResource PrimaryBrush}">
+                    <ListView.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.ContainerStyle>
+                                <Style TargetType="{x:Type GroupItem}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <Expander
+                                            BorderThickness="0"
+                                            DataContext="{Binding Items}"
+                                            IsExpanded="True">
+                                                    <Expander.Header>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock VerticalAlignment="Top"
+                                                                       FontSize="22"
+                                                                       FontWeight="Bold"
+                                                                       Foreground="{StaticResource SecondaryBrush}">
+                                                                <Run Text="{Binding Tipo}" />
+                                                            </TextBlock>
+                                                        </StackPanel>
+                                                    </Expander.Header>
+                                                    <ItemsPresenter />
+                                                </Expander>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </GroupStyle.ContainerStyle>
+                        </GroupStyle>
+                    </ListView.GroupStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -51,8 +77,11 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Foreground="{StaticResource SecondaryBrush}">
-                                    <Run Text="{Binding Nombre}" FontWeight="Bold"/>
-                                    <Run Text="{Binding Nivel}" FontWeight="Bold" />
+                                    <Run Text="Descripción:" FontWeight="Bold"/>
+                                    <Run Text="{Binding Nombre}" FontWeight="Light"/>
+                                    <Run Text="/"/>
+                                    <Run Text="Nivel:" FontWeight="Bold"/>
+                                    <Run Text="{Binding Nivel}" FontWeight="Light" />
                                 </TextBlock>
                             </Grid>
                         </DataTemplate>
@@ -63,56 +92,6 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource ButtonSecondaryStyle}" 
-                            Content="&#xE710;" 
-                            Grid.Column="1" 
-                            FontSize="18"
-                            Foreground="White"
-                            HorizontalAlignment="Right" 
-                            Command="{Binding AddIdiomaCommand}"
-                            IsDefault="True">
-                        <Button.ToolTip>
-                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Idioma"/>
-                        </Button.ToolTip>
-                    </Button>
-                    <Button Style="{StaticResource ButtonSecondaryStyle}" 
-                            Content="&#xE74D;" 
-                            Grid.Column="2" 
-                            FontSize="18"
-                            Foreground="White"
-                            HorizontalAlignment="Right" 
-                            Command="{Binding DeleteIdiomaCommand}"
-                            IsDefault="True">
-                        <Button.ToolTip>
-                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Idioma"/>
-                        </Button.ToolTip>
-                    </Button>
-                </Grid>
-            </Grid>
-        </GroupBox>
-
-        <GroupBox Margin="5" Padding="5" Grid.Column="1" BorderBrush="{StaticResource PrimaryBrush}">
-            <GroupBox.Header>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock>
-                        <Run Text="&#xED58;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource PrimaryBrush}" FontSize="24" FontWeight="Bold"/>
-                        <Run Text="Habilidades" Foreground="{StaticResource PrimaryBrush}" FontWeight="Bold" BaselineAlignment="Center"/>
-                    </TextBlock>
-                </StackPanel>
-            </GroupBox.Header>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <ListView BorderBrush="{StaticResource PrimaryBrush}">
-
-                </ListView>
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
@@ -125,74 +104,36 @@
                             Command="{Binding AddHabilidadCommand}"
                             IsDefault="True">
                         <Button.ToolTip>
-                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Habilidad"/>
+                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Idioma/Habilidad/Software"/>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Style="{StaticResource ButtonSecondaryStyle}" 
+                            Content="&#xE70F;" 
+                            Grid.Column="2" 
+                            FontSize="18"
+                            Foreground="White"
+                            HorizontalAlignment="Right" 
+                            Command="{Binding EditHabilidadCommand}"
+                            IsDefault="True">
+                        <Button.ToolTip>
+                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Editar Idioma/Habilidad/Software"/>
                         </Button.ToolTip>
                     </Button>
                     <Button Style="{StaticResource ButtonSecondaryStyle}" 
                             Content="&#xE74D;" 
-                            Grid.Column="2" 
+                            Grid.Column="3" 
                             FontSize="18"
                             Foreground="White"
                             HorizontalAlignment="Right" 
                             Command="{Binding DeleteHabilidadCommand}"
                             IsDefault="True">
                         <Button.ToolTip>
-                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Habilidad"/>
+                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Idioma/Habilidad/Software"/>
                         </Button.ToolTip>
                     </Button>
                 </Grid>
             </Grid>
         </GroupBox>
 
-        <GroupBox Margin="5" Padding="5" Grid.Row="1" BorderBrush="{StaticResource PrimaryBrush}">
-            <GroupBox.Header>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock>
-                        <Run Text="&#xE703;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource PrimaryBrush}" FontSize="24" FontWeight="Bold"/>
-                        <Run Text="Software" Foreground="{StaticResource PrimaryBrush}" FontWeight="Bold" BaselineAlignment="Center"/>
-                    </TextBlock>
-                </StackPanel>
-            </GroupBox.Header>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <ListView BorderBrush="{StaticResource PrimaryBrush}">
-
-                </ListView>
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource ButtonSecondaryStyle}" 
-                            Content="&#xE710;" 
-                            Grid.Column="1" 
-                            FontSize="18"
-                            Foreground="White"
-                            HorizontalAlignment="Right" 
-                            Command="{Binding AddSoftwareCommand}"
-                            IsDefault="True">
-                        <Button.ToolTip>
-                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Software"/>
-                        </Button.ToolTip>
-                    </Button>
-                    <Button Style="{StaticResource ButtonSecondaryStyle}" 
-                            Content="&#xE74D;" 
-                            Grid.Column="2" 
-                            FontSize="18"
-                            Foreground="White"
-                            HorizontalAlignment="Right" 
-                            Command="{Binding DeleteSoftwareCommand}"
-                            IsDefault="True">
-                        <Button.ToolTip>
-                            <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Software"/>
-                        </Button.ToolTip>
-                    </Button>
-                </Grid>
-            </Grid>
-        </GroupBox>
     </Grid>
 </UserControl>

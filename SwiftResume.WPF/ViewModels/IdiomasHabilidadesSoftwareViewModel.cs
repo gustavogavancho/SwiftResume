@@ -4,7 +4,7 @@ using SwiftResume.COMMON.Enums;
 using SwiftResume.COMMON.Models;
 using SwiftResume.WPF.Core;
 using SwiftResume.WPF.CustomControls.Dialogs.Alert;
-using SwiftResume.WPF.CustomControls.Dialogs.Idioma;
+using SwiftResume.WPF.CustomControls.Dialogs.Habilidad;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
 using SwiftResume.WPF.CustomControls.Tab;
@@ -18,11 +18,12 @@ public class IdiomasHabilidadesSoftwareViewModel : ViewModelBase, ITab
 {
     #region Fields
 
-    private readonly IIdiomaRepository _idiomaRepository;
+    private readonly IHabilidadRepository _habilidadRepository;
     private readonly IDialogService _dialogService;
     private readonly YesNoDialogViewModel _yesNoDialogViewModel;
     private readonly AlertDialogViewModel _alertDialogViewModel;
-    private readonly IdiomaDialogViewModel _idiomaDialogViewModel;
+    private readonly HabilidadDialogViewModel _habilidadDialogViewModel;
+    private readonly IEventAggregator _eventAggregator;
 
     #endregion
 
@@ -30,25 +31,27 @@ public class IdiomasHabilidadesSoftwareViewModel : ViewModelBase, ITab
 
     public string Name { get; set; } = "Idiomas/Habilidades/Software";
 
-    private ObservableCollection<Idioma> _idiomas = new();
-    public ObservableCollection<Idioma> Idiomas
+    private ObservableCollection<Habilidad> _habilidades;
+    public ObservableCollection<Habilidad> Habilidades
     {
-        get => _idiomas;
+        get => _habilidades;
         set 
         {
-            _idiomas = value;
-            OnPropertyChanged(nameof(Idiomas));
+            _habilidades = value;
+            OnPropertyChanged(nameof(Habilidades));
         }
     }
 
-    private Idioma _idioma;
-    public Idioma Idioma
+    private Habilidad _habilidad;
+    public Habilidad Habilidad
     {
-        get => _idioma;
+        get => _habilidad;
         set 
         {
-            _idioma = value;
-            OnPropertyChanged(nameof(Idioma));
+            _habilidad = value;
+            OnPropertyChanged(nameof(Habilidad));
+            DeleteHabilidadCommand.RaiseCanExecuteChanged();
+            EditHabilidadCommand.RaiseCanExecuteChanged();
         }
     }
 
@@ -67,81 +70,94 @@ public class IdiomasHabilidadesSoftwareViewModel : ViewModelBase, ITab
 
     #region Commands
 
-    public DelegateCommand AddIdiomaCommand { get; private set; }
-    public DelegateCommand DeleteIdiomaCommand { get; private set; }
+    public DelegateCommand AddHabilidadCommand { get; private set; }
+    public DelegateCommand EditHabilidadCommand { get; private set; }
+    public DelegateCommand DeleteHabilidadCommand { get; private set; }
 
     #endregion
 
     #region Constructor
 
-    public IdiomasHabilidadesSoftwareViewModel(IIdiomaRepository idiomaRepository,
+    public IdiomasHabilidadesSoftwareViewModel(IHabilidadRepository habilidadRepository,
         IDialogService dialogService,
         YesNoDialogViewModel yesNoDialogViewModel,
         AlertDialogViewModel alertDialogViewModel,
-        IdiomaDialogViewModel idiomaDialogViewModel,
+        HabilidadDialogViewModel habilidadDialogViewModel,
         IEventAggregator eventAggregator)
     {
-        _idiomaRepository = idiomaRepository;
+        _habilidadRepository = habilidadRepository;
         _dialogService = dialogService;
         _yesNoDialogViewModel = yesNoDialogViewModel;
         _alertDialogViewModel = alertDialogViewModel;
-        _idiomaDialogViewModel = idiomaDialogViewModel;
+        _habilidadDialogViewModel = habilidadDialogViewModel;
+        _eventAggregator = eventAggregator;
+
         eventAggregator.GetEvent<NavigateToEditResume>()
             .Subscribe(OnNavigateToEditResume);
 
-        AddIdiomaCommand = new DelegateCommand(OnAddIdioma);
-        DeleteIdiomaCommand = new DelegateCommand(OnDeleteIdioma);
+        AddHabilidadCommand = new DelegateCommand(OnAddHabilidad);
+        EditHabilidadCommand = new DelegateCommand(OnEditHabilidad, CanEditHabilidad);
+        DeleteHabilidadCommand = new DelegateCommand(OnDeleteHabilidad, CanDeleteHabilidad);
     }
-
 
     #endregion
 
     #region Methods
 
-    public async void OnLoad()
+    private bool CanDeleteHabilidad()
     {
-        
+        return Habilidad is not null;
     }
 
-    private async void OnDeleteIdioma()
+    private async void OnDeleteHabilidad()
     {
-        if (Idioma is not null)
+        if (Habilidad is not null)
         {
-            _yesNoDialogViewModel.Message = $"¿Deseal eliminar el idioma: {Idioma.Nombre}?";
+            _yesNoDialogViewModel.Message = $"¿Deseal eliminar el idioma: {Habilidad.Nombre}?";
 
             var result = _dialogService.OpenDialog(_yesNoDialogViewModel);
 
             if (result == DialogResults.Si)
             {
-                _idiomaRepository.Remove(Idioma);
-                Idiomas.Remove(Idioma);
+                _habilidadRepository.Remove(Habilidad);
+                Habilidades.Remove(Habilidad);
 
-                await _idiomaRepository.SaveAsync();
+                await _habilidadRepository.SaveAsync();
 
                 _alertDialogViewModel.Message = "Se eliminó correctamente el registro.";
 
                 _dialogService.OpenDialog(_alertDialogViewModel);
             }
-
         }
     }
 
     private void OnNavigateToEditResume(int Id)
     {
         ResumeId = Id;
-        Idiomas = _idiomaRepository.Find(x => x.ResumeId == Id).ToObservableCollection();
+        Habilidades = _habilidadRepository.Find(x => x.ResumeId == Id).OrderBy(x=> x.Tipo).ToObservableCollection();
     }
 
-    private void OnAddIdioma()
+    private void OnAddHabilidad()
     {
-        _idiomaDialogViewModel.ResumeId = ResumeId;
-        var idioma = _dialogService.OpenDialog(_idiomaDialogViewModel);
+        _habilidadDialogViewModel.ResumeId = ResumeId;
+        var habilidad = _dialogService.OpenDialog(_habilidadDialogViewModel);
 
-        if (idioma is not null)
+        if (habilidad is not null)
         {
-            Idiomas.Add(idioma);
+            Habilidades.Add(habilidad);
         }
     }
 
+    private bool CanEditHabilidad()
+    {
+        return Habilidad is not null;
+    }
+
+    private void OnEditHabilidad()
+    {
+        _eventAggregator.GetEvent<NavigateToEditHabilidad>().Publish(Habilidad);
+
+        _dialogService.OpenDialog(_habilidadDialogViewModel);
+    }
     #endregion
 }

@@ -11,7 +11,5 @@ public class Resume : BaseEntity
     [Required] public string Lenguaje { get; set; }
     public byte[] Foto { get; set; }
     public Perfil Perfil { get; set; }
-    public List<Idioma> Idiomas { get; set; }
     public List<Habilidad> Habilidades { get; set; }
-    public List<Software> Software { get; set; }
 }

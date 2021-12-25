@@ -2,13 +2,17 @@
 
 namespace SwiftResume.WPF.Wrapper
 {
-    public class IdiomaWrapper : ModelWrapper<Idioma>
+    public class HabilidadWrapper : ModelWrapper<Habilidad>
     {
-        public IdiomaWrapper(Idioma model) : base(model)
-        {
-        }
+        public HabilidadWrapper(Habilidad model) : base(model) {}
 
         public int Id { get { return Model.Id; } }
+
+        public string Tipo
+        {
+            get => GetValue<string>();
+            set => SetValue(value);
+        }
 
         public string Nombre
         {

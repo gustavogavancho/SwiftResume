@@ -4,6 +4,8 @@
 
     <converters:LanguageEnumToString x:Key="LanguageEnumToString"/>
     <converters:GenderEnumToString x:Key="GenderEnumToString"/>
+    <converters:HabilidadEnumToString x:Key="HabilidadEnumToString"/>
+    <converters:NivelesEnumToString x:Key="NivelesEnumToString"/>
     <converters:CharacterCounter x:Key="CharacterCounter"/>
     <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
 

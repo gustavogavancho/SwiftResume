@@ -5,5 +5,6 @@ public enum Niveles
     Básico,
     Intermedio,
     Avanzado,
-    Nativo
+    Nativo,
+    Fluido
 }

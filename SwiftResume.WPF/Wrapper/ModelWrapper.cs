@@ -10,7 +10,6 @@ public class ModelWrapper<T> : NotifyDataErrorInfoBase
     public ModelWrapper(T model)
     {
         Model = model;
-        //Validate();
     }
 
     protected virtual TValue GetValue<TValue>([CallerMemberName] string propertyName = null)

@@ -1,19 +1,22 @@
-﻿using SwiftResume.BIZ.Repositories;
+﻿using Prism.Events;
+using SwiftResume.BIZ.Repositories;
 using SwiftResume.COMMON.Enums;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
+using SwiftResume.WPF.Events;
 using SwiftResume.WPF.Wrapper;
 using Model = SwiftResume.COMMON.Models;
 
-namespace SwiftResume.WPF.CustomControls.Dialogs.Idioma
+namespace SwiftResume.WPF.CustomControls.Dialogs.Habilidad
 {
-    public class IdiomaDialogViewModel : DialogViewModelBase<Model.Idioma>
+    public class HabilidadDialogViewModel : DialogViewModelBase<Model.Habilidad>
     {
         #region Fields
 
-        private readonly IIdiomaRepository _idiomaRepository;
+        private readonly IHabilidadRepository _habilidadRepository;
         private readonly IDialogService _dialogService;
         private readonly YesNoDialogViewModel _yesNoDialogViewModel;
+        private Model.Habilidad _habilidadEdit;
 
         #endregion
 
@@ -22,14 +25,14 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Idioma
         public int ResumeId { get; set; }
 
 
-        private IdiomaWrapper _idiomaWrapper;
-        public IdiomaWrapper IdiomaWrapper
+        private HabilidadWrapper _habilidadWrapper;
+        public HabilidadWrapper HabilidadWrapper
         {
-            get => _idiomaWrapper;
+            get => _habilidadWrapper;
             set
             {
-                _idiomaWrapper = value;
-                OnPropertyChanged(nameof(IdiomaWrapper));
+                _habilidadWrapper = value;
+                OnPropertyChanged(nameof(HabilidadWrapper));
             }
         }
 
@@ -59,17 +62,23 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Idioma
 
         #region Constructor
 
-        public IdiomaDialogViewModel(IIdiomaRepository idiomaRepository,
+        public HabilidadDialogViewModel(IHabilidadRepository habilidadRepository,
             IDialogService dialogService,
-            YesNoDialogViewModel yesNoDialogViewModel)
+            YesNoDialogViewModel yesNoDialogViewModel,
+            IEventAggregator eventAggregator)
         {
-            _idiomaRepository = idiomaRepository;
+            _habilidadRepository = habilidadRepository;
             _dialogService = dialogService;
             _yesNoDialogViewModel = yesNoDialogViewModel;
+
+            eventAggregator.GetEvent<NavigateToEditHabilidad>()
+                .Subscribe(OnNavigateToEditHabilidad);
+
 
             SaveCommand = new DelegateCommand<IDialogWindow>(OnSave, CanSave);
             CancelCommand = new DelegateCommand<IDialogWindow>(OnCancel);
         }
+
         #endregion
 
         #region Methods
@@ -78,26 +87,27 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Idioma
         {
             //Restore has changes to false
             HasChanges = false;
-            _idiomaRepository.DetachAllProperties();
 
-            var idioma = CreateNewIdioma();
+            var idioma = (_habilidadEdit is not null)?
+                _habilidadEdit
+                : CreateNewIdioma();
 
             InitializeResume(idioma);
         }
 
         private bool CanSave(IDialogWindow arg)
         {
-            return IdiomaWrapper != null && !IdiomaWrapper.HasErrors && HasChanges;
+            return HabilidadWrapper != null && !HabilidadWrapper.HasErrors && HasChanges;
         }
 
         private void OnSave(IDialogWindow window)
         {
-            IdiomaWrapper.Validate();
-            if (!IdiomaWrapper.HasErrors)
+            HabilidadWrapper.Validate();
+            if (!HabilidadWrapper.HasErrors)
             {
-                _idiomaRepository.SaveAsync();
-                HasChanges = _idiomaRepository.HasChanges();
-                CloseDialogWithResult(window, IdiomaWrapper.Model);
+                _habilidadRepository.SaveAsync();
+                HasChanges = _habilidadRepository.HasChanges();
+                CloseDialogWithResult(window, HabilidadWrapper.Model);
             }
         }
 
@@ -110,32 +120,39 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Idioma
                 if (dialog == DialogResults.No)
                     return;
             }
+
+            _habilidadRepository.DetachAllProperties();
+            _habilidadEdit = null;
             CloseDialogWithResult(window, null);
         }
 
-        private void InitializeResume(Model.Idioma idioma)
+        private void InitializeResume(Model.Habilidad habilidad)
         {
-            IdiomaWrapper = new IdiomaWrapper(idioma);
-            IdiomaWrapper.PropertyChanged += (s, e) =>
+            HabilidadWrapper = new HabilidadWrapper(habilidad);
+            HabilidadWrapper.PropertyChanged += (s, e) =>
             {
                 if (!HasChanges)
-                    HasChanges = _idiomaRepository.HasChanges();
+                    HasChanges = _habilidadRepository.HasChanges();
 
-                if (e.PropertyName == nameof(IdiomaWrapper.HasErrors))
+                if (e.PropertyName == nameof(HabilidadWrapper.HasErrors))
                     SaveCommand.RaiseCanExecuteChanged();
             };
 
             SaveCommand.RaiseCanExecuteChanged();
         }
 
-        private Model.Idioma CreateNewIdioma()
+        private Model.Habilidad CreateNewIdioma()
         {
-            var idioma = new Model.Idioma();
-            idioma.ResumeId = ResumeId;
-            _idiomaRepository.Add(idioma);
-            return idioma;
+            var habilidad = new Model.Habilidad();
+            habilidad.ResumeId = ResumeId;
+            _habilidadRepository.Add(habilidad);
+            return habilidad;
         }
 
+        private void OnNavigateToEditHabilidad(Model.Habilidad habilidad)
+        {
+            _habilidadEdit = habilidad;
+        }
         #endregion
     }
 }

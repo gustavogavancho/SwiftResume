@@ -4,9 +4,7 @@ namespace SwiftResume.WPF.Wrapper;
 
 public class UserWrapper : ModelWrapper<User>
 {
-    public UserWrapper(User model) : base(model)
-    {
-    }
+    public UserWrapper(User model) : base(model) {}
 
     public int Id { get { return Model.Id; } }
 

@@ -22,7 +22,6 @@ public partial class App : Application
     {
         return Host.CreateDefaultBuilder(args)
             .AddConfiguration()
-            //.AddFinanceApi()
             .AddDbContext()
             .AddServices()
             .AddStores()
