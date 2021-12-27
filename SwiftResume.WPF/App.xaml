@@ -42,6 +42,10 @@
                 <views:IdiomasHabilidadesSoftwareView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModels:EducacionExperienciaViewModel}">
+                <views:EducacionExperienciaView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type alert:AlertDialogViewModel}">
                 <alert:AlertDialogView/>
             </DataTemplate>

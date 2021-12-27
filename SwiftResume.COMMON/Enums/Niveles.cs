@@ -1,6 +1,6 @@
 ﻿namespace SwiftResume.COMMON.Enums;
 
-public enum Niveles
+public enum Niveles : short
 {
     Básico,
     Intermedio,

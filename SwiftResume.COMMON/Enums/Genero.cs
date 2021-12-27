@@ -1,6 +1,6 @@
 ﻿namespace SwiftResume.COMMON.Enums;
 
-public enum Genero
+public enum Genero : short
 {
     Masculino,
     Femenino

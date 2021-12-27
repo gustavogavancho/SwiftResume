@@ -10,18 +10,21 @@ public class SwiftResumeViewModelFactory : ISwiftResumeViewModelFactory
     private readonly CreateViewModel<EditViewModel> _createEditViewModel;
     private readonly CreateViewModel<PerfilViewModel> _createPerfilViewModel;
     private readonly CreateViewModel<IdiomasHabilidadesSoftwareViewModel> _createIdiomasHabilidadesSoftwareViewModel;
+    private readonly CreateViewModel<EducacionExperienciaViewModel> _createEducacionExperienciaViewModel;
 
     public SwiftResumeViewModelFactory(CreateViewModel<ResumeViewModel> createResumeViewModel,
         CreateViewModel<LoginViewModel> createLoginViewModel,
         CreateViewModel<EditViewModel> createEditViewModel,
         CreateViewModel<PerfilViewModel> createPerfilViewModel,
-        CreateViewModel<IdiomasHabilidadesSoftwareViewModel> createIdiomasHabilidadesSoftwareViewModel)
+        CreateViewModel<IdiomasHabilidadesSoftwareViewModel> createIdiomasHabilidadesSoftwareViewModel,
+        CreateViewModel<EducacionExperienciaViewModel> createEducacionExperienciaViewModel)
     {
         _createResumeViewModel = createResumeViewModel;
         _createLoginViewModel = createLoginViewModel;
         _createEditViewModel = createEditViewModel;
         _createPerfilViewModel = createPerfilViewModel;
         _createIdiomasHabilidadesSoftwareViewModel = createIdiomasHabilidadesSoftwareViewModel;
+        _createEducacionExperienciaViewModel = createEducacionExperienciaViewModel;
     }
 
     public ViewModelBase CreateViewModel(ViewType viewType) => viewType switch
@@ -31,6 +34,7 @@ public class SwiftResumeViewModelFactory : ISwiftResumeViewModelFactory
         ViewType.Edit => _createEditViewModel(),
         ViewType.Perfil => _createPerfilViewModel(),
         ViewType.IdiomasHabilidadesSoftware => _createIdiomasHabilidadesSoftwareViewModel(),
+        ViewType.EducacionExperiencia => _createEducacionExperienciaViewModel(),
         _ => throw new ArgumentException("The ViewType does not have a ViewModel.")
     };
 }

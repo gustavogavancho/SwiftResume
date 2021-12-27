@@ -159,9 +159,12 @@ public class IdiomasHabilidadesSoftwareViewModel : ViewModelBase, ITab
 
         var habilidad = _dialogService.OpenDialog(_habilidadDialogViewModel);
 
-        //Workaround
-        Habilidades.Remove(habilidad);
-        Habilidades.Add(habilidad);
+        if (habilidad is not null)
+        {
+            //Workaround
+            Habilidades.Remove(habilidad);
+            Habilidades.Add(habilidad);
+        }
     }
     #endregion
 }

@@ -1,6 +1,6 @@
 ﻿namespace SwiftResume.COMMON.Enums;
 
-public enum RegistrationResult
+public enum RegistrationResult : short
 {
     Success,
     EmailAlreadyExists,

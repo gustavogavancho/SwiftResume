@@ -71,21 +71,21 @@
                             <TextBlock Grid.Column="1" Text="Perfil:" TextWrapping="Wrap" Margin="10 0 0 0" FontSize="24" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}"/>
                         </Grid>
                     </BlockUIContainer>
-                    <Paragraph>
+                    <Paragraph Margin="0 15 0 0">
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="Dirección:" FontWeight="Bold"/>
                             <LineBreak/>
                             <Run Text="{Binding Resume.Perfil.Direccion}"/>
                         </TextBlock>
                     </Paragraph>
-                    <Paragraph>
+                    <Paragraph Margin="0 0 0 0">
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="Teléfono:" FontWeight="Bold"/>
                             <LineBreak/>
                             <Run Text="{Binding Resume.Perfil.Telefono}"/>
                         </TextBlock>
                     </Paragraph>
-                    <Paragraph>
+                    <Paragraph Margin="0 0 0 0">
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="Email:" FontWeight="Bold"/>
                             <LineBreak/>
@@ -94,14 +94,14 @@
                             <Run Text="{Binding Resume.Perfil.Email2}"/>
                         </TextBlock>
                     </Paragraph>
-                    <Paragraph>
+                    <Paragraph Margin="0 0 0 0">
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="Fecha de Nacimiento:" FontWeight="Bold"/>
                             <LineBreak/>
                             <Run Text="{Binding Resume.Perfil.FechaNacimiento, StringFormat='d'}"/>
                         </TextBlock>
                     </Paragraph>
-                    <Paragraph>
+                    <Paragraph Margin="0 0 0 0">
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="LinkedIn:" FontWeight="Bold"/>
                             <LineBreak/>
@@ -112,7 +112,7 @@
                             </Hyperlink>
                         </TextBlock>
                     </Paragraph>
-                    <Paragraph>
+                    <Paragraph Margin="0 0 0 0">
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="GitHub:" FontWeight="Bold"/>
                             <LineBreak/>
@@ -123,7 +123,7 @@
                             </Hyperlink>
                         </TextBlock>
                     </Paragraph>
-                    <Paragraph>
+                    <Paragraph Margin="0 0 0 0">
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="Blog:" FontWeight="Bold"/>
                             <LineBreak/>
@@ -134,7 +134,7 @@
                             </Hyperlink>
                         </TextBlock>
                     </Paragraph>
-                    <Paragraph>
+                    <Paragraph Margin="0 0 0 15">
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="StackOverflow:" FontWeight="Bold"/>
                             <LineBreak/>
@@ -164,7 +164,6 @@
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
-                                <Run Text="Descripción: " FontWeight="Bold" />
                                 <Run Text="{Binding Nombre}" FontWeight="Light" />
                                 <Run Text=" / "/>
                                 <Run Text="Nivel: " FontWeight="Bold"/>
@@ -192,7 +191,6 @@
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
-                                <Run Text="Descripción: " FontWeight="Bold" />
                                 <Run Text="{Binding Nombre}" FontWeight="Light" />
                                 <Run Text=" / "/>
                                 <Run Text="Nivel: " FontWeight="Bold"/>
@@ -220,7 +218,6 @@
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
-                                <Run Text="Descripción: " FontWeight="Bold" />
                                 <Run Text="{Binding Nombre}" FontWeight="Light" />
                                 <Run Text=" / "/>
                                 <Run Text="Nivel: " FontWeight="Bold"/>
