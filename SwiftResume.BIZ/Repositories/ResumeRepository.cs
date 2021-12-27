@@ -23,4 +23,10 @@ public class ResumeRepository : Repository<Resume>, IResumeRepository
     {
         return await _context.Resumes.Include(x=> x.Perfil).FirstOrDefaultAsync(x => x.Id == id);
     }
+
+    public async Task<Resume> GetResumeWithProfileHabilidades(int id)
+    {
+        return await _context.Resumes.Include(x => x.Perfil)
+            .Include(x => x.Habilidades).FirstOrDefaultAsync(x => x.Id == id);
+    }
 }

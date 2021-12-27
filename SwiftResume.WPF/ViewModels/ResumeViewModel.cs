@@ -34,7 +34,7 @@ public class ResumeViewModel : ViewModelBase
 
     #region Properties
 
-    private ObservableCollection<Resume> _resumes;
+    private ObservableCollection<Resume> _resumes = new();
     public ObservableCollection<Resume> Resumes
     {
         get => _resumes;

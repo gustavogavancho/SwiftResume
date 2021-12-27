@@ -2,6 +2,7 @@
 using SwiftResume.BIZ.Repositories;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.Events;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -28,6 +29,10 @@ public class ReportDialogViewModel : DialogViewModelBase<Model.Resume>
             OnPropertyChanged(nameof(Resume));
         }
     }
+
+    public List<Model.Habilidad> Idiomas { get; set; }
+    public List<Model.Habilidad> Habilidades { get; set; }
+    public List<Model.Habilidad> Software { get; set; }
 
     #endregion
 
@@ -59,7 +64,10 @@ public class ReportDialogViewModel : DialogViewModelBase<Model.Resume>
 
     private async void OnNavigateToReportResume(int id)
     {
-        Resume = await _resumeRepository.GetResumeWithProfile(id);
+        Resume = await _resumeRepository.GetResumeWithProfileHabilidades(id);
+        Idiomas = Resume.Habilidades.Where(x => x.Tipo == "Idioma").ToList();
+        Habilidades = Resume.Habilidades.Where(x => x.Tipo == "Habilidad").ToList();
+        Software = Resume.Habilidades.Where(x => x.Tipo == "Software").ToList();
     }
 
     private void OnPrint(IDocumentPaginatorSource flowDocument)

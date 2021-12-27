@@ -157,7 +157,11 @@ public class IdiomasHabilidadesSoftwareViewModel : ViewModelBase, ITab
     {
         _eventAggregator.GetEvent<NavigateToEditHabilidad>().Publish(Habilidad);
 
-        _dialogService.OpenDialog(_habilidadDialogViewModel);
+        var habilidad = _dialogService.OpenDialog(_habilidadDialogViewModel);
+
+        //Workaround
+        Habilidades.Remove(habilidad);
+        Habilidades.Add(habilidad);
     }
     #endregion
 }

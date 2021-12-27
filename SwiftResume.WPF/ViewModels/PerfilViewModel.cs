@@ -91,10 +91,10 @@ public class PerfilViewModel : ViewModelBase, ITab
 
     public void OnLoad()
     {
+        InitializePerfil(Resume.Perfil);
+
         //Restore has changes to false
         HasChanges = false;
-
-        InitializePerfil(Resume.Perfil);
     }
 
     private bool CanSave()
@@ -114,6 +114,7 @@ public class PerfilViewModel : ViewModelBase, ITab
             Resume.Perfil = PerfilWrapper.Model;
 
             await _resumeRepository.SaveAsync();
+            HasChanges = _resumeRepository.HasChanges();
             _alertDialogViewModel.Message = "Se guardaron los cambios correctamente.";
             _dialogService.OpenDialog(_alertDialogViewModel);
         }

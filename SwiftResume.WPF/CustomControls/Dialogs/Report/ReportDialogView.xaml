@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Report"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behaviors="clr-namespace:SwiftResume.WPF.Extensions"
              mc:Ignorable="d"
              Height="700" 
              Width="1000">
@@ -14,10 +15,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
         <Button Content="Imprimir" Command="{Binding PrintCommand}" CommandParameter="{Binding ElementName=fdReport}"/>
         <FlowDocumentPageViewer Grid.Row="1">
             <FlowDocument x:Name="fdReport" IsOptimalParagraphEnabled="True">
-                <!-- Encabezado -->
                 <Section>
                     <BlockUIContainer>
                         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
@@ -70,21 +71,21 @@
                             <TextBlock Grid.Column="1" Text="Perfil:" TextWrapping="Wrap" Margin="10 0 0 0" FontSize="24" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}"/>
                         </Grid>
                     </BlockUIContainer>
-                    <Paragraph Margin="0 22 0 0">
+                    <Paragraph>
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="Dirección:" FontWeight="Bold"/>
                             <LineBreak/>
                             <Run Text="{Binding Resume.Perfil.Direccion}"/>
                         </TextBlock>
                     </Paragraph>
-                    <Paragraph Margin="0">
+                    <Paragraph>
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="Teléfono:" FontWeight="Bold"/>
                             <LineBreak/>
                             <Run Text="{Binding Resume.Perfil.Telefono}"/>
                         </TextBlock>
                     </Paragraph>
-                    <Paragraph Margin="0">
+                    <Paragraph>
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="Email:" FontWeight="Bold"/>
                             <LineBreak/>
@@ -93,14 +94,14 @@
                             <Run Text="{Binding Resume.Perfil.Email2}"/>
                         </TextBlock>
                     </Paragraph>
-                    <Paragraph Margin="0">
+                    <Paragraph>
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="Fecha de Nacimiento:" FontWeight="Bold"/>
                             <LineBreak/>
                             <Run Text="{Binding Resume.Perfil.FechaNacimiento, StringFormat='d'}"/>
                         </TextBlock>
                     </Paragraph>
-                    <Paragraph Margin="0">
+                    <Paragraph>
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="LinkedIn:" FontWeight="Bold"/>
                             <LineBreak/>
@@ -111,7 +112,7 @@
                             </Hyperlink>
                         </TextBlock>
                     </Paragraph>
-                    <Paragraph Margin="0">
+                    <Paragraph>
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="GitHub:" FontWeight="Bold"/>
                             <LineBreak/>
@@ -122,7 +123,7 @@
                             </Hyperlink>
                         </TextBlock>
                     </Paragraph>
-                    <Paragraph Margin="0">
+                    <Paragraph>
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="Blog:" FontWeight="Bold"/>
                             <LineBreak/>
@@ -133,7 +134,7 @@
                             </Hyperlink>
                         </TextBlock>
                     </Paragraph>
-                    <Paragraph Margin="0">
+                    <Paragraph>
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="StackOverflow:" FontWeight="Bold"/>
                             <LineBreak/>
@@ -143,6 +144,90 @@
                                 </Hyperlink.Inlines>
                             </Hyperlink>
                         </TextBlock>
+                    </Paragraph>
+                </Section>
+                <Section>
+                    <BlockUIContainer>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Width="30" Height="30" Fill="{StaticResource PrimaryBrush}" Margin="15 0 0 0"/>
+                            <TextBlock Grid.Column="1" Text="Idiomas:" TextWrapping="Wrap" Margin="10 0 0 0" FontSize="24" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}"/>
+                        </Grid>
+                    </BlockUIContainer>
+                    <Paragraph behaviors:ParagraphInlineBehavior.ParagraphInlineSource="{Binding Idiomas}"
+                               behaviors:ParagraphInlineBehavior.TemplateResourceName="inlineTemplate"
+                               xmlns:Collections="clr-namespace:System.Collections;assembly=mscorlib"
+                               FontSize="14"
+                               Margin="14 15 0 8">
+                        <Paragraph.Resources>
+                            <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <Run Text="Descripción: " FontWeight="Bold" />
+                                <Run Text="{Binding Nombre}" FontWeight="Light" />
+                                <Run Text=" / "/>
+                                <Run Text="Nivel: " FontWeight="Bold"/>
+                                <Run Text="{Binding Nivel}"/>
+                                <LineBreak/>
+                            </Collections:ArrayList>
+                        </Paragraph.Resources>
+                    </Paragraph>
+                </Section>
+                <Section>
+                    <BlockUIContainer>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Width="30" Height="30" Fill="{StaticResource PrimaryBrush}" Margin="15 0 0 0"/>
+                            <TextBlock Grid.Column="1" Text="Habilidades:" TextWrapping="Wrap" Margin="10 0 0 0" FontSize="24" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}"/>
+                        </Grid>
+                    </BlockUIContainer>
+                    <Paragraph behaviors:ParagraphInlineBehavior.ParagraphInlineSource="{Binding Habilidades}"
+                               behaviors:ParagraphInlineBehavior.TemplateResourceName="inlineTemplate"
+                               xmlns:Collections="clr-namespace:System.Collections;assembly=mscorlib"
+                               FontSize="14"
+                               Margin="14 15 0 8">
+                        <Paragraph.Resources>
+                            <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <Run Text="Descripción: " FontWeight="Bold" />
+                                <Run Text="{Binding Nombre}" FontWeight="Light" />
+                                <Run Text=" / "/>
+                                <Run Text="Nivel: " FontWeight="Bold"/>
+                                <Run Text="{Binding Nivel}"/>
+                                <LineBreak/>
+                            </Collections:ArrayList>
+                        </Paragraph.Resources>
+                    </Paragraph>
+                </Section>
+                <Section>
+                    <BlockUIContainer>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Width="30" Height="30" Fill="{StaticResource PrimaryBrush}" Margin="15 0 0 0"/>
+                            <TextBlock Grid.Column="1" Text="Software:" TextWrapping="Wrap" Margin="10 0 0 0" FontSize="24" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}"/>
+                        </Grid>
+                    </BlockUIContainer>
+                    <Paragraph behaviors:ParagraphInlineBehavior.ParagraphInlineSource="{Binding Software}"
+                               behaviors:ParagraphInlineBehavior.TemplateResourceName="inlineTemplate"
+                               xmlns:Collections="clr-namespace:System.Collections;assembly=mscorlib"
+                               FontSize="14"
+                               Margin="14 15 0 8">
+                        <Paragraph.Resources>
+                            <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <Run Text="Descripción: " FontWeight="Bold" />
+                                <Run Text="{Binding Nombre}" FontWeight="Light" />
+                                <Run Text=" / "/>
+                                <Run Text="Nivel: " FontWeight="Bold"/>
+                                <Run Text="{Binding Nivel}"/>
+                                <LineBreak/>
+                            </Collections:ArrayList>
+                        </Paragraph.Resources>
                     </Paragraph>
                 </Section>
             </FlowDocument>

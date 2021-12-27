@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <CollectionViewSource x:Key="GroupedItems" Source="{Binding Habilidades}">
+        <CollectionViewSource x:Key="GroupedItems" Source="{Binding Habilidades}" IsLiveGroupingRequested="True">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Tipo" />
             </CollectionViewSource.GroupDescriptions>
