@@ -1,13 +1,16 @@
-﻿namespace SwiftResume.COMMON.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SwiftResume.COMMON.Models;
 
 public class Experiencia : BaseEntity
 {
-    public string Institucion { get; set; }
-    public string Descripcion { get; set; }
-    public string Lugar { get; set; }
-    public string Responsabilidades { get; set; }
+    [Required] public string Institucion { get; set; }
+    [Required] public string Descripcion { get; set; }
+    [Required] public string Lugar { get; set; }
+    [Required] public string Responsabilidades { get; set; }
     public string Logros { get; set; }
-    public DateTime FechaInicio { get; set; } = DateTime.Now;
-    public DateTime FechaFin { get; set; } = DateTime.Now;
+    [Required] public DateTime FechaInicio { get; set; } = DateTime.Now;
+    [Required] public DateTime FechaFin { get; set; } = DateTime.Now;
+    public int ResumeId { get; set; }
 
 }

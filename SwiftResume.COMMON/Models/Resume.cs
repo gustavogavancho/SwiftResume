@@ -12,4 +12,7 @@ public class Resume : BaseEntity
     public byte[] Foto { get; set; }
     public Perfil Perfil { get; set; }
     public List<Habilidad> Habilidades { get; set; }
+    public List<Educacion> Educacion { get; set; }
+    public List<Experiencia> Experiencia { get; set; }
+
 }
