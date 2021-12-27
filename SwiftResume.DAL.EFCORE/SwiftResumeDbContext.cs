@@ -9,6 +9,8 @@ public class SwiftResumeDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Perfil> Perfiles { get; set; }
     public DbSet<Habilidad> Habilidades { get; set; }
+    public DbSet<Educacion> Educacion { get; set; }
+    public DbSet<Experiencia> Experiencia { get; set; }
 
     public SwiftResumeDbContext(DbContextOptions<SwiftResumeDbContext> options) : base(options)
     {

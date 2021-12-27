@@ -23,6 +23,8 @@ public static class AddServicesHostBuilderExtensions
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IResumeRepository, ResumeRepository>();
             services.AddSingleton<IHabilidadRepository, HabilidadRepository>();
+            services.AddSingleton<IEducacionRepository, EducacionRepository>();
+            services.AddSingleton<IExperienciaRepository, ExperienciaRepository>();
         });
 
         return host;
