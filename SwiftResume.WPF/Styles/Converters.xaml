@@ -6,7 +6,11 @@
     <converters:GenderEnumToString x:Key="GenderEnumToString"/>
     <converters:HabilidadEnumToString x:Key="HabilidadEnumToString"/>
     <converters:NivelesEnumToString x:Key="NivelesEnumToString"/>
+    <converters:TipoEducacionEnumToString x:Key="TipoEducacionEnumToString"/>
     <converters:CharacterCounter x:Key="CharacterCounter"/>
+    <converters:EnunToDescription x:Key="EnumToDescription"/>
+    <converters:SplitCamelCaseString x:Key="SplitCameCaseString"/>
     <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+    
 
 </ResourceDictionary>

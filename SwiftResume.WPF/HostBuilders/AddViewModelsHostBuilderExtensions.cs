@@ -1,5 +1,7 @@
 ﻿using SwiftResume.WPF.Core;
 using SwiftResume.WPF.CustomControls.Dialogs.Alert;
+using SwiftResume.WPF.CustomControls.Dialogs.Educacion;
+using SwiftResume.WPF.CustomControls.Dialogs.Experiencia;
 using SwiftResume.WPF.CustomControls.Dialogs.Habilidad;
 using SwiftResume.WPF.CustomControls.Dialogs.Report;
 using SwiftResume.WPF.CustomControls.Dialogs.Resume;
@@ -29,6 +31,8 @@ public static class AddViewModelsHostBuilderExtensions
             services.AddSingleton<ResumeDialogViewModel>();
             services.AddSingleton<ReportDialogViewModel>();
             services.AddSingleton<HabilidadDialogViewModel>();
+            services.AddSingleton<EducacionDialogViewModel>();
+            services.AddSingleton<ExperienciaDialogViewModel>();
             services.AddSingleton<AlertDialogViewModel>();
             services.AddSingleton<YesNoDialogViewModel>();
 

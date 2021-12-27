@@ -74,7 +74,6 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Habilidad
             eventAggregator.GetEvent<NavigateToEditHabilidad>()
                 .Subscribe(OnNavigateToEditHabilidad);
 
-
             SaveCommand = new DelegateCommand<IDialogWindow>(OnSave, CanSave);
             CancelCommand = new DelegateCommand<IDialogWindow>(OnCancel);
         }

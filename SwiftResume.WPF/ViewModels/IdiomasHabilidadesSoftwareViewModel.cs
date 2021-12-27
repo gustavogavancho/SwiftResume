@@ -131,10 +131,10 @@ public class IdiomasHabilidadesSoftwareViewModel : ViewModelBase, ITab
         }
     }
 
-    private void OnNavigateToEditResume(int Id)
+    private void OnNavigateToEditResume(int id)
     {
-        ResumeId = Id;
-        Habilidades = _habilidadRepository.Find(x => x.ResumeId == Id).OrderBy(x=> x.Tipo).ToObservableCollection();
+        ResumeId = id;
+        Habilidades = _habilidadRepository.Find(x => x.ResumeId == id).OrderBy(x=> x.Tipo).ToObservableCollection();
     }
 
     private void OnAddHabilidad()

@@ -7,6 +7,207 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <GroupBox Margin="5" Padding="5" BorderBrush="{StaticResource PrimaryBrush}">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>
+                        <Run Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource PrimaryBrush}" FontSize="24" FontWeight="Bold"/>
+                        <Run Text="Educación" Foreground="{StaticResource PrimaryBrush}" FontWeight="Bold" BaselineAlignment="Center"/>
+                        </TextBlock>
+                    </StackPanel>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <ListView ItemsSource="{Binding Educacion}" 
+                              SelectedItem="{Binding EducacionSelected}"
+                              BorderBrush="{StaticResource PrimaryBrush}"
+                              Background="{StaticResource PrimaryBrush}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Foreground="{StaticResource SecondaryBrush}">
+                                        <Run Text="Institución:" FontWeight="Bold"/>
+                                        <Run Text="{Binding Institucion}" FontWeight="Light"/>
+                                        <Run Text="/"/>
+                                        <Run Text="Nivel:" FontWeight="Bold"/>
+                                        <Run Text="{Binding TipoEducacion, Converter={StaticResource SplitCameCaseString}}" FontWeight="Light" />
+                                        <LineBreak/>
+                                        <Run Text="Descripción:" FontWeight="Bold"/>
+                                        <Run Text="{Binding Descripcion}"/>
+                                        <LineBreak/>
+                                        <Run Text="Fecha Inicio:" FontWeight="Bold"/>
+                                        <Run Text="{Binding FechaInicio, StringFormat='d'}"/>
+                                        <Run Text="/"/>
+                                        <Run Text="Fecha Fin:" FontWeight="Bold"/>
+                                        <Run Text="{Binding FechaFin, StringFormat='d'}"/>
+                                    </TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Style="{StaticResource ButtonSecondaryStyle}" 
+                                Content="&#xE710;" 
+                                Grid.Column="1" 
+                                FontSize="18"
+                                Foreground="White"
+                                HorizontalAlignment="Right" 
+                                Command="{Binding AddEducacionExperienciaCommand}"
+                                CommandParameter="{Binding EducacionSelected}"
+                                IsDefault="True">
+                            <Button.ToolTip>
+                                <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Educacion"/>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Style="{StaticResource ButtonSecondaryStyle}" 
+                                Content="&#xE70F;" 
+                                Grid.Column="2" 
+                                FontSize="18"
+                                Foreground="White"
+                                HorizontalAlignment="Right" 
+                                Command="{Binding EditEducacionExperienciaCommand}"
+                                CommandParameter="{Binding EducacionSelected}"
+                                IsDefault="True">
+                            <Button.ToolTip>
+                                <ToolTip Style="{StaticResource ToolTipStyle}" Content="Editar Educacion"/>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Style="{StaticResource ButtonSecondaryStyle}" 
+                                Content="&#xE74D;" 
+                                Grid.Column="3" 
+                                FontSize="18"
+                                Foreground="White"
+                                HorizontalAlignment="Right" 
+                                Command="{Binding DeleteEducacionExperienciaCommand}"
+                                CommandParameter="{Binding EducacionSelected}"
+                                IsDefault="True">
+                            <Button.ToolTip>
+                                <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Educacion"/>
+                            </Button.ToolTip>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <GroupBox Margin="5" Padding="5" BorderBrush="{StaticResource PrimaryBrush}">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>
+                        <Run Text="&#xE774;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource PrimaryBrush}" FontSize="24" FontWeight="Bold"/>
+                        <Run Text="Experiencia" Foreground="{StaticResource PrimaryBrush}" FontWeight="Bold" BaselineAlignment="Center"/>
+                        </TextBlock>
+                    </StackPanel>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <ListView ItemsSource="{Binding Experiencia}" 
+                              SelectedItem="{Binding ExperienciaSelected}"
+                              BorderBrush="{StaticResource PrimaryBrush}"
+                              Background="{StaticResource PrimaryBrush}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Foreground="{StaticResource SecondaryBrush}">
+                                        <Run Text="Institución:" FontWeight="Bold"/>
+                                        <Run Text="{Binding Institucion}" FontWeight="Light"/>
+                                        <Run Text="/"/>
+                                        <Run Text="Tipo Educacion:" FontWeight="Bold"/>
+                                        <Run Text="{Binding TipoEducacion}" FontWeight="Light" />
+                                        <LineBreak/>
+                                        <Run Text="Descripción:" FontWeight="Bold"/>
+                                        <Run Text="{Binding Descripcion}"/>
+                                        <LineBreak/>
+                                        <Run Text="Fecha Inicio:" FontWeight="Bold"/>
+                                        <Run Text="{Binding FechaInicio}"/>
+                                        <Run Text="/"/>
+                                        <Run Text="Fecha Fin:" FontWeight="Bold"/>
+                                        <Run Text="{Binding FechaFin}"/>
+                                    </TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Style="{StaticResource ButtonSecondaryStyle}" 
+                                Content="&#xE710;" 
+                                Grid.Column="1" 
+                                FontSize="18"
+                                Foreground="White"
+                                HorizontalAlignment="Right" 
+                                Command="{Binding AddHabilidadCommand}"
+                                IsDefault="True">
+                            <Button.ToolTip>
+                                <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Experiencia"/>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Style="{StaticResource ButtonSecondaryStyle}" 
+                                Content="&#xE70F;" 
+                                Grid.Column="2" 
+                                FontSize="18"
+                                Foreground="White"
+                                HorizontalAlignment="Right" 
+                                Command="{Binding EditHabilidadCommand}"
+                                IsDefault="True">
+                            <Button.ToolTip>
+                                <ToolTip Style="{StaticResource ToolTipStyle}" Content="Editar Experiencia"/>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Style="{StaticResource ButtonSecondaryStyle}" 
+                                Content="&#xE74D;" 
+                                Grid.Column="3" 
+                                FontSize="18"
+                                Foreground="White"
+                                HorizontalAlignment="Right" 
+                                Command="{Binding DeleteHabilidadCommand}"
+                                IsDefault="True">
+                            <Button.ToolTip>
+                                <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Experiencia"/>
+                            </Button.ToolTip>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+
+        </Grid>
+
+
     </Grid>
 </UserControl>
