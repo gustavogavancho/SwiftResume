@@ -64,13 +64,13 @@ public class EducacionDialogViewModel : DialogViewModelBase<Model.Educacion>
     public EducacionDialogViewModel(IEducacionRepository educacionRepository,
         IDialogService dialogService,
         YesNoDialogViewModel yesNoDialogViewModel,
-        IEventAggregator eventAgreggator)
+        IEventAggregator eventAggregator)
     {
         _educacionRepository = educacionRepository;
         _dialogService = dialogService;
         _yesNoDialogViewModel = yesNoDialogViewModel;
 
-        eventAgreggator.GetEvent<NavigateToEditEducacion>()
+        eventAggregator.GetEvent<NavigateToEditEducacion>()
                 .Subscribe(OnNavigateToEditEducacion);
 
         SaveCommand = new DelegateCommand<IDialogWindow>(OnSave, CanSave);

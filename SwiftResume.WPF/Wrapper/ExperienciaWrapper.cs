@@ -31,6 +31,12 @@ public class ExperienciaWrapper : ModelWrapper<Experiencia>
         set => SetValue(value);
     }
 
+    public string Logros
+    {
+        get => GetValue<string>();
+        set => SetValue(value);
+    }
+
     public DateTime FechaInicio
     {
         get => GetValue<DateTime>();

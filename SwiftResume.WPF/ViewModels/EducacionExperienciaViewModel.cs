@@ -130,7 +130,6 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
         AddEducacionExperienciaCommand = new DelegateCommand<object>(OnAddEducacionExperiencia);
         EditEducacionExperienciaCommand = new DelegateCommand<object>(OnEditEducacionExperiencia, CanEditEducacionExperiencia);
         DeleteEducacionExperienciaCommand = new DelegateCommand<object>(OnDeleteEducacionExpericena, CanDeleteEducacionExperiencia);
-
     }
 
     #endregion
@@ -176,19 +175,6 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
         return CanEditDeleteEducacionExperiencia(obj);
     }
 
-    private bool CanEditDeleteEducacionExperiencia(object obj)
-    {
-        if (obj is Educacion)
-        {
-            return Educacion is not null;
-        }
-        else if (obj is Experiencia)
-        {
-            return Experiencia is not null;
-        }
-        else return false;
-    }
-
     private async void OnDeleteEducacionExpericena(object obj)
     {
         if (obj is Educacion edu)
@@ -211,7 +197,21 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
         }
         else if (obj is Experiencia exp)
         {
-            //TODO:
+            _yesNoDialogViewModel.Message = $"¿Deseal eliminar el grado académico: {exp.Descripcion} - {exp.Institucion}?";
+
+            var result = _dialogService.OpenDialog(_yesNoDialogViewModel);
+
+            if (result == DialogResults.Si)
+            {
+                _experienciaRepository.Remove(exp);
+                Experiencia.Remove(exp);
+
+                await _experienciaRepository.SaveAsync();
+
+                _alertDialogViewModel.Message = "Se eliminó correctamente el registro.";
+
+                _dialogService.OpenDialog(_alertDialogViewModel);
+            }
         }
     }
 
@@ -237,8 +237,30 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
         }
         else if (obj is Experiencia exp)
         {
-            //TODO:
+            _eventAggregator.GetEvent<NavigateToEditExperiencia>().Publish(exp);
+
+            var experiencia = _dialogService.OpenDialog(_experienciaDialogViewModel);
+
+            if (experiencia is not null)
+            {
+                //Workaround
+                Experiencia.Remove(experiencia);
+                Experiencia.Add(experiencia);
+            }
         }
+    }
+
+    private bool CanEditDeleteEducacionExperiencia(object obj)
+    {
+        if (obj is Educacion)
+        {
+            return Educacion is not null;
+        }
+        else if (obj is Experiencia)
+        {
+            return Experiencia is not null;
+        }
+        else return false;
     }
 
     #endregion
