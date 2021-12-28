@@ -49,6 +49,10 @@
                                         <Run Text="Descripción:" FontWeight="Bold"/>
                                         <Run Text="{Binding Descripcion}"/>
                                         <LineBreak/>
+                                        <Run Text="Meritos:" FontWeight="Bold"/>
+                                        <LineBreak/>
+                                        <Run Text="{Binding Meritos}"/>
+                                        <LineBreak/>
                                         <Run Text="Fecha Inicio:" FontWeight="Bold"/>
                                         <Run Text="{Binding FechaInicio, StringFormat='d'}"/>
                                         <Run Text="/"/>
@@ -74,8 +78,7 @@
                                 Foreground="White"
                                 HorizontalAlignment="Right" 
                                 Command="{Binding AddEducacionExperienciaCommand}"
-                                CommandParameter="{Binding EducacionSelected}"
-                                IsDefault="True">
+                                CommandParameter="{Binding EducacionSelected}">
                             <Button.ToolTip>
                                 <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Educacion"/>
                             </Button.ToolTip>
@@ -86,9 +89,7 @@
                                 FontSize="18"
                                 Foreground="White"
                                 HorizontalAlignment="Right" 
-                                Command="{Binding EditEducacionExperienciaCommand}"
-                                CommandParameter="{Binding EducacionSelected}"
-                                IsDefault="True">
+                                Command="{Binding EditEducacionCommand}">
                             <Button.ToolTip>
                                 <ToolTip Style="{StaticResource ToolTipStyle}" Content="Editar Educacion"/>
                             </Button.ToolTip>
@@ -99,9 +100,7 @@
                                 FontSize="18"
                                 Foreground="White"
                                 HorizontalAlignment="Right" 
-                                Command="{Binding DeleteEducacionExperienciaCommand}"
-                                CommandParameter="{Binding EducacionSelected}"
-                                IsDefault="True">
+                                Command="{Binding DeleteEducacionCommand}">
                             <Button.ToolTip>
                                 <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Educacion"/>
                             </Button.ToolTip>
@@ -181,8 +180,7 @@
                                 Foreground="White"
                                 HorizontalAlignment="Right" 
                                 Command="{Binding AddEducacionExperienciaCommand}"
-                                CommandParameter="{Binding ExperienciaSelected}"
-                                IsDefault="True">
+                                CommandParameter="{Binding ExperienciaSelected}">
                             <Button.ToolTip>
                                 <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Experiencia"/>
                             </Button.ToolTip>
@@ -193,9 +191,7 @@
                                 FontSize="18"
                                 Foreground="White"
                                 HorizontalAlignment="Right" 
-                                Command="{Binding EditEducacionExperienciaCommand}"
-                                CommandParameter="{Binding ExperienciaSelected}"
-                                IsDefault="True">
+                                Command="{Binding EditExperienciaCommand}">
                             <Button.ToolTip>
                                 <ToolTip Style="{StaticResource ToolTipStyle}" Content="Editar Experiencia"/>
                             </Button.ToolTip>
@@ -206,9 +202,7 @@
                                 FontSize="18"
                                 Foreground="White"
                                 HorizontalAlignment="Right" 
-                                Command="{Binding DeleteEducacionExperienciaCommand}"
-                                CommandParameter="{Binding ExperienciaSelected}"
-                                IsDefault="True">
+                                Command="{Binding DeleteExperienciaCommand}">
                             <Button.ToolTip>
                                 <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Experiencia"/>
                             </Button.ToolTip>

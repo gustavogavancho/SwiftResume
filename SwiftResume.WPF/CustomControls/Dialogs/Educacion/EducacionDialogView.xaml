@@ -54,7 +54,7 @@
         </StackPanel>
         <StackPanel Grid.Row="4" Margin="0 15 0 0">
             <TextBlock Text="Meritos:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-            <TextBox Text="{Binding EducacionWrapper.Meritos, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" Height="80" TextWrapping="Wrap"/>
+            <TextBox Text="{Binding EducacionWrapper.Meritos, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" Height="80" TextWrapping="Wrap" AcceptsReturn="True"/>
         </StackPanel>
         <StackPanel Grid.Row="5" Margin="0 15 0 0">
             <TextBlock Text="Fecha Inicio:" Style="{StaticResource BlueTextTextBlockStyle}"/>

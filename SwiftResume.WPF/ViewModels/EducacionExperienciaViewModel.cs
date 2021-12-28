@@ -56,7 +56,7 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
         }
     }
 
-    private Educacion _educacionSelected = new();
+    private Educacion _educacionSelected;
     public Educacion EducacionSelected
     {
         get => _educacionSelected;
@@ -64,12 +64,12 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
         { 
             _educacionSelected = value;
             OnPropertyChanged(nameof(EducacionSelected));
-            DeleteEducacionExperienciaCommand.RaiseCanExecuteChanged();
-            EditEducacionExperienciaCommand.RaiseCanExecuteChanged();
+            DeleteEducacionCommand.RaiseCanExecuteChanged();
+            EditEducacionCommand.RaiseCanExecuteChanged();
         }
     }
 
-    private Experiencia _experienciaSelected = new();
+    private Experiencia _experienciaSelected;
     public Experiencia ExperienciaSelected
     {
         get => _experienciaSelected;
@@ -77,8 +77,8 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
         {
             _experienciaSelected = value;
             OnPropertyChanged(nameof(ExperienciaSelected));
-            DeleteEducacionExperienciaCommand.RaiseCanExecuteChanged();
-            EditEducacionExperienciaCommand.RaiseCanExecuteChanged();
+            DeleteExperienciaCommand.RaiseCanExecuteChanged();
+            EditExperienciaCommand.RaiseCanExecuteChanged();
         }
     }
 
@@ -98,9 +98,10 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
     #region Commands
 
     public DelegateCommand<object> AddEducacionExperienciaCommand { get; private set; }
-    public DelegateCommand<object> EditEducacionExperienciaCommand { get; private set; }
-    public DelegateCommand<object> DeleteEducacionExperienciaCommand { get; private set; }
-
+    public DelegateCommand EditEducacionCommand { get; private set; }
+    public DelegateCommand EditExperienciaCommand { get; private set; }
+    public DelegateCommand DeleteEducacionCommand { get; private set; }
+    public DelegateCommand DeleteExperienciaCommand { get; private set; }
 
     #endregion
 
@@ -128,13 +129,25 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
             .Subscribe(OnNavigateToEditResume);
 
         AddEducacionExperienciaCommand = new DelegateCommand<object>(OnAddEducacionExperiencia);
-        EditEducacionExperienciaCommand = new DelegateCommand<object>(OnEditEducacionExperiencia, CanEditEducacionExperiencia);
-        DeleteEducacionExperienciaCommand = new DelegateCommand<object>(OnDeleteEducacionExpericena, CanDeleteEducacionExperiencia);
+        EditEducacionCommand = new DelegateCommand(OnEditEducacion, CanEditDeleteEducacion);
+        EditExperienciaCommand = new DelegateCommand(OnEditExperiencia, CanEditDeleteExperiencia);
+        DeleteEducacionCommand = new DelegateCommand(OnDeleteEducacion, CanEditDeleteEducacion);
+        DeleteExperienciaCommand = new DelegateCommand(OnDeleteExperiencia, CanEditDeleteExperiencia);
     }
 
     #endregion
 
     #region Methods
+
+    private bool CanEditDeleteEducacion()
+    {
+        return EducacionSelected is not null;
+    }
+
+    private bool CanEditDeleteExperiencia()
+    {
+        return ExperienciaSelected is not null;
+    }
 
     private void OnNavigateToEditResume(int id)
     {
@@ -170,23 +183,18 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
         }
     }
 
-    private bool CanDeleteEducacionExperiencia(object obj)
+    private async void OnDeleteEducacion()
     {
-        return CanEditDeleteEducacionExperiencia(obj);
-    }
-
-    private async void OnDeleteEducacionExpericena(object obj)
-    {
-        if (obj is Educacion edu)
+        if (EducacionSelected is not null)
         {
-            _yesNoDialogViewModel.Message = $"¿Deseal eliminar el grado académico: {edu.Descripcion} - {edu.Institucion}?";
+            _yesNoDialogViewModel.Message = $"¿Deseal eliminar el grado académico: {EducacionSelected.Descripcion} - {EducacionSelected.Institucion}?";
 
             var result = _dialogService.OpenDialog(_yesNoDialogViewModel);
 
             if (result == DialogResults.Si)
             {
-                _educacionRepository.Remove(edu);
-                Educacion.Remove(edu);
+                _educacionRepository.Remove(EducacionSelected);
+                Educacion.Remove(EducacionSelected);
 
                 await _educacionRepository.SaveAsync();
 
@@ -195,16 +203,20 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
                 _dialogService.OpenDialog(_alertDialogViewModel);
             }
         }
-        else if (obj is Experiencia exp)
+    }
+
+    private async void OnDeleteExperiencia()
+    {
+        if (ExperienciaSelected is not null)
         {
-            _yesNoDialogViewModel.Message = $"¿Deseal eliminar el grado académico: {exp.Descripcion} - {exp.Institucion}?";
+            _yesNoDialogViewModel.Message = $"¿Deseal eliminar el grado académico: {ExperienciaSelected.Descripcion} - {ExperienciaSelected.Institucion}?";
 
             var result = _dialogService.OpenDialog(_yesNoDialogViewModel);
 
             if (result == DialogResults.Si)
             {
-                _experienciaRepository.Remove(exp);
-                Experiencia.Remove(exp);
+                _experienciaRepository.Remove(ExperienciaSelected);
+                Experiencia.Remove(ExperienciaSelected);
 
                 await _experienciaRepository.SaveAsync();
 
@@ -215,16 +227,11 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
         }
     }
 
-    private bool CanEditEducacionExperiencia(object obj)
+    private void OnEditEducacion()
     {
-        return CanEditDeleteEducacionExperiencia(obj);
-    }
-
-    private void OnEditEducacionExperiencia(object obj)
-    {
-        if (obj is Educacion edu)
+        if (EducacionSelected is not null)
         {
-            _eventAggregator.GetEvent<NavigateToEditEducacion>().Publish(edu.Id);
+            _eventAggregator.GetEvent<NavigateToEditEducacion>().Publish(EducacionSelected.Id);
 
             var habilidad = _dialogService.OpenDialog(_educacionDialogViewModel);
 
@@ -235,9 +242,13 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
                 Educacion.Add(habilidad);
             }
         }
-        else if (obj is Experiencia exp)
+    }
+
+    private void OnEditExperiencia()
+    {
+        if (ExperienciaSelected is not null)
         {
-            _eventAggregator.GetEvent<NavigateToEditExperiencia>().Publish(exp.Id);
+            _eventAggregator.GetEvent<NavigateToEditExperiencia>().Publish(ExperienciaSelected.Id);
 
             var experiencia = _dialogService.OpenDialog(_experienciaDialogViewModel);
 
@@ -248,19 +259,6 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
                 Experiencia.Add(experiencia);
             }
         }
-    }
-
-    private bool CanEditDeleteEducacionExperiencia(object obj)
-    {
-        if (obj is Educacion)
-        {
-            return Educacion is not null;
-        }
-        else if (obj is Experiencia)
-        {
-            return Experiencia is not null;
-        }
-        else return false;
     }
 
     #endregion
