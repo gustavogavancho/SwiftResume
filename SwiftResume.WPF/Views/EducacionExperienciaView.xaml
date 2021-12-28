@@ -77,8 +77,7 @@
                                 FontSize="18"
                                 Foreground="White"
                                 HorizontalAlignment="Right" 
-                                Command="{Binding AddEducacionExperienciaCommand}"
-                                CommandParameter="{Binding EducacionSelected}">
+                                Command="{Binding AddEducacionCommand}">
                             <Button.ToolTip>
                                 <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Educacion"/>
                             </Button.ToolTip>
@@ -179,8 +178,7 @@
                                 FontSize="18"
                                 Foreground="White"
                                 HorizontalAlignment="Right" 
-                                Command="{Binding AddEducacionExperienciaCommand}"
-                                CommandParameter="{Binding ExperienciaSelected}">
+                                Command="{Binding AddExperienciaCommand}">
                             <Button.ToolTip>
                                 <ToolTip Style="{StaticResource ToolTipStyle}" Content="Agregar Experiencia"/>
                             </Button.ToolTip>

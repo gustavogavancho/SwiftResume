@@ -97,7 +97,8 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
 
     #region Commands
 
-    public DelegateCommand<object> AddEducacionExperienciaCommand { get; private set; }
+    public DelegateCommand AddEducacionCommand { get; private set; }
+    public DelegateCommand AddExperienciaCommand { get; private set; }
     public DelegateCommand EditEducacionCommand { get; private set; }
     public DelegateCommand EditExperienciaCommand { get; private set; }
     public DelegateCommand DeleteEducacionCommand { get; private set; }
@@ -128,7 +129,8 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
         eventAggregator.GetEvent<NavigateToEditResume>()
             .Subscribe(OnNavigateToEditResume);
 
-        AddEducacionExperienciaCommand = new DelegateCommand<object>(OnAddEducacionExperiencia);
+        AddEducacionCommand = new DelegateCommand(OnAddEducacion);
+        AddExperienciaCommand = new DelegateCommand(OnAddExperiencia);
         EditEducacionCommand = new DelegateCommand(OnEditEducacion, CanEditDeleteEducacion);
         EditExperienciaCommand = new DelegateCommand(OnEditExperiencia, CanEditDeleteExperiencia);
         DeleteEducacionCommand = new DelegateCommand(OnDeleteEducacion, CanEditDeleteEducacion);
@@ -157,29 +159,27 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
     }
 
 
-    private void OnAddEducacionExperiencia(object obj)
+    private void OnAddEducacion()
     {
-        if (obj is Educacion)
+        _educacionDialogViewModel.ResumeId = ResumeId;
+
+        var educacion = _dialogService.OpenDialog(_educacionDialogViewModel);
+
+        if (educacion is not null)
         {
-            _educacionDialogViewModel.ResumeId = ResumeId;
-
-            var educacion = _dialogService.OpenDialog(_educacionDialogViewModel);
-
-            if (educacion is not null)
-            {
-                Educacion.Add(educacion);
-            }
+            Educacion.Add(educacion);
         }
-        else if (obj is Experiencia)
+    }
+
+    private void OnAddExperiencia()
+    {
+        _experienciaDialogViewModel.ResumeId = ResumeId;
+
+        var experiencia = _dialogService.OpenDialog(_experienciaDialogViewModel);
+
+        if (experiencia is not null)
         {
-            _experienciaDialogViewModel.ResumeId = ResumeId;
-
-            var experiencia = _dialogService.OpenDialog(_experienciaDialogViewModel);
-
-            if (experiencia is not null)
-            {
-                Experiencia.Add(experiencia);
-            }
+            Experiencia.Add(experiencia);
         }
     }
 

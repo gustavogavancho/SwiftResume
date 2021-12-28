@@ -98,7 +98,7 @@
                         <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}" Margin="15 0 15 0">
                             <Run Text="Fecha de Nacimiento:" FontWeight="Bold"/>
                             <LineBreak/>
-                            <Run Text="{Binding Resume.Perfil.FechaNacimiento, StringFormat='d'}"/>
+                            <Run Text="{Binding Resume.Perfil.FechaNacimiento, StringFormat='d', ConverterCulture='es-PE'}"/>
                         </TextBlock>
                     </Paragraph>
                     <Paragraph Margin="0 0 0 0">
@@ -164,8 +164,10 @@
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <Run Text="Descripción: " FontWeight="Bold"/>
+                                <Run Text=" "/>
                                 <Run Text="{Binding Nombre}" FontWeight="Light" />
-                                <Run Text=" / "/>
+                                <Run Text=" - "/>
                                 <Run Text="Nivel: " FontWeight="Bold"/>
                                 <Run Text="{Binding Nivel}"/>
                                 <LineBreak/>
@@ -188,11 +190,14 @@
                                behaviors:ParagraphInlineBehavior.TemplateResourceName="inlineTemplate"
                                xmlns:Collections="clr-namespace:System.Collections;assembly=mscorlib"
                                FontSize="14"
+                               TextAlignment="Justify"
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <Run Text="Descripción: " FontWeight="Bold"/>
+                                <Run Text=" "/>
                                 <Run Text="{Binding Nombre}" FontWeight="Light" />
-                                <Run Text=" / "/>
+                                <Run Text=" - "/>
                                 <Run Text="Nivel: " FontWeight="Bold"/>
                                 <Run Text="{Binding Nivel}"/>
                                 <LineBreak/>
@@ -215,13 +220,60 @@
                                behaviors:ParagraphInlineBehavior.TemplateResourceName="inlineTemplate"
                                xmlns:Collections="clr-namespace:System.Collections;assembly=mscorlib"
                                FontSize="14"
+                               TextAlignment="Justify"
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <Run Text="Descripción: " FontWeight="Bold"/>
+                                <Run Text=" "/>
                                 <Run Text="{Binding Nombre}" FontWeight="Light" />
-                                <Run Text=" / "/>
+                                <Run Text=" - "/>
                                 <Run Text="Nivel: " FontWeight="Bold"/>
                                 <Run Text="{Binding Nivel}"/>
+                                <LineBreak/>
+                            </Collections:ArrayList>
+                        </Paragraph.Resources>
+                    </Paragraph>
+                </Section>
+                <Section>
+                    <BlockUIContainer>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Width="30" Height="30" Fill="{StaticResource PrimaryBrush}" Margin="15 0 0 0"/>
+                            <TextBlock Grid.Column="1" Text="Educación:" TextWrapping="Wrap" Margin="10 0 0 0" FontSize="24" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}"/>
+                        </Grid>
+                    </BlockUIContainer>
+                    <Paragraph behaviors:ParagraphInlineBehavior.ParagraphInlineSource="{Binding Resume.Educacion}"
+                               behaviors:ParagraphInlineBehavior.TemplateResourceName="inlineTemplate"
+                               xmlns:Collections="clr-namespace:System.Collections;assembly=mscorlib"
+                               FontSize="14"
+                               TextAlignment="Justify"
+                               Margin="14 15 0 8">
+                        <Paragraph.Resources>
+                            <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <Run Text="Descripción:" FontWeight="Bold"/>
+                                <Run Text=" "/>
+                                <Run Text="{Binding Descripcion}" FontWeight="Light"/>
+                                <Run Text=", "/>
+                                <Run Text="{Binding Institucion}" FontWeight="Light"/>
+                                <LineBreak/>
+                                <Run Text="Grado Académico: " FontWeight="Bold"/>
+                                <Run Text="{Binding TipoEducacion, Converter={StaticResource SplitCameCaseString}}" FontWeight="Light"/>
+                                <LineBreak/>
+                                <Run Text="Meritos: " FontWeight="Bold"/>
+                                <LineBreak/>
+                                <Run Text="{Binding Meritos}" FontWeight="Light"/>
+                                <LineBreak/>
+                                <Run Text="Inicio:" FontWeight="Bold"/>
+                                <Run Text=" "/>
+                                <Run Text="{Binding FechaInicio, StringFormat='d', ConverterCulture='es-PE'}" FontWeight="Light"/>
+                                <Run Text=" - " FontWeight="Bold"/>
+                                <Run Text="Fin:" FontWeight="Bold"/>
+                                <Run Text=" "/>
+                                <Run Text="{Binding FechaFin, StringFormat='d', ConverterCulture='es-PE'}" FontWeight="Light"/>
                                 <LineBreak/>
                             </Collections:ArrayList>
                         </Paragraph.Resources>

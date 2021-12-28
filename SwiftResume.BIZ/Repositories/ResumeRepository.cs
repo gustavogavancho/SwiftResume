@@ -24,9 +24,12 @@ public class ResumeRepository : Repository<Resume>, IResumeRepository
         return await _context.Resumes.Include(x=> x.Perfil).FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<Resume> GetResumeWithProfileHabilidades(int id)
+    public async Task<Resume> GetResumeWithProfileHabilidadesEducacion(int id)
     {
-        return await _context.Resumes.Include(x => x.Perfil)
-            .Include(x => x.Habilidades).FirstOrDefaultAsync(x => x.Id == id);
+        return await _context.Resumes
+            .Include(x => x.Perfil)
+            .Include(x => x.Habilidades)
+            .Include(x => x.Educacion)
+            .FirstOrDefaultAsync(x => x.Id == id);
     }
 }
