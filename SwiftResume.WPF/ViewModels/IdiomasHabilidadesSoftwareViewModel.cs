@@ -155,7 +155,7 @@ public class IdiomasHabilidadesSoftwareViewModel : ViewModelBase, ITab
 
     private void OnEditHabilidad()
     {
-        _eventAggregator.GetEvent<NavigateToEditHabilidad>().Publish(Habilidad);
+        _eventAggregator.GetEvent<NavigateToEditHabilidad>().Publish(Habilidad.Id);
 
         var habilidad = _dialogService.OpenDialog(_habilidadDialogViewModel);
 

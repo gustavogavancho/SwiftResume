@@ -148,9 +148,9 @@ namespace SwiftResume.WPF.CustomControls.Dialogs.Habilidad
             return habilidad;
         }
 
-        private void OnNavigateToEditHabilidad(Model.Habilidad habilidad)
+        private async void OnNavigateToEditHabilidad(int habilidadId)
         {
-            _habilidadEdit = habilidad;
+            _habilidadEdit = await _habilidadRepository.Get(habilidadId);
         }
         #endregion
     }

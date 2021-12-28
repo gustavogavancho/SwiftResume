@@ -94,9 +94,9 @@ public class ExperienciaDialogViewModel : DialogViewModelBase<Model.Experiencia>
         InitializeResume(experiencia);
     }
 
-    private void OnNavigateToEditExperiencia(Model.Experiencia experiencia)
+    private async void OnNavigateToEditExperiencia(int experienciaId)
     {
-        _experienciaEdit = experiencia;
+        _experienciaEdit = await _experienciaRepository.Get(experienciaId);
     }
 
     private void OnCancel(IDialogWindow window)

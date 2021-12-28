@@ -224,7 +224,7 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
     {
         if (obj is Educacion edu)
         {
-            _eventAggregator.GetEvent<NavigateToEditEducacion>().Publish(edu);
+            _eventAggregator.GetEvent<NavigateToEditEducacion>().Publish(edu.Id);
 
             var habilidad = _dialogService.OpenDialog(_educacionDialogViewModel);
 
@@ -237,7 +237,7 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
         }
         else if (obj is Experiencia exp)
         {
-            _eventAggregator.GetEvent<NavigateToEditExperiencia>().Publish(exp);
+            _eventAggregator.GetEvent<NavigateToEditExperiencia>().Publish(exp.Id);
 
             var experiencia = _dialogService.OpenDialog(_experienciaDialogViewModel);
 

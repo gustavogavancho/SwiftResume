@@ -93,9 +93,9 @@ public class EducacionDialogViewModel : DialogViewModelBase<Model.Educacion>
         InitializeResume(educacion);
     }
 
-    private void OnNavigateToEditEducacion(Model.Educacion educacion)
+    private async void OnNavigateToEditEducacion(int educacionId)
     {
-        _educacionEdit = educacion;
+        _educacionEdit = await _educacionRepository.Get(educacionId);
     }
 
     private void OnCancel(IDialogWindow window)

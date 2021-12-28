@@ -3,4 +3,4 @@ using SwiftResume.COMMON.Models;
 
 namespace SwiftResume.WPF.Events;
 
-public class NavigateToEditExperiencia : PubSubEvent<Experiencia> { }
+public class NavigateToEditExperiencia : PubSubEvent<int> { }
