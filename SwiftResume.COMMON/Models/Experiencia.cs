@@ -12,5 +12,4 @@ public class Experiencia : BaseEntity
     [Required] public DateTime FechaInicio { get; set; } = DateTime.Now;
     [Required] public DateTime FechaFin { get; set; } = DateTime.Now;
     public int ResumeId { get; set; }
-
 }

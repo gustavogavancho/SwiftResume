@@ -7,5 +7,5 @@ public interface IResumeRepository : IRepository<Resume>
 {
     Task<Resume> GetResumeWithProfile(int id);
     Task<IEnumerable<Resume>> GetResumesByUsername(string username);
-    Task<Resume> GetResumeWithProfileHabilidadesEducacion(int id);
+    Task<Resume> GetResumeWithProfileHabilidadesEducacionOtros(int id);
 }

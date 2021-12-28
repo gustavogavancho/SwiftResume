@@ -55,7 +55,7 @@
                                         <LineBreak/>
                                         <Run Text="Fecha Inicio:" FontWeight="Bold"/>
                                         <Run Text="{Binding FechaInicio, StringFormat='d'}"/>
-                                        <Run Text="/"/>
+                                        <Run Text=" - " FontWeight="Bold"/>
                                         <Run Text="Fecha Fin:" FontWeight="Bold"/>
                                         <Run Text="{Binding FechaFin, StringFormat='d'}"/>
                                     </TextBlock>

@@ -7,17 +7,17 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:behaviors="clr-namespace:SwiftResume.WPF.Extensions"
              mc:Ignorable="d"
-             Height="700" 
+             Height="715" 
              Width="1000">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <Button Content="Imprimir" Command="{Binding PrintCommand}" CommandParameter="{Binding ElementName=fdReport}"/>
-        <FlowDocumentPageViewer Grid.Row="1">
+        <FlowDocumentPageViewer Grid.Row="0">
             <FlowDocument x:Name="fdReport" IsOptimalParagraphEnabled="True">
                 <Section>
                     <BlockUIContainer>
@@ -279,7 +279,57 @@
                         </Paragraph.Resources>
                     </Paragraph>
                 </Section>
+                <Section>
+                    <BlockUIContainer>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Width="30" Height="30" Fill="{StaticResource PrimaryBrush}" Margin="15 0 0 0"/>
+                            <TextBlock Grid.Column="1" Text="Experiencia:" TextWrapping="Wrap" Margin="10 0 0 0" FontSize="24" FontWeight="Light" Foreground="{StaticResource PrimaryBrush}"/>
+                        </Grid>
+                    </BlockUIContainer>
+                    <Paragraph behaviors:ParagraphInlineBehavior.ParagraphInlineSource="{Binding Resume.Experiencia}"
+                               behaviors:ParagraphInlineBehavior.TemplateResourceName="inlineTemplate"
+                               xmlns:Collections="clr-namespace:System.Collections;assembly=mscorlib"
+                               FontSize="14"
+                               TextAlignment="Justify"
+                               Margin="14 15 0 8">
+                        <Paragraph.Resources>
+                            <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <Run Text="Descripción:" FontWeight="Bold"/>
+                                <Run Text=" "/>
+                                <Run Text="{Binding Descripcion}" FontWeight="Light"/>
+                                <Run Text=", "/>
+                                <Run Text="{Binding Institucion}" FontWeight="Light"/>
+                                <LineBreak/>
+                                <Run Text="Inicio:" FontWeight="Bold"/>
+                                <Run Text=" "/>
+                                <Run Text="{Binding FechaInicio, StringFormat='d', ConverterCulture='es-PE'}" FontWeight="Light"/>
+                                <Run Text=" - " FontWeight="Bold"/>
+                                <Run Text="Fin:" FontWeight="Bold"/>
+                                <Run Text=" "/>
+                                <Run Text="{Binding FechaFin, StringFormat='d', ConverterCulture='es-PE'}" FontWeight="Light"/>
+                                <LineBreak/>
+                                <Run Text="Lugar: " FontWeight="Bold"/>
+                                <Run Text="{Binding Lugar}" FontWeight="Light"/>
+                                <LineBreak/>
+                                <Run Text="Responsabilidades: " FontWeight="Bold"/>
+                                <LineBreak/>
+                                <Run Text="{Binding Responsabilidades}" FontWeight="Light"/>
+                                <LineBreak/>
+                                <Run Text="Logros: " FontWeight="Bold"/>
+                                <LineBreak/>
+                                <Run Text="{Binding Logros}" FontWeight="Light"/>
+                                <LineBreak/>
+                            </Collections:ArrayList>
+                        </Paragraph.Resources>
+                    </Paragraph>
+                </Section>
             </FlowDocument>
         </FlowDocumentPageViewer>
+        <Rectangle Fill="{StaticResource PrimaryBrush}" Grid.Row="1"  Height="5" Margin="5" HorizontalAlignment="Stretch" />
+        <Button Content="Imprimir" Grid.Row="2" Command="{Binding PrintCommand}" Style="{StaticResource SecondaryNormalButtonSytle}" HorizontalAlignment="Right" CommandParameter="{Binding ElementName=fdReport}"/>
     </Grid>
 </UserControl>
