@@ -49,10 +49,6 @@
                                         <Run Text="Descripción:" FontWeight="Bold"/>
                                         <Run Text="{Binding Descripcion}"/>
                                         <LineBreak/>
-                                        <Run Text="Meritos:" FontWeight="Bold"/>
-                                        <LineBreak/>
-                                        <Run Text="{Binding Meritos}"/>
-                                        <LineBreak/>
                                         <Run Text="Fecha Inicio:" FontWeight="Bold"/>
                                         <Run Text="{Binding FechaInicio, StringFormat='d'}"/>
                                         <Run Text=" - " FontWeight="Bold"/>
@@ -145,14 +141,6 @@
                                         <LineBreak/>
                                         <Run Text="Descripción:" FontWeight="Bold"/>
                                         <Run Text="{Binding Descripcion}"/>
-                                        <LineBreak/>
-                                        <Run Text="Responsabilidades:" FontWeight="Bold"/>
-                                        <LineBreak/>
-                                        <Run Text="{Binding Responsabilidades}" FontWeight="Light"/>
-                                        <LineBreak/>
-                                        <Run Text="Logros:" FontWeight="Bold"/>
-                                        <LineBreak/>
-                                        <Run Text="{Binding Logros}" FontWeight="Light"/>
                                         <LineBreak/>
                                         <Run Text="Fecha Inicio:" FontWeight="Bold"/>
                                         <Run Text="{Binding FechaInicio, StringFormat='d'}"/>

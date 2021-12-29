@@ -8,7 +8,7 @@
              xmlns:behaviors="clr-namespace:SwiftResume.WPF.Extensions"
              mc:Ignorable="d"
              Height="715" 
-             Width="1000">
+             Width="1020">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -267,13 +267,13 @@
                                 <LineBreak/>
                                 <Run Text="{Binding Meritos}" FontWeight="Light"/>
                                 <LineBreak/>
-                                <Run Text="Inicio:" FontWeight="Bold"/>
-                                <Run Text=" "/>
-                                <Run Text="{Binding FechaInicio, StringFormat='d', ConverterCulture='es-PE'}" FontWeight="Light"/>
-                                <Run Text=" - " FontWeight="Bold"/>
-                                <Run Text="Fin:" FontWeight="Bold"/>
-                                <Run Text=" "/>
-                                <Run Text="{Binding FechaFin, StringFormat='d', ConverterCulture='es-PE'}" FontWeight="Light"/>
+                                <Run Text="Inicio:" FontWeight="Bold" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
+                                <Run Text=" " Background="{StaticResource PrimaryBrush}" Foreground="White"/>
+                                <Run Text="{Binding FechaInicio, StringFormat='d', ConverterCulture='es-PE'}" FontWeight="Light" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
+                                <Run Text=" - " FontWeight="Bold" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
+                                <Run Text="Fin:" FontWeight="Bold" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
+                                <Run Text=" " Background="{StaticResource PrimaryBrush}" Foreground="White"/>
+                                <Run Text="{Binding FechaFin, StringFormat='d', ConverterCulture='es-PE'}" FontWeight="Light" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
                                 <LineBreak/>
                             </Collections:ArrayList>
                         </Paragraph.Resources>
@@ -298,19 +298,21 @@
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <Run Text="**********************************************************************"/>
+                                <LineBreak/>
                                 <Run Text="Descripción:" FontWeight="Bold"/>
                                 <Run Text=" "/>
-                                <Run Text="{Binding Descripcion}" FontWeight="Light"/>
+                                <Run Text="{Binding Descripcion}" FontWeight="Light" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
                                 <Run Text=", "/>
                                 <Run Text="{Binding Institucion}" FontWeight="Light"/>
                                 <LineBreak/>
-                                <Run Text="Inicio:" FontWeight="Bold"/>
-                                <Run Text=" "/>
-                                <Run Text="{Binding FechaInicio, StringFormat='d', ConverterCulture='es-PE'}" FontWeight="Light"/>
-                                <Run Text=" - " FontWeight="Bold"/>
-                                <Run Text="Fin:" FontWeight="Bold"/>
-                                <Run Text=" "/>
-                                <Run Text="{Binding FechaFin, StringFormat='d', ConverterCulture='es-PE'}" FontWeight="Light"/>
+                                <Run Text="Inicio:" FontWeight="Bold" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
+                                <Run Text=" " Background="{StaticResource PrimaryBrush}" Foreground="White"/>
+                                <Run Text="{Binding FechaInicio, StringFormat='d', ConverterCulture='es-PE'}" FontWeight="Light" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
+                                <Run Text=" - " FontWeight="Bold" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
+                                <Run Text="Fin:" FontWeight="Bold" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
+                                <Run Text=" " Background="{StaticResource PrimaryBrush}" Foreground="White"/>
+                                <Run Text="{Binding FechaFin, StringFormat='d', ConverterCulture='es-PE'}" FontWeight="Light" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
                                 <LineBreak/>
                                 <Run Text="Lugar: " FontWeight="Bold"/>
                                 <Run Text="{Binding Lugar}" FontWeight="Light"/>
@@ -321,7 +323,7 @@
                                 <LineBreak/>
                                 <Run Text="Logros: " FontWeight="Bold"/>
                                 <LineBreak/>
-                                <Run Text="{Binding Logros}" FontWeight="Light"/>
+                                <Run Text="{Binding Logros, Converter={StaticResource EmptyStringToNA}}" FontWeight="Light"/>
                                 <LineBreak/>
                             </Collections:ArrayList>
                         </Paragraph.Resources>

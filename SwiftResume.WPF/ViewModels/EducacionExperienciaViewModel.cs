@@ -154,10 +154,14 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
     private void OnNavigateToEditResume(int id)
     {
         ResumeId = id;
-        Educacion = _educacionRepository.Find(x => x.ResumeId == id).ToObservableCollection();
-        Experiencia = _experienciaRepository.Find(x => x.ResumeId == id).ToObservableCollection();
-    }
 
+        Educacion = _educacionRepository.Find(x => x.ResumeId == id)
+            .OrderByDescending(x=> x.FechaFin)
+            .ToObservableCollection();
+        Experiencia = _experienciaRepository.Find(x => x.ResumeId == id)
+            .OrderByDescending(x=> x.FechaInicio)
+            .ToObservableCollection();
+    }
 
     private void OnAddEducacion()
     {

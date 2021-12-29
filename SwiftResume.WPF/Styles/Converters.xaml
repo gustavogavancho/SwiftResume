@@ -10,6 +10,7 @@
     <converters:CharacterCounter x:Key="CharacterCounter"/>
     <converters:EnunToDescription x:Key="EnumToDescription"/>
     <converters:SplitCamelCaseString x:Key="SplitCameCaseString"/>
+    <converters:EmptyStringToNA x:Key="EmptyStringToNA"/>
     <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
     
 

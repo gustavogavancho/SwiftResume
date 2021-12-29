@@ -37,7 +37,7 @@
         <TextBlock Text="Experiencia:" Style="{StaticResource SubTitleTextBlockStyle}" FocusManager.FocusedElement="{Binding ElementName=txtInstitucion}"/>
         <StackPanel Grid.Row="1" Margin="0 15 0 0">
             <TextBlock Text="Institucion:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-            <TextBox x:Name="txtInstitucion" Text="{Binding ExperienciaWrapper.Institucion, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+            <TextBox x:Name="txtInstitucion" Text="{Binding ExperienciaWrapper.Institucion, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" CharacterCasing="Upper"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Margin="0 15 0 0">
             <TextBlock Text="Descripcion:" Style="{StaticResource BlueTextTextBlockStyle}"/>
