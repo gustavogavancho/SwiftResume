@@ -8,9 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\certificationsreport.png" />
+    <None Remove="Images\educationreport.png" />
+    <None Remove="Images\experiencereport.png" />
+    <None Remove="Images\languagereport.png" />
     <None Remove="Images\loginbackground.jpg" />
     <None Remove="Images\personfemale.png" />
     <None Remove="Images\personmale.svg" />
+    <None Remove="Images\profilereport.png" />
+    <None Remove="Images\skillsreport.png" />
+    <None Remove="Images\softwarereport.png" />
+    <None Remove="Images\summaryreport.png" />
     <None Remove="Images\swiftline.svg" />
   </ItemGroup>
 
@@ -34,6 +42,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\certificationsreport.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\educationreport.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\experiencereport.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\languagereport.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\loginbackground.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -41,6 +61,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\personmale.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\profilereport.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\skillsreport.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\softwarereport.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\summaryreport.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\swiftline.svg">
