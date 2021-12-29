@@ -7,7 +7,7 @@ public class EmptyStringToNA : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        string valueToString = value.ToString();
+        string valueToString = value?.ToString();
         if (string.IsNullOrEmpty(valueToString))
             return "- NA";
         else

@@ -65,6 +65,7 @@ public class ReportDialogViewModel : DialogViewModelBase<Model.Resume>
     private async void OnNavigateToReportResume(int id)
     {
         Resume = await _resumeRepository.GetResumeWithProfileHabilidadesEducacionOtros(id);
+        Resume.Experiencia = Resume.Experiencia.Where(x => x.Mostrar).OrderByDescending(x=> x.EsActual).ThenByDescending(x=> x.FechaFin).ToList();
         Idiomas = Resume.Habilidades.Where(x => x.Tipo == "Idioma").ToList();
         Habilidades = Resume.Habilidades.Where(x => x.Tipo == "Habilidad").ToList();
         Software = Resume.Habilidades.Where(x => x.Tipo == "Software").ToList();

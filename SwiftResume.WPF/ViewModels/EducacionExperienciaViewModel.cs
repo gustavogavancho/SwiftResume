@@ -159,7 +159,8 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
             .OrderByDescending(x=> x.FechaFin)
             .ToObservableCollection();
         Experiencia = _experienciaRepository.Find(x => x.ResumeId == id)
-            .OrderByDescending(x=> x.FechaInicio)
+            .OrderByDescending(x=> x.EsActual)
+            .ThenByDescending(x=> x.FechaFin)
             .ToObservableCollection();
     }
 

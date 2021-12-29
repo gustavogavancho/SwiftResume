@@ -147,6 +147,11 @@
                                         <Run Text="/"/>
                                         <Run Text="Fecha Fin:" FontWeight="Bold"/>
                                         <Run Text="{Binding FechaFin, StringFormat='d'}"/>
+                                        <LineBreak/>
+                                        <Run Text="¿Es Actual?" FontWeight="Bold"/>
+                                        <Run Text="{Binding EsActual}"/>
+                                        <Run Text="¿Mostrar?" FontWeight="Bold"/>
+                                        <Run Text="{Binding Mostrar}"/>
                                     </TextBlock>
                                 </Grid>
                             </DataTemplate>

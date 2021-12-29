@@ -8,7 +8,7 @@
              xmlns:enum="clr-namespace:SwiftResume.COMMON.Enums;assembly=SwiftResume.COMMON"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
-             Height="700" Width="400">
+             Height="710" Width="400">
 
     <UserControl.InputBindings>
         <KeyBinding Key="Escape" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
@@ -32,38 +32,43 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="Experiencia:" Style="{StaticResource SubTitleTextBlockStyle}" FocusManager.FocusedElement="{Binding ElementName=txtInstitucion}"/>
-        <StackPanel Grid.Row="1" Margin="0 15 0 0">
+        <StackPanel Grid.Row="1" Margin="0 15 0 0" Orientation="Horizontal">
+            <CheckBox IsChecked="{Binding ExperienciaWrapper.EsActual, UpdateSourceTrigger=PropertyChanged}" Content="¿Es Actual?" Margin="0 0 0 0" />
+            <CheckBox IsChecked="{Binding ExperienciaWrapper.Mostrar, UpdateSourceTrigger=PropertyChanged}" Content="¿Mostrar?" Margin="5 0 0 0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Margin="0 15 0 0">
             <TextBlock Text="Institucion:" Style="{StaticResource BlueTextTextBlockStyle}"/>
             <TextBox x:Name="txtInstitucion" Text="{Binding ExperienciaWrapper.Institucion, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" CharacterCasing="Upper"/>
         </StackPanel>
-        <StackPanel Grid.Row="2" Margin="0 15 0 0">
+        <StackPanel Grid.Row="3" Margin="0 15 0 0">
             <TextBlock Text="Descripcion:" Style="{StaticResource BlueTextTextBlockStyle}"/>
             <TextBox Text="{Binding ExperienciaWrapper.Descripcion, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
         </StackPanel>
-        <StackPanel Grid.Row="3" Margin="0 15 0 0">
+        <StackPanel Grid.Row="4" Margin="0 15 0 0">
             <TextBlock Text="Lugar:" Style="{StaticResource BlueTextTextBlockStyle}"/>
             <TextBox Text="{Binding ExperienciaWrapper.Lugar, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
         </StackPanel>
-        <StackPanel Grid.Row="4" Margin="0 15 0 0">
-            <TextBlock Text="Responsabilidades:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-            <TextBox Text="{Binding ExperienciaWrapper.Responsabilidades, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" Height="80" TextWrapping="Wrap" AcceptsReturn="True"/>
-        </StackPanel>
         <StackPanel Grid.Row="5" Margin="0 15 0 0">
-            <TextBlock Text="Logros:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-            <TextBox Text="{Binding ExperienciaWrapper.Logros, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" Height="80" TextWrapping="Wrap" AcceptsReturn="True"/>
+            <TextBlock Text="Responsabilidades:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+            <TextBox Text="{Binding ExperienciaWrapper.Responsabilidades, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" Height="70" TextWrapping="Wrap" AcceptsReturn="True"/>
         </StackPanel>
         <StackPanel Grid.Row="6" Margin="0 15 0 0">
+            <TextBlock Text="Logros:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+            <TextBox Text="{Binding ExperienciaWrapper.Logros, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" Height="70" TextWrapping="Wrap" AcceptsReturn="True"/>
+        </StackPanel>
+        <StackPanel Grid.Row="7" Margin="0 15 0 0">
             <TextBlock Text="Fecha Inicio:" Style="{StaticResource BlueTextTextBlockStyle}"/>
             <DatePicker SelectedDate="{Binding ExperienciaWrapper.FechaInicio, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DateTimePickerStyle}"/>
         </StackPanel>
-        <StackPanel Grid.Row="7" Margin="0 15 0 0">
+        <StackPanel Grid.Row="8" Margin="0 15 0 0">
             <TextBlock Text="Fecha Fin:" Style="{StaticResource BlueTextTextBlockStyle}"/>
             <DatePicker SelectedDate="{Binding ExperienciaWrapper.FechaFin, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DateTimePickerStyle}"/>
         </StackPanel>
-        <Grid Grid.Row="8" Margin="0 20 0 0">
+        <Grid Grid.Row="9" Margin="0 20 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>

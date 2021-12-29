@@ -48,4 +48,16 @@ public class ExperienciaWrapper : ModelWrapper<Experiencia>
         get => GetValue<DateTime>();
         set => SetValue(value);
     }
+
+    public bool Mostrar
+    {
+        get => GetValue<bool>();
+        set => SetValue(value);
+    }
+
+    public bool EsActual
+    {
+        get => GetValue<bool>();
+        set => SetValue(value);
+    }
 }

@@ -11,5 +11,7 @@ public class Experiencia : BaseEntity
     public string Logros { get; set; }
     [Required] public DateTime FechaInicio { get; set; } = DateTime.Now;
     [Required] public DateTime FechaFin { get; set; } = DateTime.Now;
+    public bool Mostrar { get; set; } = true;
+    public bool EsActual { get; set; }
     public int ResumeId { get; set; }
 }
