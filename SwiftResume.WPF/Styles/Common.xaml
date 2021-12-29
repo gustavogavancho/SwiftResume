@@ -7,11 +7,13 @@
     <Color x:Key="PrimaryColor">#003366</Color>
     <Color x:Key="SecondaryColor">White</Color>
     <Color x:Key="TertiaryColor">#C70039</Color>
+    <Color x:Key="ForthColor">#006400</Color>
 
     <!-- Brushes -->
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource TertiaryColor}"/>
+    <SolidColorBrush x:Key="ForthBrush" Color="{StaticResource ForthColor}"/>
 
     <!-- TextBlock -->
     <Style x:Key="TitleSecondaryTextBlockStyle" TargetType="TextBlock">

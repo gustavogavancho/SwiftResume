@@ -243,8 +243,9 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
             if (habilidad is not null)
             {
                 //Workaround
-                Educacion.Remove(habilidad);
-                Educacion.Add(habilidad);
+                Educacion = Educacion = _educacionRepository.Find(x => x.ResumeId == ResumeId)
+                    .OrderByDescending(x => x.FechaFin)
+                    .ToObservableCollection();
             }
         }
     }
@@ -259,9 +260,10 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
 
             if (experiencia is not null)
             {
-                //Workaround
-                Experiencia.Remove(experiencia);
-                Experiencia.Add(experiencia);
+                Experiencia = _experienciaRepository.Find(x => x.ResumeId == ResumeId)
+                    .OrderByDescending(x => x.EsActual)
+                    .ThenByDescending(x => x.FechaFin)
+                    .ToObservableCollection();
             }
         }
     }

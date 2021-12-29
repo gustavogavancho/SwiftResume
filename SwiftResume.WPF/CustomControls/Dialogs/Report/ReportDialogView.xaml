@@ -164,6 +164,8 @@
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <Run Text="&#xE7C8;" FontFamily="Segoe MDL2 Assets" FontSize="10"/>
+                                <Run Text=" " FontWeight="Bold"/>
                                 <Run Text="Descripción: " FontWeight="Bold"/>
                                 <Run Text=" "/>
                                 <Run Text="{Binding Nombre}" FontWeight="Light" />
@@ -194,6 +196,8 @@
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <Run Text="&#xE7C8;" FontFamily="Segoe MDL2 Assets" FontSize="10"/>
+                                <Run Text=" " FontWeight="Bold"/>
                                 <Run Text="Descripción: " FontWeight="Bold"/>
                                 <Run Text=" "/>
                                 <Run Text="{Binding Nombre}" FontWeight="Light" />
@@ -224,6 +228,8 @@
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <Run Text="&#xE7C8;" FontFamily="Segoe MDL2 Assets" FontSize="10"/>
+                                <Run Text=" " FontWeight="Bold"/>
                                 <Run Text="Descripción: " FontWeight="Bold"/>
                                 <Run Text=" "/>
                                 <Run Text="{Binding Nombre}" FontWeight="Light" />
@@ -254,6 +260,8 @@
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <Run Text="&#xE7C8;" FontFamily="Segoe MDL2 Assets" FontSize="10"/>
+                                <Run Text=" " FontWeight="Bold"/>
                                 <Run Text="Descripción:" FontWeight="Bold"/>
                                 <Run Text=" "/>
                                 <Run Text="{Binding Descripcion}" FontWeight="Light"/>
@@ -298,8 +306,9 @@
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
-                                <Run Text="**********************************************************************"/>
                                 <LineBreak/>
+                                <Run Text="&#xE7C8;" FontFamily="Segoe MDL2 Assets" FontSize="10"/>
+                                <Run Text=" " FontWeight="Bold"/>
                                 <Run Text="Descripción:" FontWeight="Bold"/>
                                 <Run Text=" "/>
                                 <Run Text="{Binding Descripcion}" FontWeight="Light" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
@@ -313,6 +322,8 @@
                                 <Run Text="Fin:" FontWeight="Bold" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
                                 <Run Text=" " Background="{StaticResource PrimaryBrush}" Foreground="White"/>
                                 <Run Text="{Binding FechaFin, StringFormat='d', ConverterCulture='es-PE'}" FontWeight="Light" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
+                                <Run Text="  "/>
+                                <Run Text="{Binding EsActual, Converter={StaticResource EsActualToString}}" Background="{StaticResource ForthBrush}" Foreground="White" FontWeight="Bold"/>
                                 <LineBreak/>
                                 <Run Text="Lugar: " FontWeight="Bold"/>
                                 <Run Text="{Binding Lugar}" FontWeight="Light"/>

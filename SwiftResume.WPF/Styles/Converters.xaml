@@ -11,6 +11,7 @@
     <converters:EnunToDescription x:Key="EnumToDescription"/>
     <converters:SplitCamelCaseString x:Key="SplitCameCaseString"/>
     <converters:EmptyStringToNA x:Key="EmptyStringToNA"/>
+    <converters:EsActualToString x:Key="EsActualToString"/>
     <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
     
 

@@ -2,7 +2,6 @@
 using SwiftResume.BIZ.Repositories;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.Events;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Documents;

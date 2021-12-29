@@ -162,8 +162,7 @@ public class IdiomasHabilidadesSoftwareViewModel : ViewModelBase, ITab
         if (habilidad is not null)
         {
             //Workaround
-            Habilidades.Remove(habilidad);
-            Habilidades.Add(habilidad);
+            Habilidades = _habilidadRepository.Find(x => x.ResumeId == ResumeId).OrderBy(x => x.Tipo).ToObservableCollection();
         }
     }
     #endregion
