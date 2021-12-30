@@ -25,6 +25,7 @@ public static class AddServicesHostBuilderExtensions
             services.AddSingleton<IHabilidadRepository, HabilidadRepository>();
             services.AddSingleton<IEducacionRepository, EducacionRepository>();
             services.AddSingleton<IExperienciaRepository, ExperienciaRepository>();
+            services.AddSingleton<ICertificacionRepository, CertificacionRepository>();
         });
 
         return host;

@@ -11,13 +11,15 @@ public class SwiftResumeViewModelFactory : ISwiftResumeViewModelFactory
     private readonly CreateViewModel<PerfilViewModel> _createPerfilViewModel;
     private readonly CreateViewModel<IdiomasHabilidadesSoftwareViewModel> _createIdiomasHabilidadesSoftwareViewModel;
     private readonly CreateViewModel<EducacionExperienciaViewModel> _createEducacionExperienciaViewModel;
+    private readonly CreateViewModel<CertificacionViewModel> _createCertificacionViewModel;
 
     public SwiftResumeViewModelFactory(CreateViewModel<ResumeViewModel> createResumeViewModel,
         CreateViewModel<LoginViewModel> createLoginViewModel,
         CreateViewModel<EditViewModel> createEditViewModel,
         CreateViewModel<PerfilViewModel> createPerfilViewModel,
         CreateViewModel<IdiomasHabilidadesSoftwareViewModel> createIdiomasHabilidadesSoftwareViewModel,
-        CreateViewModel<EducacionExperienciaViewModel> createEducacionExperienciaViewModel)
+        CreateViewModel<EducacionExperienciaViewModel> createEducacionExperienciaViewModel,
+        CreateViewModel<CertificacionViewModel> createCertificacionViewModel)
     {
         _createResumeViewModel = createResumeViewModel;
         _createLoginViewModel = createLoginViewModel;
@@ -25,6 +27,7 @@ public class SwiftResumeViewModelFactory : ISwiftResumeViewModelFactory
         _createPerfilViewModel = createPerfilViewModel;
         _createIdiomasHabilidadesSoftwareViewModel = createIdiomasHabilidadesSoftwareViewModel;
         _createEducacionExperienciaViewModel = createEducacionExperienciaViewModel;
+        _createCertificacionViewModel = createCertificacionViewModel;
     }
 
     public ViewModelBase CreateViewModel(ViewType viewType) => viewType switch
@@ -35,6 +38,7 @@ public class SwiftResumeViewModelFactory : ISwiftResumeViewModelFactory
         ViewType.Perfil => _createPerfilViewModel(),
         ViewType.IdiomasHabilidadesSoftware => _createIdiomasHabilidadesSoftwareViewModel(),
         ViewType.EducacionExperiencia => _createEducacionExperienciaViewModel(),
+        ViewType.Certificacion => _createCertificacionViewModel(),
         _ => throw new ArgumentException("The ViewType does not have a ViewModel.")
     };
 }

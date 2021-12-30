@@ -7,5 +7,6 @@ public enum ViewType : short
     Edit,
     Perfil,
     IdiomasHabilidadesSoftware,
-    EducacionExperiencia
+    EducacionExperiencia,
+    Certificacion
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwiftResume.DAL.EFCORE;
 
@@ -10,9 +11,10 @@ using SwiftResume.DAL.EFCORE;
 namespace SwiftResume.DAL.EFCORE.Migrations
 {
     [DbContext(typeof(SwiftResumeDbContext))]
-    partial class SwiftResumeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211230043127_CertificacionTableAdded")]
+    partial class CertificacionTableAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -38,9 +40,6 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ResumeId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("TipoActividad")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -50,8 +49,6 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ResumeId");
 
                     b.ToTable("Certificaciones");
                 });
@@ -284,20 +281,11 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         new
                         {
                             Id = 1,
-                            DateJoined = new DateTime(2021, 12, 29, 23, 33, 5, 437, DateTimeKind.Local).AddTicks(3134),
+                            DateJoined = new DateTime(2021, 12, 29, 23, 31, 26, 873, DateTimeKind.Local).AddTicks(4017),
                             Email = "ggavancholeon@gmail.com",
                             PasswordHashed = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==",
                             Username = "GGAVANCHO"
                         });
-                });
-
-            modelBuilder.Entity("SwiftResume.COMMON.Models.Certificacion", b =>
-                {
-                    b.HasOne("SwiftResume.COMMON.Models.Resume", null)
-                        .WithMany("Certificacion")
-                        .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("SwiftResume.COMMON.Models.Educacion", b =>
@@ -338,8 +326,6 @@ namespace SwiftResume.DAL.EFCORE.Migrations
 
             modelBuilder.Entity("SwiftResume.COMMON.Models.Resume", b =>
                 {
-                    b.Navigation("Certificacion");
-
                     b.Navigation("Educacion");
 
                     b.Navigation("Experiencia");

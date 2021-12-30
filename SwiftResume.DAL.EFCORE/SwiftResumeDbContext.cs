@@ -11,6 +11,7 @@ public class SwiftResumeDbContext : DbContext
     public DbSet<Habilidad> Habilidades { get; set; }
     public DbSet<Educacion> Educacion { get; set; }
     public DbSet<Experiencia> Experiencia { get; set; }
+    public DbSet<Certificacion> Certificaciones { get; set; }
 
     public SwiftResumeDbContext(DbContextOptions<SwiftResumeDbContext> options) : base(options)
     {
