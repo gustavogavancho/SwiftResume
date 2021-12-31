@@ -9,5 +9,4 @@ public interface IUserRepository : IRepository<User>
     Task<User> GetByUserName(string username);
     Task<User> GetByEmail(string email);
     public Task<RegistrationResult> ValidateUserRegistration(User user);
-
 }

@@ -49,8 +49,12 @@
                 <views:EducacionExperienciaView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModels:CertificacionViewModel}">
-                <views:CertificacionView/>
+            <DataTemplate DataType="{x:Type viewModels:CertificacionProyectoViewModel}">
+                <views:CertificacionProyectoView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:InfoAdicionalViewModel}">
+                <views:InfoAdicionalView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type alert:AlertDialogViewModel}">

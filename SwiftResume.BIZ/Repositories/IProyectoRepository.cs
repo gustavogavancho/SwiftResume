@@ -3,4 +3,4 @@ using SwiftResume.DAL.EFCORE.Services;
 
 namespace SwiftResume.BIZ.Repositories;
 
-public interface IExperienciaRepository : IRepository<Experiencia> {}
+public interface IProyectoRepository : IRepository<Proyecto> {}

@@ -3,7 +3,7 @@ using SwiftResume.WPF.CustomControls.Tab;
 
 namespace SwiftResume.WPF.ViewModels;
 
-public class CertificacionViewModel : ViewModelBase, ITab
+public class InfoAdicionalViewModel : ViewModelBase, ITab
 {
     #region Fields
 
@@ -11,7 +11,7 @@ public class CertificacionViewModel : ViewModelBase, ITab
 
     #region Properties
 
-    public string Name { get; set; } = "Certificaciones";
+    public string Name { get; set; } = "Info Adicional";
 
     #endregion
 
@@ -26,5 +26,4 @@ public class CertificacionViewModel : ViewModelBase, ITab
     #region Methods
 
     #endregion
-
 }

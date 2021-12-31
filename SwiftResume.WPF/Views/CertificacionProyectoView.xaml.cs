@@ -2,9 +2,9 @@
 
 namespace SwiftResume.WPF.Views;
 
-public partial class CertificacionView : UserControl
+public partial class CertificacionProyectoView : UserControl
 {
-    public CertificacionView()
+    public CertificacionProyectoView()
     {
         InitializeComponent();
     }

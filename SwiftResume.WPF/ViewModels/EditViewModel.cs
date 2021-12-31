@@ -18,12 +18,14 @@ public class EditViewModel : ViewModelBase
     public EditViewModel(PerfilViewModel perfilViewModel, 
         IdiomasHabilidadesSoftwareViewModel idiomasHabilidadesSoftwareViewModel,
         EducacionExperienciaViewModel educacionExperienciaViewModel,
-        CertificacionViewModel certificacionViewModel)
+        CertificacionProyectoViewModel certificacionViewModel,
+        InfoAdicionalViewModel infoAdicionalViewModel)
     {
         Tabs.Add(perfilViewModel);
         Tabs.Add(idiomasHabilidadesSoftwareViewModel);
         Tabs.Add(educacionExperienciaViewModel);
         Tabs.Add(certificacionViewModel);
+        Tabs.Add(infoAdicionalViewModel);
         Tab = Tabs.FirstOrDefault();
     }
 

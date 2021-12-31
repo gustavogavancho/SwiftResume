@@ -15,4 +15,6 @@ public class Resume : BaseEntity
     public List<Educacion> Educacion { get; set; }
     public List<Experiencia> Experiencia { get; set; }
     public List<Certificacion> Certificacion { get; set;}
+    public List<Proyecto> Proyectos { get; set; }
+    public List<InfoAdicional> InfoAdicional { get; set; }
 }

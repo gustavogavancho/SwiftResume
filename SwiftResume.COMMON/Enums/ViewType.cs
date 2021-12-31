@@ -8,5 +8,6 @@ public enum ViewType : short
     Perfil,
     IdiomasHabilidadesSoftware,
     EducacionExperiencia,
-    Certificacion
+    CertificacionProyecto,
+    InfoAdicional
 }

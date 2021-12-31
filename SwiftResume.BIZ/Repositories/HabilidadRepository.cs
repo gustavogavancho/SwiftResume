@@ -6,7 +6,5 @@ namespace SwiftResume.BIZ.Repositories;
 
 public class HabilidadRepository : Repository<Habilidad>, IHabilidadRepository
 {
-    public HabilidadRepository(SwiftResumeDbContext context) : base(context)
-    {
-    }
+    public HabilidadRepository(SwiftResumeDbContext context) : base(context) {}
 }

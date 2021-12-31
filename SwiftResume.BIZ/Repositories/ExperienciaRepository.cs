@@ -6,7 +6,5 @@ namespace SwiftResume.BIZ.Repositories;
 
 public class ExperienciaRepository : Repository<Experiencia>, IExperienciaRepository
 {
-    public ExperienciaRepository(SwiftResumeDbContext context) : base(context)
-    {
-    }
+    public ExperienciaRepository(SwiftResumeDbContext context) : base(context) {}
 }

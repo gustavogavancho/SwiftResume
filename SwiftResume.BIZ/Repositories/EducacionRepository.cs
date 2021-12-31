@@ -6,7 +6,5 @@ namespace SwiftResume.BIZ.Repositories;
 
 public class EducacionRepository : Repository<Educacion>, IEducacionRepository
 {
-    public EducacionRepository(SwiftResumeDbContext context) : base(context)
-    {
-    }
+    public EducacionRepository(SwiftResumeDbContext context) : base(context) {}
 }
