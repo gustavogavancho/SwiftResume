@@ -11,6 +11,7 @@
              xmlns:habilidad="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Habilidad"
              xmlns:educacion="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Educacion"
              xmlns:experiencia="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Experiencia"
+             xmlns:certificacion="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Certificacion"
              Startup="Application_Startup">
 
     <Application.Resources>
@@ -83,6 +84,10 @@
 
             <DataTemplate DataType="{x:Type experiencia:ExperienciaDialogViewModel}">
                 <experiencia:ExperienciaDialogView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type certificacion:CertificacionDialogViewModel}">
+                <certificacion:CertificacionDialogView/>
             </DataTemplate>
 
         </ResourceDictionary>

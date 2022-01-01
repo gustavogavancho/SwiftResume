@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwiftResume.DAL.EFCORE;
 
@@ -10,9 +11,10 @@ using SwiftResume.DAL.EFCORE;
 namespace SwiftResume.DAL.EFCORE.Migrations
 {
     [DbContext(typeof(SwiftResumeDbContext))]
-    partial class SwiftResumeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220101165157_CertificacionFechasAdded2")]
+    partial class CertificacionFechasAdded2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -27,7 +29,7 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("Fecha")
+                    b.Property<DateTime>("FechaInicio")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Horas")
@@ -343,7 +345,7 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         new
                         {
                             Id = 1,
-                            DateJoined = new DateTime(2022, 1, 1, 11, 53, 17, 142, DateTimeKind.Local).AddTicks(7417),
+                            DateJoined = new DateTime(2022, 1, 1, 11, 51, 57, 509, DateTimeKind.Local).AddTicks(681),
                             Email = "ggavancholeon@gmail.com",
                             PasswordHashed = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==",
                             Username = "GGAVANCHO"

@@ -243,7 +243,7 @@ public class EducacionExperienciaViewModel : ViewModelBase, ITab
             if (habilidad is not null)
             {
                 //Workaround
-                Educacion = Educacion = _educacionRepository.Find(x => x.ResumeId == ResumeId)
+                Educacion = _educacionRepository.Find(x => x.ResumeId == ResumeId)
                     .OrderByDescending(x => x.FechaFin)
                     .ToObservableCollection();
             }
