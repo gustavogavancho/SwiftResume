@@ -6,6 +6,15 @@
              xmlns:local="clr-namespace:SwiftResume.WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="GroupedItems" Source="{Binding Proyectos}" IsLiveGroupingRequested="True">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="TipoProyecto" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
+
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -28,10 +37,39 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <ListView ItemsSource="{Binding Educacion}" 
-                              SelectedItem="{Binding EducacionSelected}"
+                    <ListView ItemsSource="{Binding Source={StaticResource GroupedItems}}"
+                              SelectedItem="{Binding ProyectoSelected}"
                               BorderBrush="{StaticResource PrimaryBrush}"
                               Background="{StaticResource PrimaryBrush}">
+                        <ListView.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.ContainerStyle>
+                                    <Style TargetType="{x:Type GroupItem}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+                                                    <Expander BorderThickness="0"
+                                                              DataContext="{Binding Items}"
+                                                              IsExpanded="True">
+                                                        <Expander.Header>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock VerticalAlignment="Top"
+                                                                       FontSize="22"
+                                                                       FontWeight="Bold"
+                                                                       Foreground="{StaticResource SecondaryBrush}">
+                                                                <Run Text="{Binding TipoProyecto}" />
+                                                                </TextBlock>
+                                                            </StackPanel>
+                                                        </Expander.Header>
+                                                        <ItemsPresenter />
+                                                    </Expander>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </GroupStyle.ContainerStyle>
+                            </GroupStyle>
+                        </ListView.GroupStyle>
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -40,25 +78,21 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Foreground="{StaticResource SecondaryBrush}">
-                                        <Run Text="Institución:" FontWeight="Bold"/>
-                                        <Run Text="{Binding Institucion}" FontWeight="Light"/>
+                                        <Run Text="Tipo Proyecto:" FontWeight="Bold"/>
+                                        <Run Text="{Binding TipoProyecto}" FontWeight="Light"/>
                                         <Run Text="/"/>
-                                        <Run Text="Nivel:" FontWeight="Bold"/>
-                                        <Run Text="{Binding TipoEducacion, Converter={StaticResource SplitCameCaseString}}" FontWeight="Light" />
+                                        <Run Text="Título:" FontWeight="Bold"/>
+                                        <Run Text="{Binding Titulo, Converter={StaticResource SplitCameCaseString}}" FontWeight="Light" />
+                                        <LineBreak/>
+                                        <Run Text="Link:" FontWeight="Bold"/>
+                                        <Run Text="{Binding Link}"/>
                                         <LineBreak/>
                                         <Run Text="Descripción:" FontWeight="Bold"/>
                                         <Run Text="{Binding Descripcion}"/>
-                                        <LineBreak/>
-                                        <Run Text="Fecha Inicio:" FontWeight="Bold"/>
-                                        <Run Text="{Binding FechaInicio, StringFormat='d'}"/>
-                                        <Run Text=" - " FontWeight="Bold"/>
-                                        <Run Text="Fecha Fin:" FontWeight="Bold"/>
-                                        <Run Text="{Binding FechaFin, StringFormat='d'}"/>
                                     </TextBlock>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-
                     </ListView>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -84,7 +118,7 @@
                                 FontSize="18"
                                 Foreground="White"
                                 HorizontalAlignment="Right" 
-                                Command="{Binding EditEducacionCommand}">
+                                Command="{Binding EditProyectoCommand}">
                             <Button.ToolTip>
                                 <ToolTip Style="{StaticResource ToolTipStyle}" Content="Editar Educacion"/>
                             </Button.ToolTip>
@@ -95,7 +129,7 @@
                                 FontSize="18"
                                 Foreground="White"
                                 HorizontalAlignment="Right" 
-                                Command="{Binding DeleteEducacionCommand}">
+                                Command="{Binding DeleteProyectoCommand}">
                             <Button.ToolTip>
                                 <ToolTip Style="{StaticResource ToolTipStyle}" Content="Eliminar Educacion"/>
                             </Button.ToolTip>
