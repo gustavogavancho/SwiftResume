@@ -38,7 +38,13 @@
         <TextBlock Text="Certificación:" Style="{StaticResource SubTitleTextBlockStyle}" FocusManager.FocusedElement="{Binding ElementName=cmbTipoCertificado}"/>
         <StackPanel Grid.Row="1" Margin="0 10 0 0">
             <TextBlock Text="Tipo Certificado:" Style="{StaticResource BlueTextTextBlockStyle}"/>
-            <ComboBox x:Name="cmbTipoCertificado" ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:TipoCertificado}}}" SelectedItem="{Binding CertificacionWrapper.TipoCertificado, Converter={StaticResource TipoCertificadoEnumToString}, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}"/>
+            <ComboBox x:Name="cmbTipoCertificado" ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:TipoCertificado}}}" SelectedItem="{Binding CertificacionWrapper.TipoCertificado, Converter={StaticResource TipoCertificadoEnumToString}, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource EnumToDescription}}"></TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </StackPanel>
         <StackPanel Grid.Row="2" Margin="0 10 0 0">
             <TextBlock Text="Tipo Actividad:" Style="{StaticResource BlueTextTextBlockStyle}"/>

@@ -194,7 +194,7 @@ public class CertificacionProyectoViewModel : ViewModelBase, ITab
     {
         if (CertificacionSelected is not null)
         {
-            _eventAggregator.GetEvent<NavigateToEditEducacion>().Publish(CertificacionSelected.Id);
+            _eventAggregator.GetEvent<NavigateToEditCertificacion>().Publish(CertificacionSelected.Id);
 
             var certificacion = _dialogService.OpenDialog(_certificacionDialogViewModel);
 

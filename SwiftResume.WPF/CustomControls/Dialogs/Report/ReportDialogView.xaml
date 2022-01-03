@@ -171,10 +171,6 @@
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
-                                <Run Text="&#xE7C8;" FontFamily="Segoe MDL2 Assets" FontSize="10"/>
-                                <Run Text=" " FontWeight="Bold"/>
-                                <Run Text="Descripción: " FontWeight="Bold"/>
-                                <Run Text=" "/>
                                 <Run Text="{Binding Nombre}" FontWeight="Light" />
                                 <Run Text=" - "/>
                                 <Run Text="Nivel: " FontWeight="Bold"/>
@@ -204,10 +200,6 @@
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
-                                <Run Text="&#xE7C8;" FontFamily="Segoe MDL2 Assets" FontSize="10"/>
-                                <Run Text=" " FontWeight="Bold"/>
-                                <Run Text="Descripción: " FontWeight="Bold"/>
-                                <Run Text=" "/>
                                 <Run Text="{Binding Nombre}" FontWeight="Light" />
                                 <Run Text=" - "/>
                                 <Run Text="Nivel: " FontWeight="Bold"/>
@@ -237,10 +229,6 @@
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
-                                <Run Text="&#xE7C8;" FontFamily="Segoe MDL2 Assets" FontSize="10"/>
-                                <Run Text=" " FontWeight="Bold"/>
-                                <Run Text="Descripción: " FontWeight="Bold"/>
-                                <Run Text=" "/>
                                 <Run Text="{Binding Nombre}" FontWeight="Light" />
                                 <Run Text=" - "/>
                                 <Run Text="Nivel: " FontWeight="Bold"/>
@@ -270,8 +258,6 @@
                                Margin="14 15 0 8">
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
-                                <Run Text="&#xE7C8;" FontFamily="Segoe MDL2 Assets" FontSize="10"/>
-                                <Run Text=" " FontWeight="Bold"/>
                                 <Run Text="Descripción:" FontWeight="Bold"/>
                                 <Run Text=" "/>
                                 <Run Text="{Binding Descripcion}" FontWeight="Light"/>
@@ -318,8 +304,6 @@
                         <Paragraph.Resources>
                             <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
                                 <LineBreak/>
-                                <Run Text="&#xE7C8;" FontFamily="Segoe MDL2 Assets" FontSize="10"/>
-                                <Run Text=" " FontWeight="Bold"/>
                                 <Run Text="Descripción:" FontWeight="Bold"/>
                                 <Run Text=" "/>
                                 <Run Text="{Binding Descripcion}" FontWeight="Light" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
@@ -346,6 +330,44 @@
                                 <Run Text="Logros: " FontWeight="Bold"/>
                                 <LineBreak/>
                                 <Run Text="{Binding Logros, Converter={StaticResource EmptyStringToNA}}" FontWeight="Light"/>
+                                <LineBreak/>
+                            </Collections:ArrayList>
+                        </Paragraph.Resources>
+                    </Paragraph>
+                </Section>
+                <Section>
+                    <BlockUIContainer>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Images/projectreport.png" Margin="10 0 0 0" Width="30" Height="30"/>
+                            <!--<Ellipse Width="30" Height="30" Fill="{StaticResource PrimaryBrush}" Margin="15 0 0 0"/>-->
+                            <TextBlock Grid.Column="1" Text="Proyectos" TextWrapping="Wrap" Margin="10 0 0 0" FontSize="24" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}"/>
+                        </Grid>
+                    </BlockUIContainer>
+                    <Paragraph behaviors:ParagraphInlineBehavior.ParagraphInlineSource="{Binding Proyectos}"
+                               behaviors:ParagraphInlineBehavior.TemplateResourceName="inlineTemplate"
+                               xmlns:Collections="clr-namespace:System.Collections;assembly=mscorlib"
+                               FontSize="14"
+                               TextAlignment="Justify"
+                               Margin="14 10 0 8">
+                        <Paragraph.Resources>
+                            <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <LineBreak/>
+                                <Run Text="Título: " FontWeight="Bold"/>
+                                <Run Text="{Binding Titulo}" FontWeight="Light" Background="{StaticResource PrimaryBrush}" Foreground="White"/>
+                                <LineBreak/>
+                                <Run Text="Link: " FontWeight="Bold"/>
+                                <Hyperlink NavigateUri="{Binding Link}" Command="{Binding OpenHyperlinkCommand}" CommandParameter="{Binding Link}">
+                                    <Hyperlink.Inlines>
+                                        <Run Text="{Binding Link}"/>
+                                    </Hyperlink.Inlines>
+                                </Hyperlink>
+                                <LineBreak/>
+                                <Run Text="Descripción: " FontWeight="Bold"/>
+                                <Run Text="{Binding Descripcion}" FontWeight="Light"/>
                                 <LineBreak/>
                             </Collections:ArrayList>
                         </Paragraph.Resources>

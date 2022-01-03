@@ -32,6 +32,7 @@ public class ReportDialogViewModel : DialogViewModelBase<Model.Resume>
     public List<Model.Habilidad> Idiomas { get; set; }
     public List<Model.Habilidad> Habilidades { get; set; }
     public List<Model.Habilidad> Software { get; set; }
+    public List<Model.Proyecto> Proyectos { get; set; }
 
     #endregion
 
@@ -68,6 +69,7 @@ public class ReportDialogViewModel : DialogViewModelBase<Model.Resume>
         Idiomas = Resume.Habilidades.Where(x => x.Tipo == "Idioma").ToList();
         Habilidades = Resume.Habilidades.Where(x => x.Tipo == "Habilidad").ToList();
         Software = Resume.Habilidades.Where(x => x.Tipo == "Software").ToList();
+        Proyectos = Resume.Proyectos.Where(x => x.TipoProyecto == "Proyecto").ToList();
     }
 
     private void OnPrint(IDocumentPaginatorSource flowDocument)

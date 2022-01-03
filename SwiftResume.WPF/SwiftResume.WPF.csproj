@@ -16,6 +16,7 @@
     <None Remove="Images\personfemale.png" />
     <None Remove="Images\personmale.svg" />
     <None Remove="Images\profilereport.png" />
+    <None Remove="Images\projectreport.png" />
     <None Remove="Images\skillsreport.png" />
     <None Remove="Images\softwarereport.png" />
     <None Remove="Images\summaryreport.png" />
@@ -64,6 +65,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\profilereport.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\projectreport.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\skillsreport.png">

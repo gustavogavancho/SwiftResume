@@ -72,17 +72,17 @@
                         </ListView.GroupStyle>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
+                                <Grid Width="758">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Foreground="{StaticResource SecondaryBrush}">
+                                    <TextBlock Foreground="{StaticResource SecondaryBrush}" TextWrapping="Wrap">
                                         <Run Text="Tipo Proyecto:" FontWeight="Bold"/>
                                         <Run Text="{Binding TipoProyecto}" FontWeight="Light"/>
                                         <Run Text="/"/>
                                         <Run Text="Título:" FontWeight="Bold"/>
-                                        <Run Text="{Binding Titulo, Converter={StaticResource SplitCameCaseString}}" FontWeight="Light" />
+                                        <Run Text="{Binding Titulo, Converter={StaticResource SplitCameCaseString}}" FontWeight="Light"/>
                                         <LineBreak/>
                                         <Run Text="Link:" FontWeight="Bold"/>
                                         <Run Text="{Binding Link}"/>
@@ -168,7 +168,7 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Foreground="{StaticResource SecondaryBrush}">
                                         <Run Text="Tipo Certificado:" FontWeight="Bold"/>
-                                        <Run Text="{Binding TipoCertificado}" FontWeight="Light"/>
+                                        <Run Text="{Binding TipoCertificado, Converter={StaticResource SplitCameCaseString}}" FontWeight="Light"/>
                                         <LineBreak/>
                                         <Run Text="Tipo Actividad:" FontWeight="Bold"/>
                                         <Run Text="{Binding TipoActividad}" FontWeight="Light"/>
