@@ -385,6 +385,34 @@
                             <TextBlock Grid.Column="1" Text="Certificaciones" TextWrapping="Wrap" Margin="10 0 0 0" FontSize="24" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}"/>
                         </Grid>
                     </BlockUIContainer>
+                    <Paragraph behaviors:ParagraphInlineBehavior.ParagraphInlineSource="{Binding Resume.Certificacion}"
+                               behaviors:ParagraphInlineBehavior.TemplateResourceName="inlineTemplate"
+                               xmlns:Collections="clr-namespace:System.Collections;assembly=mscorlib"
+                               FontSize="14"
+                               TextAlignment="Justify"
+                               Margin="14 10 0 8">
+                        <Paragraph.Resources>
+                            <Collections:ArrayList x:Shared="False" x:Key="inlineTemplate">
+                                <LineBreak/>
+                                <Run Text="{Binding TipoCertificado, Converter={StaticResource SplitCameCaseString}}" FontWeight="Bold"/>
+                                <Run Text=" " FontWeight="Light"/>
+                                <Run Text="{Binding Fecha, StringFormat='yyyy-MM'}" FontWeight="Light" Background="DarkGreen" Foreground="White"/>
+                                <Run Text=" " FontWeight="Light"/>
+                                <LineBreak/>
+                                <Run Text="{Binding TipoActividad}" FontWeight="Bold"/>
+                                <Run Text=": " />
+                                <Run Text="{Binding Descripcion}" FontWeight="Light"/>
+                                <Run Text=" - " />
+                                <Run Text="{Binding Ponente}"/>
+                                <Run Text=" - " />
+                                <Run Text="{Binding Institucion}" FontWeight="Light"/>
+                                <Run Text=" (" FontWeight="Light"/>
+                                <Run Text="{Binding Horas}" FontWeight="Light"/>
+                                <Run Text=" h)" FontWeight="Light"/>
+                                <LineBreak/>
+                            </Collections:ArrayList>
+                        </Paragraph.Resources>
+                    </Paragraph>
                 </Section>
             </FlowDocument>
         </FlowDocumentPageViewer>

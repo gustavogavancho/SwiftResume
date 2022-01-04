@@ -32,6 +32,7 @@ public class ResumeRepository : Repository<Resume>, IResumeRepository
             .Include(x => x.Educacion)
             .Include(x=> x.Experiencia)
             .Include(x=> x.Proyectos)
+            .Include(x=> x.Certificacion)
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 }

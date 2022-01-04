@@ -149,7 +149,6 @@ public class CertificacionDialogViewModel : DialogViewModelBase<Model.Certificac
         return certificacion;
     }
 
-
     private async void OnNavigateToEditCertificacion(int certificacicacionId)
     {
         _certificacionEdit = await _certificacionRepository.Get(certificacicacionId);
