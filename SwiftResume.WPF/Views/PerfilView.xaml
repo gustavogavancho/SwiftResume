@@ -41,6 +41,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -134,6 +135,13 @@
                 <StackPanel Grid.Row="7" Grid.Column="1" Margin="15 10 15 10">
                     <TextBlock Text="StackOverFlow:" Style="{StaticResource BlueTextTextBlockStyle}"/>
                     <TextBox Text="{Binding Resume.Perfil.StackOverflow, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="8" Grid.ColumnSpan="2" Margin="15 10 15 10">
+                    <TextBlock Text="Foto:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+                    <Button Command="{Binding AgregarFotoCommand}" Content="Agregar foto" Style="{StaticResource SecondaryNormalButtonSytle}"/>
+                    <Border Width="100" Height="100" BorderThickness="1" BorderBrush="{StaticResource PrimaryBrush}" Margin="0 0 0 5">
+                        <Image Width="100" Height="100" HorizontalAlignment="Center" Source="{Binding PerfilWrapper.FotoString, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Base64ImageConverter}}"/>
+                    </Border>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

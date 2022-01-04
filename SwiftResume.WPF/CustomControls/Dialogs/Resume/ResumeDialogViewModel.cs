@@ -1,9 +1,11 @@
-﻿using SwiftResume.BIZ.Repositories;
+﻿using Microsoft.Win32;
+using SwiftResume.BIZ.Repositories;
 using SwiftResume.COMMON.Enums;
 using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Dialogs.YesNo;
 using SwiftResume.WPF.State.Users;
 using SwiftResume.WPF.Wrapper;
+using System.IO;
 using Model = SwiftResume.COMMON.Models;
 
 namespace SwiftResume.WPF.CustomControls.Dialogs.Resume;
@@ -53,6 +55,7 @@ public class ResumeDialogViewModel : DialogViewModelBase<Model.Resume>
 
     public DelegateCommand<IDialogWindow> SaveCommand { get; private set; }
     public DelegateCommand<IDialogWindow> CancelCommand { get; private set; }
+    public DelegateCommand AgregarFotoCommand { get; private set; }
 
     #endregion
 
@@ -70,11 +73,40 @@ public class ResumeDialogViewModel : DialogViewModelBase<Model.Resume>
 
         SaveCommand = new DelegateCommand<IDialogWindow>(OnSave, CanSave);
         CancelCommand = new DelegateCommand<IDialogWindow>(OnCancel);
+        AgregarFotoCommand = new DelegateCommand(OnAgregarFoto);
     }
 
     #endregion
 
     #region Methods
+    private void OnAgregarFoto()
+    {
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
+        if (openFileDialog.ShowDialog() == true)
+        {
+            string var = ImageToBase64(openFileDialog.FileName);
+
+            ResumeWrapper.FotoString = ResumeWrapper.Model.FotoString = var;
+        }
+    }
+
+    public static string ImageToBase64(string _imagePath)
+    {
+        string _base64String = null;
+
+        using (System.Drawing.Image _image = System.Drawing.Image.FromFile(_imagePath))
+        {
+            using (MemoryStream _mStream = new MemoryStream())
+            {
+                _image.Save(_mStream, _image.RawFormat);
+                byte[] _imageBytes = _mStream.ToArray();
+                _base64String = Convert.ToBase64String(_imageBytes);
+
+                return _base64String;
+            }
+        }
+    }
 
     public void OnLoad()
     {

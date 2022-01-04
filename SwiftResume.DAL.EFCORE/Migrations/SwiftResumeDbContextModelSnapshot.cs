@@ -292,8 +292,8 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<byte[]>("Foto")
-                        .HasColumnType("BLOB");
+                    b.Property<string>("FotoString")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Genero")
                         .IsRequired()
@@ -343,7 +343,7 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         new
                         {
                             Id = 1,
-                            DateJoined = new DateTime(2022, 1, 1, 11, 53, 17, 142, DateTimeKind.Local).AddTicks(7417),
+                            DateJoined = new DateTime(2022, 1, 4, 14, 39, 2, 289, DateTimeKind.Local).AddTicks(3387),
                             Email = "ggavancholeon@gmail.com",
                             PasswordHashed = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==",
                             Username = "GGAVANCHO"

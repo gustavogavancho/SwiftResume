@@ -16,6 +16,7 @@
     <converters:SplitCamelCaseString x:Key="SplitCameCaseString"/>
     <converters:EmptyStringToNA x:Key="EmptyStringToNA"/>
     <converters:EsActualToString x:Key="EsActualToString"/>
+    <converters:Base64ImageConverter x:Key="Base64ImageConverter"/>
     <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
     
 

@@ -31,6 +31,13 @@ public class ResumeWrapper : ModelWrapper<Resume>
         set => SetValue(value);
     }
 
+    public string FotoString
+    {
+        get => GetValue<string>();
+        set => SetValue(value);
+    }
+
+
     protected override IEnumerable<Tuple<string, string>> ValidateProperty()
     {
         if (Nombres == "Gustavo")

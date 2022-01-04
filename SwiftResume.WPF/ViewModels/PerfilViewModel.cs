@@ -1,4 +1,5 @@
-﻿using Prism.Events;
+﻿using Microsoft.Win32;
+using Prism.Events;
 using SwiftResume.BIZ.Repositories;
 using SwiftResume.COMMON.Models;
 using SwiftResume.WPF.Core;
@@ -7,6 +8,7 @@ using SwiftResume.WPF.CustomControls.Dialogs.Service;
 using SwiftResume.WPF.CustomControls.Tab;
 using SwiftResume.WPF.Events;
 using SwiftResume.WPF.Wrapper;
+using System.IO;
 
 namespace SwiftResume.WPF.ViewModels;
 
@@ -65,6 +67,7 @@ public class PerfilViewModel : ViewModelBase, ITab
     #region Commands
 
     public DelegateCommand SaveCommand { get; set; }
+    public DelegateCommand AgregarFotoCommand { get; private set; }
 
     #endregion
 
@@ -82,6 +85,7 @@ public class PerfilViewModel : ViewModelBase, ITab
             .Subscribe(OnNavigateToEditResume);
 
         SaveCommand = new DelegateCommand(OnSave, CanSave);
+        AgregarFotoCommand = new DelegateCommand(OnAgregarFoto);
     }
 
 
@@ -111,6 +115,7 @@ public class PerfilViewModel : ViewModelBase, ITab
             //Workaround
             Resume.Nombres = PerfilWrapper.Nombres;
             Resume.Apellidos = PerfilWrapper.Apellidos;
+            Resume.FotoString = PerfilWrapper.FotoString;
             Resume.Perfil = PerfilWrapper.Model;
 
             await _resumeRepository.SaveAsync();
@@ -145,11 +150,41 @@ public class PerfilViewModel : ViewModelBase, ITab
         //Workaround
         PerfilWrapper.Nombres = Resume.Nombres;
         PerfilWrapper.Apellidos = Resume.Apellidos;
+        PerfilWrapper.FotoString = Resume.FotoString;
     }
     
     public void OnSelectionChanged()
     {
         HasChanges = true;
+    }
+
+    private void OnAgregarFoto()
+    {
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
+        if (openFileDialog.ShowDialog() == true)
+        {
+            string var = ImageToBase64(openFileDialog.FileName);
+
+            PerfilWrapper.FotoString = PerfilWrapper.Model.FotoString = Resume.FotoString = var;
+        }
+    }
+
+    public static string ImageToBase64(string _imagePath)
+    {
+        string _base64String = null;
+
+        using (System.Drawing.Image _image = System.Drawing.Image.FromFile(_imagePath))
+        {
+            using (MemoryStream _mStream = new MemoryStream())
+            {
+                _image.Save(_mStream, _image.RawFormat);
+                byte[] _imageBytes = _mStream.ToArray();
+                _base64String = Convert.ToBase64String(_imageBytes);
+
+                return _base64String;
+            }
+        }
     }
 
     #endregion

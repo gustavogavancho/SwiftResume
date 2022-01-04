@@ -56,6 +56,12 @@ public class PerfilWrapper : ModelWrapper<Perfil>
         set => SetValue(value);
     }
 
+    public string FotoString
+    {
+        get => GetValue<string>();
+        set => SetValue(value);
+    }
+
     public DateTime FechaNacimiento
     {
         get => GetValue<DateTime>();

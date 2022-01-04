@@ -11,8 +11,8 @@ using SwiftResume.DAL.EFCORE;
 namespace SwiftResume.DAL.EFCORE.Migrations
 {
     [DbContext(typeof(SwiftResumeDbContext))]
-    [Migration("20211231212029_ProyectoInfoAdicionalTablesAdded")]
-    partial class ProyectoInfoAdicionalTablesAdded
+    [Migration("20220104193902_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,9 @@ namespace SwiftResume.DAL.EFCORE.Migrations
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Horas")
@@ -291,8 +294,8 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<byte[]>("Foto")
-                        .HasColumnType("BLOB");
+                    b.Property<string>("FotoString")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Genero")
                         .IsRequired()
@@ -342,7 +345,7 @@ namespace SwiftResume.DAL.EFCORE.Migrations
                         new
                         {
                             Id = 1,
-                            DateJoined = new DateTime(2021, 12, 31, 16, 20, 28, 885, DateTimeKind.Local).AddTicks(3928),
+                            DateJoined = new DateTime(2022, 1, 4, 14, 39, 2, 289, DateTimeKind.Local).AddTicks(3387),
                             Email = "ggavancholeon@gmail.com",
                             PasswordHashed = "AQAAAAEAACcQAAAAEMcloCaeJ2BYcGk+0LLGptkVnAjHoVr9npkXmqqRvVB2LmDnu1CW/tI0iX1KeKzIYA==",
                             Username = "GGAVANCHO"
