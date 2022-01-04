@@ -13,6 +13,7 @@
              xmlns:experiencia="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Experiencia"
              xmlns:certificacion="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Certificacion"
              xmlns:proyecto="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.Proyecto"
+             xmlns:infoadicional="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.InfoAdicional"
              Startup="Application_Startup">
 
     <Application.Resources>
@@ -93,6 +94,10 @@
 
             <DataTemplate DataType="{x:Type proyecto:ProyectoDialogViewModel}">
                 <proyecto:ProyectoDialogView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type infoadicional:InfoAdicionalDialogViewModel}">
+                <infoadicional:InfoAdicionalDialogView/>
             </DataTemplate>
 
         </ResourceDictionary>

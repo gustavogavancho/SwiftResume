@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="SwiftResume.WPF.CustomControls.Dialogs.InfoAdicional.InfoAdicionalDialogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SwiftResume.WPF.CustomControls.Dialogs.InfoAdicional"
+             xmlns:core="clr-namespace:SwiftResume.WPF.Core"
+             xmlns:enum="clr-namespace:SwiftResume.COMMON.Enums;assembly=SwiftResume.COMMON"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             Height="260" Width="400">
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+    </UserControl.InputBindings>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:CallMethodAction TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext}"
+                                MethodName="OnLoad"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid Margin="10 0 5 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Info. Adicional:" Style="{StaticResource SubTitleTextBlockStyle}" FocusManager.FocusedElement="{Binding ElementName=cmbTipoInfoAdicional}"/>
+        <StackPanel Grid.Row="1" Margin="0 10 0 0">
+            <TextBlock Text="Tipo Info. Adicional:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+            <ComboBox x:Name="cmbTipoInfoAdicional" ItemsSource="{Binding Source={core:EnumBindingSource {x:Type enum:TipoInfoAdicional}}}" SelectedItem="{Binding InfoAdicionalWrapper.TipoInfoAdicional, Converter={StaticResource TipoInfoAdicionalEnumToString}, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource EnumToDescription}}"></TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Margin="0 15 0 0">
+            <TextBlock Text="Descripción:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+            <TextBox  Text="{Binding InfoAdicionalWrapper.Descripcion, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+        </StackPanel>
+        <Grid Grid.Row="3" Margin="0 20 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Style="{StaticResource ButtonSecondaryStyle}" 
+                    Content="&#xE74E;" 
+                    Grid.Column="1" 
+                    FontSize="18"
+                    Foreground="White"
+                    HorizontalAlignment="Right" 
+                    Command="{Binding SaveCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                    IsDefault="True">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource ToolTipStyle}" Content="Guardar Idioma"/>
+                </Button.ToolTip>
+            </Button>
+            <Button Style="{StaticResource ButtonSecondaryStyle}"
+                    Content="&#xF78A;"
+                    Grid.Column="2"
+                    FontSize="18"
+                    Foreground="White"
+                    HorizontalAlignment="Right"
+                    Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource ToolTipStyle}" Content="Cancelar"/>
+                </Button.ToolTip>
+            </Button>
+        </Grid>
+    </Grid>
+    
+</UserControl>

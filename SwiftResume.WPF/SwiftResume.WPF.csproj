@@ -11,6 +11,8 @@
     <None Remove="Images\certificationsreport.png" />
     <None Remove="Images\educationreport.png" />
     <None Remove="Images\experiencereport.png" />
+    <None Remove="Images\infoadicionalreport.png" />
+    <None Remove="Images\interesesreport.png" />
     <None Remove="Images\languagereport.png" />
     <None Remove="Images\loginbackground.jpg" />
     <None Remove="Images\personfemale.png" />
@@ -50,6 +52,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\experiencereport.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\infoadicionalreport.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\interesesreport.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\languagereport.png">

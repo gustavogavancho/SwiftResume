@@ -10,6 +10,7 @@
     <converters:TipoCertificadoEnumToString x:Key="TipoCertificadoEnumToString"/>
     <converters:TipoActividadEnumToString x:Key="TipoActivdadEnumToString"/>
     <converters:TipoProyectoEnumToString x:Key="TipoProyectoEnumToString"/>
+    <converters:TipoInfoAdicionalEnumToString x:Key="TipoInfoAdicionalEnumToString"/>
     <converters:CharacterCounter x:Key="CharacterCounter"/>
     <converters:EnunToDescription x:Key="EnumToDescription"/>
     <converters:SplitCamelCaseString x:Key="SplitCameCaseString"/>
