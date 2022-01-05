@@ -10,7 +10,9 @@ public class SplitCamelCaseString : IValueConverter
     {
         if (value == null) return null;
 
-        return value.ToString().SplitCamelCase();
+        string valueString = value.ToString().SplitCamelCase();
+
+        return valueString.Substring(0, 1) + valueString.Substring(1).ToLower();
 
     }
 
