@@ -57,7 +57,7 @@
             <TextBox Text="{Binding ExperienciaWrapper.Responsabilidades, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" Height="70" TextWrapping="Wrap" AcceptsReturn="True"/>
         </StackPanel>
         <StackPanel Grid.Row="6" Margin="0 15 0 0">
-            <TextBlock Text="Logros:" Style="{StaticResource BlueTextTextBlockStyle}"/>
+            <TextBlock Text="Tecnologías:" Style="{StaticResource BlueTextTextBlockStyle}"/>
             <TextBox Text="{Binding ExperienciaWrapper.Logros, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}" Height="70" TextWrapping="Wrap" AcceptsReturn="True"/>
         </StackPanel>
         <StackPanel Grid.Row="7" Margin="0 15 0 0">
